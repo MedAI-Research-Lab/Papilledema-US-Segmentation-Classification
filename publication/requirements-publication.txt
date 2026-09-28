@@ -1,0 +1,9 @@
+# Tested publication-rendering environment. No training dependencies are needed.
+matplotlib==3.10.7
+numpy==2.5.3
+pandas==3.0.1
+Pillow==12.3.0
+scipy==1.18.1
+scikit-learn==1.7.2
+reportlab==4.4.9
+lxml==6.1.1

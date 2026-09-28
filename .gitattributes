@@ -1,0 +1,5 @@
+# Preserve the bytes used by the configuration and source-hash protocols.
+# Git should not rewrite line endings in frozen scientific inputs.
+* -text
+*.png binary
+*.jpg binary

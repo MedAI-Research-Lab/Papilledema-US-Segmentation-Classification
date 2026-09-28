@@ -1,0 +1,46 @@
+cff-version: 1.2.0
+message: "Please cite this repository when using the analysis implementation or publication-generation code."
+type: software
+title: "Papilledema US Segmentation and Classification"
+version: 1.0.0
+date-released: 2026-09-28
+url: "https://github.com/MedAI-Research-Lab/Papilledema-US-Segmentation-Classification"
+repository-code: "https://github.com/MedAI-Research-Lab/Papilledema-US-Segmentation-Classification"
+authors:
+  - family-names: "Işık"
+    given-names: "Muhammed Ikbal"
+  - family-names: "Güler"
+    given-names: "Melisa"
+  - family-names: "Jalili"
+    given-names: "Marziye"
+  - family-names: "Simsek"
+    given-names: "Zehra"
+    affiliation: "Department of Electrical and Electronics Engineering, Engineering Faculty, Istanbul Topkapi University, Istanbul, Türkiye"
+    orcid: "https://orcid.org/0009-0001-1683-1373"
+  - family-names: "Tulum"
+    given-names: "Gokalp"
+  - family-names: "Cüce"
+    given-names: "Ferhat"
+  - family-names: "Baştemur"
+    given-names: "Mehmet"
+  - family-names: "Arslan"
+    given-names: "Mutluay"
+  - family-names: "Unay"
+    given-names: "Bülent"
+  - family-names: "Ince"
+    given-names: "Merve Dur"
+  - family-names: "Yumuşak"
+    given-names: "Mehmet Erhan"
+  - family-names: "Uysal"
+    given-names: "Yusuf"
+  - family-names: "Osman"
+    given-names: "Onur"
+keywords:
+  - papilledema
+  - pseudopapilledema
+  - transorbital ultrasound
+  - anatomical segmentation
+  - predicted region of interest
+  - binary classification
+  - three-class classification
+  - patient-grouped evaluation

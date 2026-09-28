@@ -1,0 +1,118 @@
+{
+  "schema_version": 1,
+  "scope": "Source-only four-model strict predicted-ROI research release",
+  "blanket_license_assigned_by_release": false,
+  "clinical_data_bundled": false,
+  "study_trained_checkpoints_bundled": false,
+  "dependencies": [
+    {
+      "component": "Ultralytics YOLO26",
+      "package": "ultralytics",
+      "version": "8.4.138",
+      "repository": "https://github.com/ultralytics/ultralytics",
+      "revision": "v8.4.138",
+      "distribution": "External installed dependency; upstream source archives and weights not bundled",
+      "license": "AGPL-3.0",
+      "license_url": "https://raw.githubusercontent.com/ultralytics/ultralytics/v8.4.138/LICENSE",
+      "license_file": "licenses/ULTRALYTICS_AGPL-3.0.txt",
+      "license_sha256": "0d96a4ff68ad6d4b6f1f30f713b18d5184912ba8dd389f86aa7710db079abcb0"
+    },
+    {
+      "component": "EMCAD and its associated PVT-v2 implementation",
+      "repository": "https://github.com/SLDGroup/EMCAD",
+      "commit": "26c9c31f731f749b62c5fe83f44376dac75f3aa8",
+      "distribution": "User-supplied source; restricted source and prior derivatives not bundled",
+      "license": "UT Austin Research License",
+      "license_url": "https://raw.githubusercontent.com/SLDGroup/EMCAD/26c9c31f731f749b62c5fe83f44376dac75f3aa8/LICENSE",
+      "acquisition_environment_variable": "EMCAD_SOURCE_DIR",
+      "automatic_download": false,
+      "source_files": [
+        {"path": "lib/decoders.py", "sha256": "4b36981117376ea005aed8844f4ea9c846f432286695b85c1530797a20157a18"},
+        {"path": "lib/pvtv2.py", "sha256": "9711ee6600e3e5274b927a7aecd706ad459173b1c86867aa56522fad5ec3f5f3"}
+      ],
+      "rights_note": "Academic/research use and redistribution are governed by distinct provisions; redistribution permission is not asserted."
+    },
+    {
+      "component": "SAM2-UNet",
+      "repository": "https://github.com/WZH0120/SAM2-UNet",
+      "commit": "01598e5e9912ffb23f965ecbebf4d1dfecbaa56e",
+      "distribution": "Selected runtime files and local adapters",
+      "upstream_repository_license": "Apache-2.0",
+      "license_url": "https://raw.githubusercontent.com/WZH0120/SAM2-UNet/01598e5e9912ffb23f965ecbebf4d1dfecbaa56e/LICENSE",
+      "license_file": "licenses/SAM2_UNET_APACHE-2.0.txt",
+      "license_sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+      "source_files": [
+        {"path": "SAM2UNet.py", "sha256": "52cad0313cdffce96706fba8c0ffbdaeab8edcedb76602525cb702da2b32b19c"},
+        {"path": "sam2/modeling/backbones/hieradet.py", "sha256": "4853711ba496b79957b2c73862443fc72246534160061110422bd7dc45669028"},
+        {"path": "sam2/modeling/backbones/utils.py", "sha256": "84bd48cda1ad468fb8c231d0c2eb83ad53386633d6e63ddaa6ed929c5521bdba"},
+        {"path": "sam2/modeling/sam2_utils.py", "sha256": "85f5b9474b382b2ee7e87f6f25db0590ba2b2fb7534bc4ace33f6ea9bc65c143"}
+      ],
+      "rights_note": "Repository-level Apache declaration recorded together with the inherited Pytorch-UNet source notices; no Apache-only assertion for all inherited portions."
+    },
+    {
+      "component": "Meta SAM2 and Hiera",
+      "repository": "https://github.com/facebookresearch/sam2",
+      "license_reference_commit": "2b90b9f5ceec907a1c18123530e92e794ad901a4",
+      "executed_source_revision": "SAM2-UNet commit 01598e5e9912ffb23f965ecbebf4d1dfecbaa56e",
+      "license": "Apache-2.0",
+      "license_url": "https://raw.githubusercontent.com/facebookresearch/sam2/2b90b9f5ceec907a1c18123530e92e794ad901a4/LICENSE",
+      "license_file": "licenses/META_SAM2_APACHE-2.0.txt",
+      "license_sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+      "attribution": "Copyright (c) Meta Platforms, Inc. and affiliates."
+    },
+    {
+      "component": "Pytorch-UNet helper ancestry",
+      "repository": "https://github.com/milesial/Pytorch-UNet",
+      "historical_repository_name": "xiaopeng-liao/Pytorch-UNet",
+      "commit": "8ebac70e633bac59fc22bb5195e513d5832fb3bd",
+      "relationship": "Explicit inherited source link in SAM2-UNet Up/DoubleConv helper lineage",
+      "license": "GPL-3.0",
+      "license_url": "https://raw.githubusercontent.com/milesial/Pytorch-UNet/8ebac70e633bac59fc22bb5195e513d5832fb3bd/LICENSE",
+      "license_file": "licenses/PYTORCH_UNET_GPL-3.0.txt",
+      "license_sha256": "8ceb4b9ee5adedde47b31e975c1d90c73ad27b6b165a1dcd80c7c545eb65b903",
+      "additional_retained_source_link": "https://github.com/HaiyongJiang/U-Net-Pytorch-Unstructured-Buggy/commit/0e854509c2cea854e247a9c615f175f76fbb2e3a"
+    },
+    {
+      "component": "PVT-v2 original model family",
+      "repository": "https://github.com/whai362/PVT",
+      "license_reference_commit": "57e2dfaa5a46f9050d76f306a4fcd9a7c061f520",
+      "license": "Apache-2.0",
+      "license_url": "https://raw.githubusercontent.com/whai362/PVT/57e2dfaa5a46f9050d76f306a4fcd9a7c061f520/LICENSE",
+      "license_file": "licenses/PVT_APACHE-2.0.txt",
+      "license_sha256": "b208c52b00a2df2c8f4c3298c34407bf2bfe409968213372251c91fcc737a1a5",
+      "rights_note": "This license reference does not relicense EMCAD-associated source or adaptations."
+    },
+    {
+      "component": "timm",
+      "version": "1.0.19",
+      "repository": "https://github.com/huggingface/pytorch-image-models",
+      "license": "Apache-2.0",
+      "license_url": "https://raw.githubusercontent.com/huggingface/pytorch-image-models/v1.0.19/LICENSE",
+      "license_file": "licenses/TIMM_APACHE-2.0.txt",
+      "license_sha256": "71b111620fa32c17a80ccd6db2da759d31a591e497d8b5f382174f59d1b59d49",
+      "attribution": "Copyright 2019 Ross Wightman"
+    },
+    {
+      "component": "torchvision ResNet-18 and transforms",
+      "version": "0.23.0",
+      "repository": "https://github.com/pytorch/vision",
+      "license": "BSD-3-Clause",
+      "license_url": "https://raw.githubusercontent.com/pytorch/vision/v0.23.0/LICENSE",
+      "license_file": "licenses/TORCHVISION_BSD-3-Clause.txt",
+      "license_sha256": "6502f676851cfe25f8af75531dfb32375b7325b73c37e7b43741fa422893e71d"
+    },
+    {
+      "component": "Custom ViT Method2",
+      "source": "Author-supplied research notebook",
+      "source_sha256": "4b9d695756e6f4a5539baad70a1ad2386b5c9bc399c6d5eec49c33520026761d",
+      "distribution": "Study-specific port; notebook archive not bundled",
+      "external_pretrained_initialization": false,
+      "license": null,
+      "rights_note": "No license declaration in the supplied notebook; no third-party license or new blanket license inferred."
+    }
+  ],
+  "privacy_boundary": {
+    "excluded": ["clinical images and masks", "videos", "patient linkage and split memberships", "per-patient predictions", "trained study checkpoints", "runtime logs and state", "private source-snapshot archives", "local weight provenance sidecars"],
+    "identifiers_in_source": "Schema field names and synthetic test identifiers are not clinical records."
+  }
+}

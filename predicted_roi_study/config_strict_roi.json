@@ -1,0 +1,771 @@
+{
+  "schema_version": 1,
+  "study_id": "strict_predicted_roi_binary_4model_v1_2_0_clean",
+  "task": "binary",
+  "study_design": "strict_predicted_roi",
+  "analysis_status": "exploratory_post_hoc_internal",
+  "protocol_version": "1.2.0",
+  "output": "strict_roi_results_4model_v1_2_0",
+  "clean_run": {
+    "output_namespace": "strict_roi_results_4model_v1_2_0",
+    "prior_failed_output": "strict_roi_results_clean_v1_1_1",
+    "import_upstream_artifacts": false,
+    "resume_policy": "explicit_switch_same_namespace_same_code_config_split_and_input_hashes_only",
+    "unreceipted_output_policy": "reject_non_orchestration_content",
+    "seed_scope": "one_predeclared_seed_per_launcher_invocation",
+    "launcher_stops_after": "validation_lock",
+    "test_evaluation_in_seed_launcher": false
+  },
+  "models": [
+    "yolo26",
+    "vit_method2",
+    "emcad",
+    "sam2_unet"
+  ],
+  "split_seeds": [17, 42, 2026, 3407, 9103],
+  "dataset": {
+    "root": "çalışma_ds",
+    "manifest": "çalışma_ds/manifest.csv",
+    "manifest_sha256": "4efe349f7f3a5a7eda430251592526311df3b644a02139afb8c423b256668b48",
+    "patients": 91,
+    "eyes": 182,
+    "frames": 1274,
+    "frames_per_eye": 7,
+    "eyes_per_patient": 2,
+    "image_size": [768, 768],
+    "binary_mapping": {
+      "control": 0,
+      "papilledema_or_pseudopapilledema": 1
+    },
+    "ground_truth_use": "segmentation_training_validation_and_oracle_analysis_only"
+  },
+  "split_policy": {
+    "unit": "patient",
+    "mode": "immutable_copy_with_sha256",
+    "regenerate": false,
+    "stratify_by": "label_3class",
+    "partitions": ["train", "validation", "test"],
+    "class_quotas_train_validation_test": {
+      "0": [28, 10, 10],
+      "1": [13, 4, 4],
+      "2": [14, 4, 4]
+    },
+    "sources": {
+      "17": {
+        "path": "binary_results_seed17/splits/seed_17_patients.csv",
+        "sha256": "0d62e5f7360620fe4a634a4596acab5ca72f9137db88a9c92ff16669b3d67a3d"
+      },
+      "42": {
+        "path": "binary_results_seeds42_2026_fixed/splits/seed_42_patients.csv",
+        "sha256": "3df9deee3dad6b57a701ad9f055c6427bf63262c411507dcbe465df557bb2cdd"
+      },
+      "2026": {
+        "path": "binary_results_seeds42_2026_fixed/splits/seed_2026_patients.csv",
+        "sha256": "426b8f7cd2c6bdb466b751ae29260ee4d7436cdd562224ba4fe9dee82463c792"
+      },
+      "3407": {
+        "path": "binary_results_seeds3407_9103_fixed/splits/seed_3407_patients.csv",
+        "sha256": "e4c2ff1b2e4ee106d2cc8e811dd3db46d333a6c69ca8dcf28dbf29fb9616a0f5"
+      },
+      "9103": {
+        "path": "binary_results_seeds3407_9103_fixed/splits/seed_9103_patients.csv",
+        "sha256": "6545232811a92276c600d27bb6bb33bca705df3329e9d8bd9b0b1feea13a1175"
+      }
+    },
+    "leakage_checks": [
+      "no_patient_overlap_within_seed",
+      "both_eyes_in_same_partition",
+      "exact_cross_patient_image_duplicates",
+      "seven_unique_frames_per_eye",
+      "consistent_patient_labels"
+    ]
+  },
+  "preflight": {
+    "require_cuda": true,
+    "minimum_cuda_device_count": 1,
+    "minimum_free_output_disk_gib": 100,
+    "verify_manifest_and_all_dataset_file_hashes": true,
+    "verify_all_pretrained_weight_hashes": true,
+    "network_access_during_run": false,
+    "synthetic_batch_size": 1,
+    "required_checks": [
+      "model_forward_and_output_shape",
+      "segmentation_only_backward",
+      "no_classifier_gradient_in_segmenter_fit",
+      "both_classifier_strategies_forward_backward_and_output_shape",
+      "both_classifier_strategies_strict_roi_input_contract",
+      "classifier_training_eye_eligibility_contract",
+      "model_specific_classifier_trainability_policy",
+      "roi_component_edge_cases",
+      "outside_roi_logit_invariance",
+      "crossfit_patient_disjointness",
+      "environment_and_package_provenance"
+    ],
+    "required_prelaunch_audits": [
+      {
+        "round": 1,
+        "name": "dual_classifier_contract_and_backward",
+        "scope": "all_four_models_both_strategies",
+        "required_status": "passed"
+      },
+      {
+        "round": 2,
+        "name": "synthetic_strict_roi_end_to_end_and_outside_roi_invariance",
+        "scope": "all_four_models_both_strategies",
+        "required_status": "passed"
+      }
+    ],
+    "verification_artifact": "verification/{model}.json",
+    "receipt_must_hash_verification_artifact": true,
+    "train_segmenters_requires_all_four_preflight_receipts": true
+  },
+  "training": {
+    "max_epochs": 60,
+    "patience": 10,
+    "batch_size": 1,
+    "gradient_accumulation": 4,
+    "weight_decay": 0.0001,
+    "gradient_clip": 1.0,
+    "amp": true,
+    "amp_dtype": "bfloat16",
+    "num_workers": 0,
+    "deterministic_algorithms_warn_only": true,
+    "test_used_for_selection": false,
+    "early_stopping": {
+      "segmentation_monitor": "validation_eye_dice",
+      "classifier_monitor": "validation_eye_auroc",
+      "classifier_tie_breaker": "validation_eye_nll",
+      "undefined_classifier_auroc_policy": "use_negative_validation_eye_nll_if_defined_else_stop_and_flag",
+      "no_evaluable_validation_eyes_policy": "stop_and_lock_non_evaluable_all_test_decisions_abstain",
+      "lock_requires_monitor_status": true,
+      "mode": "max",
+      "evaluation_frequency_epochs": 1,
+      "minimum_delta": 0.0,
+      "restore_best_weights": true
+    },
+    "augmentation": {
+      "rotation_degrees": 7.0,
+      "translation_fraction": 0.03,
+      "scale": [0.95, 1.05],
+      "brightness": [0.9, 1.1],
+      "flips": false,
+      "apply_same_spatial_transform_to_image_and_mask": true,
+      "classifier_augmentation_occurs_after_strict_masking": true
+    },
+    "seed_offsets": {
+      "segmentation": 10000,
+      "augmentation": 20000,
+      "cross_fit": 30000,
+      "classifier": 40000,
+      "bootstrap": 50000
+    }
+  },
+  "cross_fitting": {
+    "enabled": true,
+    "group_unit": "patient",
+    "folds": 5,
+    "stratify_by": "label_3class",
+    "train_roi_source": "out_of_fold_predicted_mask",
+    "validation_roi_source": "outer_train_full_fit_predicted_mask",
+    "test_roi_source": "outer_train_full_fit_predicted_mask",
+    "inner_fit_epoch_policy": "outer_full_fit_selected_epoch",
+    "inner_holdout_labels_used_for_training_or_selection": false,
+    "test_generated_before_lock": false,
+    "expected_primary_segmenter_fits": {
+      "outer_full": 20,
+      "inner_out_of_fold": 100,
+      "total": 120
+    },
+    "expected_base_study_fits": {
+      "segmenters": 120,
+      "model_specific_classifiers": 20,
+      "standardized_resnet18_classifiers": 20,
+      "classifiers_total": 40,
+      "learned_fits_total": 160
+    }
+  },
+  "segmentation": {
+    "training_mode": "segmentation_only",
+    "classifier_loss_weight": 0.0,
+    "loss": {
+      "name": "binary_cross_entropy_plus_soft_dice",
+      "binary_cross_entropy_weight": 1.0,
+      "soft_dice_weight": 1.0,
+      "per_model": {
+        "yolo26": "native_yolo_instance_segmentation_loss",
+        "vit_method2": "binary_cross_entropy_plus_soft_dice",
+        "emcad": "binary_cross_entropy_plus_soft_dice",
+        "sam2_unet": "binary_cross_entropy_plus_soft_dice"
+      }
+    },
+    "checkpoint_selection": "validation_eye_dice",
+    "checkpoint_tie_breakers": ["validation_eye_iou", "earliest_epoch"],
+    "threshold_selection_partition": "validation",
+    "threshold_selection_metric": "eye_dice",
+    "surface_dice_tolerance_pixels": 2.0,
+    "threshold_candidates": [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9],
+    "fixed_hyperparameters": {
+      "yolo26": {"learning_rate": 0.0003},
+      "vit_method2": {"learning_rate": 0.0003},
+      "emcad": {"learning_rate": 0.0001},
+      "sam2_unet": {"learning_rate": 0.0003}
+    },
+    "initialization": {
+      "yolo26": {
+        "mode": "verified_pretrained_segmentation_weights",
+        "checkpoint": "binary_study/models/vendor/yolo26_sources/weights/yolo26s-seg.pt",
+        "sha256": "3da1d83e31caec96f9300eb4064f4f62882c133c7c264d63dfe61a7c197837a4",
+        "source": "https://github.com/ultralytics/assets/releases/download/v8.4.0/yolo26s-seg.pt"
+      },
+      "vit_method2": {
+        "mode": "random_segmentation_weights",
+        "checkpoint": null,
+        "sha256": null,
+        "note": "No locked compatible segmentation checkpoint is available"
+      },
+      "emcad": {
+        "mode": "verified_pretrained_encoder_weights",
+        "checkpoint": "binary_study/weights/emcad_joint/pvt_v2_b0.pth",
+        "sha256": "fbb931ad59ab4d64e3f4370991326803e3af882fcaa877b81550d368d1fbab1f",
+        "source": "https://github.com/whai362/PVT/releases/download/v2/pvt_v2_b0.pth"
+      },
+      "sam2_unet": {
+        "mode": "verified_pretrained_encoder_weights",
+        "checkpoint": "binary_study/weights/sam2_unet/sam2_hiera_tiny.pt",
+        "sha256": "65b50056e05bcb13694174f51bb6da89c894b57b75ccdf0ba6352c597c5d1125",
+        "source": "https://dl.fbaipublicfiles.com/segment_anything_2/072824/sam2_hiera_tiny.pt"
+      }
+    },
+    "metrics": [
+      "dice",
+      "iou",
+      "pixel_sensitivity",
+      "pixel_specificity",
+      "pixel_precision",
+      "hausdorff95",
+      "average_symmetric_surface_distance",
+      "surface_dice",
+      "absolute_area_error",
+      "relative_area_error",
+      "centroid_distance"
+    ],
+    "aggregation_levels": ["frame", "eye", "patient"]
+  },
+  "roi": {
+    "mask_source": "predicted_probability_only",
+    "hard_mask": true,
+    "one_anatomical_roi_per_frame": true,
+    "connectivity": 8,
+    "allow_ground_truth_at_inference": false,
+    "allow_full_image_fallback": false,
+    "allow_global_feature_branch": false,
+    "empty_policy": "abstain_frame",
+    "ambiguous_multi_component_policy": "abstain_frame",
+    "implausibly_large_policy": "abstain_frame",
+    "edge_touch_policy": "abstain_frame",
+    "minimum_area": {
+      "reference_partition": "train",
+      "reference_mask": "ground_truth",
+      "quantile": 0.01,
+      "multiplier": 0.5,
+      "formula": "0.5 * Q01(train_ground_truth_roi_area_fraction)"
+    },
+    "maximum_area": {
+      "reference_partition": "train",
+      "reference_mask": "ground_truth",
+      "quantile": 0.99,
+      "multiplier": 1.5,
+      "formula": "1.5 * Q99(train_ground_truth_roi_area_fraction)"
+    },
+    "component_cleanup": {
+      "remove_components_below_minimum_area": true,
+      "fill_internal_holes": true,
+      "maximum_hole_area_pixels": 64,
+      "morphological_closing": false,
+      "morphological_closing_iterations": 0,
+      "never_merge_disconnected_anatomical_candidates": true,
+      "reject_frame_if_any_component_exceeds_maximum_area": true
+    },
+    "dominance": {
+      "metric": "component_mean_probability",
+      "ratio_definition": "best_score_divided_by_second_best_score",
+      "candidate_ratios": [1.1, 1.25, 1.5, 2.0],
+      "threshold_selected_on": "validation",
+      "selection_objective": "postprocessed_eye_dice_subject_to_eye_coverage",
+      "postprocessed_eye_dice_definition": "mean_of_seven_frame_dice_with_abstained_frame_prediction_empty_and_dice_zero",
+      "eye_coverage_definition": "fraction_of_validation_eyes_with_at_least_four_valid_frames",
+      "minimum_validation_coverage": 0.8,
+      "infeasible_fallback": "highest_eye_coverage_then_postprocessed_eye_dice_and_flag_in_lock",
+      "ties_or_insufficient_dominance": "abstain_frame"
+    },
+    "outside_roi": "fixed_neutral_after_normalization",
+    "neutral_normalized_value": [0.0, 0.0, 0.0],
+    "crop": "tight_component_bbox_then_aspect_preserving_letterbox",
+    "include_unmasked_bbox_context": false,
+    "input_size": [224, 224],
+    "anti_leakage_invariance_test": {
+      "enabled": true,
+      "operation": "randomize_every_pixel_outside_fixed_mask",
+      "maximum_absolute_logit_difference": 0.000001
+    }
+  },
+  "classifier": {
+    "strategy_order": ["model_specific", "standardized_resnet18"],
+    "primary": {
+      "name": "model_specific",
+      "role": "primary_estimand",
+      "estimand_id": "E1_model_specific_strict_roi_system",
+      "architecture_by_segmenter": {
+        "yolo26": "yolo26s_roi_classifier",
+        "vit_method2": "vit_method2_roi_classifier",
+        "emcad": "pvt_v2_b0_roi_classifier",
+        "sam2_unet": "sam2_hiera_tiny_roi_classifier"
+      },
+      "initialization_source": "per_segmenter_locked_initialization_with_new_binary_head",
+      "initialization_by_segmenter": {
+        "yolo26": {
+          "pretrained": true,
+          "checkpoint": "binary_study/models/vendor/yolo26_sources/weights/yolo26s-seg.pt",
+          "sha256": "3da1d83e31caec96f9300eb4064f4f62882c133c7c264d63dfe61a7c197837a4",
+          "source": "https://github.com/ultralytics/assets/releases/download/v8.4.0/yolo26s-seg.pt",
+          "network_download_during_run": false
+        },
+        "vit_method2": {
+          "pretrained": false,
+          "checkpoint": null,
+          "sha256": null,
+          "source": "random_initialization_no_compatible_locked_checkpoint",
+          "network_download_during_run": false
+        },
+        "emcad": {
+          "pretrained": true,
+          "checkpoint": "binary_study/weights/emcad_joint/pvt_v2_b0.pth",
+          "sha256": "fbb931ad59ab4d64e3f4370991326803e3af882fcaa877b81550d368d1fbab1f",
+          "source": "https://github.com/whai362/PVT/releases/download/v2/pvt_v2_b0.pth",
+          "network_download_during_run": false
+        },
+        "sam2_unet": {
+          "pretrained": true,
+          "checkpoint": "binary_study/weights/sam2_unet/sam2_hiera_tiny.pt",
+          "sha256": "65b50056e05bcb13694174f51bb6da89c894b57b75ccdf0ba6352c597c5d1125",
+          "source": "https://dl.fbaipublicfiles.com/segment_anything_2/072824/sam2_hiera_tiny.pt",
+          "network_download_during_run": false
+        }
+      },
+      "trainability_by_segmenter": {
+        "yolo26": {
+          "policy_id": "full_yolo26_backbone_neck_finetune_plus_new_binary_head_native_segmentation_head_frozen",
+          "trainable_components": ["yolo26_backbone", "yolo26_neck", "new_binary_head"],
+          "frozen_components": ["native_yolo_detection_segmentation_head_forward_only"],
+          "disabled_components": ["native_yolo_segmentation_loss", "legacy_joint_classifier"]
+        },
+        "vit_method2": {
+          "policy_id": "full_method2_encoder_cross_attention_and_new_binary_head_training",
+          "trainable_components": ["patch_embedding", "transformer_encoder", "cross_attention", "new_binary_head"],
+          "frozen_components": [],
+          "disabled_components": ["segmentation_decoder", "legacy_joint_classifier"]
+        },
+        "emcad": {
+          "policy_id": "full_pvt_v2_b0_finetune_plus_new_binary_head",
+          "trainable_components": ["pvt_v2_b0_full_backbone", "new_binary_head"],
+          "frozen_components": [],
+          "disabled_components": ["pvt_imagenet_head", "emcad_segmentation_decoder", "legacy_joint_classifier"]
+        },
+        "sam2_unet": {
+          "policy_id": "frozen_original_hiera_trunk_plus_trainable_prompt_learn_adapters_and_new_binary_head",
+          "trainable_components": ["adapter_prompt_learn", "new_binary_head"],
+          "frozen_components": ["original_hiera_trunk_including_patch_position_and_native_attention_blocks"],
+          "disabled_components": ["sam2_unet_segmentation_decoder", "legacy_joint_classifier"],
+          "freeze_order": "freeze_original_hiera_before_wrapping_blocks_with_trainable_adapters",
+          "gradient_through_frozen_trunk_to_adapters": true
+        }
+      },
+      "fitted_segmenter_frozen_during_classifier_training": true,
+      "require_parameter_audit_against_trainability_policy": true,
+      "strict_roi_input": "corresponding_segmenter_strict_predicted_roi_only",
+      "separate_weights_per_model_seed": true,
+      "seed_offset": 0,
+      "expected_fits": 20
+    },
+    "secondary": {
+      "name": "standardized_resnet18",
+      "role": "prespecified_secondary_standardized_analysis",
+      "estimand_id": "E2_standardized_resnet18_strict_roi_system",
+      "architecture": "torchvision_resnet18",
+      "shared_architecture_across_segmenters": true,
+      "strict_roi_input": "corresponding_segmenter_strict_predicted_roi_only",
+      "separate_weights_per_model_seed": true,
+      "seed_offset": 500009,
+      "expected_fits": 20,
+      "pretrained_weights": {
+        "required": true,
+        "name": "ResNet18_Weights.IMAGENET1K_V1",
+        "url": "https://download.pytorch.org/models/resnet18-f37072fd.pth",
+        "sha256": "f37072fd47e89c5e827621c5baffa7500819f7896bbacec160b1a16c560e07ec",
+        "cache_path": "predicted_roi_study/weights/resnet18-f37072fd.pth",
+        "license": "BSD-3-Clause",
+        "source": "torchvision",
+        "network_download_during_run": false
+      }
+    },
+    "shared_roi_artifact_contract": "byte_identical_roi_tensor_mask_validity_and_abstention_status_for_both_strategies_within_model_seed_frame",
+    "expected_core_fits": {
+      "model_specific": 20,
+      "standardized_resnet18": 20,
+      "total": 40
+    },
+    "classes": 2,
+    "primary_features": "strict_roi_masked_pixels_no_explicit_geometry_vector",
+    "include_explicit_geometry_features_in_primary": false,
+    "normalization": {
+      "mean": [0.485, 0.456, 0.406],
+      "std": [0.229, 0.224, 0.225]
+    },
+    "optimizer": "adamw",
+    "scheduler": "cosine_annealing",
+    "learning_rate": 0.0001,
+    "weight_decay": 0.0001,
+    "batch_size": 16,
+    "gradient_accumulation": 1,
+    "loss": "class_weighted_cross_entropy",
+    "loss_weighting": "patient_class_balanced_and_equal_total_weight_per_eye",
+    "loss_weight_formula": "w_frame=1/(2*N_evaluable_training_eyes_in_class*N_valid_frames_in_eye)_then_normalize_mean_weight_to_one",
+    "class_weight_source": "outer_training_patients_only",
+    "threshold_selection_partition": "validation",
+    "threshold_selection_metric": "balanced_accuracy",
+    "undefined_threshold_policy": "mark_unavailable_and_all_test_decisions_abstain",
+    "threshold_candidates": [
+      0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5,
+      0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 0.9, 0.95
+    ]
+  },
+  "aggregation": {
+    "frame_to_eye": "arithmetic_mean_of_valid_frame_probabilities",
+    "minimum_valid_frames": 4,
+    "insufficient_frames": "abstain_eye",
+    "eye_to_patient": "arithmetic_mean_of_both_eye_probabilities",
+    "require_both_eyes": true,
+    "insufficient_eyes": "abstain_patient",
+    "ground_truth_roi_overlap_used_in_deployment_decision": false
+  },
+  "calibration": {
+    "report_raw_probabilities": true,
+    "method": "temperature_scaling",
+    "fit_partition": "validation",
+    "fit_separately_per_classifier_strategy_model_seed_level": true,
+    "levels": ["eye", "patient"],
+    "metrics": [
+      "brier",
+      "nll",
+      "ece_equal_width",
+      "ece_equal_mass",
+      "calibration_intercept",
+      "calibration_slope"
+    ],
+    "ece_bins": 10,
+    "temperature_bounds": [0.05, 20.0],
+    "probability_clip_epsilon": 0.0000001,
+    "ece_definition": {
+      "equal_width": "ten_[left_closed_right_open]_bins_with_probability_one_in_final_bin",
+      "equal_mass": "stable_probability_sort_then_numpy_array_split_into_min_ten_n_bins_ties_may_split",
+      "weighting": "bin_count_divided_by_evaluable_count"
+    },
+    "plots": ["reliability_diagram_with_bootstrap_band", "calibration_density"],
+    "reliability_band": {
+      "resampling_unit": "patient_cluster",
+      "interval": "percentile_95",
+      "draws": 5000
+    },
+    "small_sample_caution": true,
+    "test_refitting": false,
+    "undefined_fit_policy": "mark_unavailable_without_default_temperature",
+    "classification_threshold_if_temperature_unavailable": "select_on_raw_validation_probability_and_flag"
+  },
+  "evaluation": {
+    "estimands": {
+      "primary": {
+        "id": "E1_model_specific_strict_roi_system",
+        "classifier_strategy": "model_specific",
+        "unit": "eye",
+        "population": "all_intended_held_out_test_eyes_including_abstentions",
+        "endpoint": "failure_aware_balanced_accuracy",
+        "contrast": "all_6_unordered_complete_system_pairs_within_each_seed",
+        "interpretation": "joint_effect_of_segmenter_localization_and_its_model_specific_strict_roi_classifier"
+      },
+      "secondary_standardized": {
+        "id": "E2_standardized_resnet18_strict_roi_system",
+        "classifier_strategy": "standardized_resnet18",
+        "unit": "eye",
+        "population": "all_intended_held_out_test_eyes_including_abstentions",
+        "endpoint": "failure_aware_balanced_accuracy",
+        "contrast": "all_6_unordered_segmenter_pairs_within_each_seed_under_common_classifier_architecture",
+        "interpretation": "segmenter_and_predicted_roi_effect_with_classifier_architecture_standardized"
+      },
+      "within_segmenter_strategy": {
+        "id": "E3_model_specific_minus_standardized_within_segmenter",
+        "classifier_strategies": ["model_specific", "standardized_resnet18"],
+        "unit": "eye",
+        "population": "all_intended_held_out_test_eyes_including_abstentions",
+        "endpoint": "failure_aware_balanced_accuracy",
+        "contrast": "model_specific_minus_standardized_resnet18_within_same_segmenter_seed_on_identical_strict_roi_artifacts",
+        "interpretation": "incremental_classifier_strategy_effect_conditional_on_the_same_predicted_roi_stream"
+      }
+    },
+    "classification_levels": ["eye", "patient"],
+    "primary_level": "eye",
+    "primary_endpoint": "failure_aware_balanced_accuracy",
+    "discrimination_metrics": ["auroc", "average_precision"],
+    "threshold_metrics": [
+      "sensitivity",
+      "specificity",
+      "ppv",
+      "npv",
+      "accuracy",
+      "balanced_accuracy",
+      "f1",
+      "mcc"
+    ],
+    "selective_prediction_metrics": [
+      "coverage",
+      "class_conditional_coverage",
+      "selective_risk",
+      "aurc",
+      "failure_aware_accuracy",
+      "failure_aware_sensitivity",
+      "failure_aware_specificity"
+    ],
+    "risk_coverage_definition": {
+      "confidence": "absolute_probability_distance_from_locked_decision_threshold",
+      "ranking": "descending_confidence_stable_ties",
+      "segmentation_gate_abstentions": "append_at_lowest_confidence_and_count_as_errors",
+      "aurc": "mean_cumulative_risk_over_all_attainable_coverage_steps"
+    },
+    "localized_success": {
+      "enabled": true,
+      "definition": "correct_classification_and_gt_roi_hit_in_at_least_four_of_seven_frames",
+      "gt_used_for_retrospective_evaluation_only": true,
+      "frame_hit_iou_threshold": 0.5,
+      "minimum_hit_frames": 4
+    },
+    "confusion_matrix": {
+      "primary": "two_true_classes_by_control_disease_abstain",
+      "secondary": "two_by_two_among_non_abstained_only"
+    },
+    "clinical_utility": ["decision_curve_net_benefit", "standardized_net_benefit"],
+    "decision_curve": {
+      "threshold_start": 0.01,
+      "threshold_stop": 0.99,
+      "threshold_step": 0.01,
+      "positive_action": "trigger_specialist_evaluation_for_papilledema_or_pseudopapilledema",
+      "abstention_action": "no_model_triggered_intervention",
+      "denominator": "complete_intended_cohort_including_abstentions"
+    }
+  },
+  "statistics": {
+    "confidence_level": 0.95,
+    "bootstrap_draws": 5000,
+    "bootstrap_seed": 19051,
+    "bootstrap_unit": "patient_cluster",
+    "preserve_both_eyes_and_seven_frames": true,
+    "confidence_interval": "bias_corrected_and_accelerated_when_defined_else_percentile",
+    "seed_summary": "mean_and_sample_std",
+    "also_report_each_seed": true,
+    "do_not_treat_overlapping_seed_holdouts_as_independent": true,
+    "paired_model_comparisons": [
+      "paired_patient_cluster_bootstrap_metric_difference",
+      "delong_auroc_within_seed",
+      "mcnemar_on_paired_non_abstained_predictions"
+    ],
+    "paired_patient_cluster_bootstrap_is_primary_comparison": true,
+    "primary_effect_interval": "paired_patient_cluster_bca_else_percentile",
+    "primary_hypothesis_test": "whole_patient_paired_model_label_swap_randomization_plus_one",
+    "paired_calibration_loss_tests": ["brier", "nll"],
+    "paired_calibration_common_evaluable_only": true,
+    "paired_segmentation_metrics": ["dice", "iou", "surface_dice", "hausdorff95", "average_symmetric_surface_distance", "centroid_distance"],
+    "paired_segmentation_representations": ["postprocessed", "raw"],
+    "delong_scope": "common_evaluable_subset_only_descriptive_sensitivity_analysis_due_to_two_eye_within_patient_dependence",
+    "multiple_comparison_correction": "holm",
+    "holm_families": {
+      "primary_model_specific": "E1_all_6_complete_system_pairs_by_5_seeds_for_eye_failure_aware_balanced_accuracy_30_hypotheses",
+      "secondary_standardized_resnet18": "E2_all_6_segmenter_pairs_by_5_seeds_for_eye_failure_aware_balanced_accuracy_30_hypotheses",
+      "within_segmenter_strategy": "E3_all_4_segmenters_by_5_seeds_for_model_specific_minus_standardized_eye_failure_aware_balanced_accuracy_20_hypotheses",
+      "other_metrics_model_specific": "separate_family_for_each_metric_and_level_across_all_6_pairs_by_5_seeds",
+      "other_metrics_standardized_resnet18": "separate_family_for_each_metric_and_level_across_all_6_pairs_by_5_seeds",
+      "calibration_model_specific": "separate_family_for_each_calibration_metric_and_level_across_all_6_pairs_by_5_seeds",
+      "calibration_standardized_resnet18": "separate_family_for_each_calibration_metric_and_level_across_all_6_pairs_by_5_seeds",
+      "ablations_model_specific": "separate_family_for_each_test_and_level_within_each_segmenter_across_predeclared_arms_and_5_seeds"
+    },
+    "comparison_sets": {
+      "primary_model_specific": {
+        "estimand_id": "E1_model_specific_strict_roi_system",
+        "classifier_strategy": "model_specific",
+        "contrasts_per_seed": 6,
+        "seeds": 5,
+        "planned_hypotheses": 30,
+        "effect": "paired_difference_in_eye_failure_aware_balanced_accuracy",
+        "interval": "paired_patient_cluster_bca_else_percentile",
+        "test": "whole_patient_paired_model_label_swap_randomization_plus_one",
+        "multiplicity_family": "primary_model_specific"
+      },
+      "secondary_standardized_resnet18": {
+        "estimand_id": "E2_standardized_resnet18_strict_roi_system",
+        "classifier_strategy": "standardized_resnet18",
+        "contrasts_per_seed": 6,
+        "seeds": 5,
+        "planned_hypotheses": 30,
+        "effect": "paired_difference_in_eye_failure_aware_balanced_accuracy",
+        "interval": "paired_patient_cluster_bca_else_percentile",
+        "test": "whole_patient_paired_model_label_swap_randomization_plus_one",
+        "multiplicity_family": "secondary_standardized_resnet18"
+      },
+      "within_segmenter_strategy": {
+        "estimand_id": "E3_model_specific_minus_standardized_within_segmenter",
+        "classifier_strategies": ["model_specific", "standardized_resnet18"],
+        "contrasts_per_seed": 4,
+        "seeds": 5,
+        "planned_hypotheses": 20,
+        "effect": "paired_model_specific_minus_standardized_difference_in_eye_failure_aware_balanced_accuracy",
+        "interval": "paired_patient_cluster_bca_else_percentile",
+        "test": "whole_patient_paired_strategy_label_swap_randomization_plus_one",
+        "multiplicity_family": "within_segmenter_strategy"
+      }
+    },
+    "alpha": 0.05,
+    "effect_sizes_required": true
+  },
+  "ablations": {
+    "predeclared": true,
+    "primary_must_be_evaluated_before_ablations": true,
+    "separate_checkpoints_and_locks": true,
+    "all_ablation_validation_locks_before_any_ablation_test": true,
+    "classifier_strategy": "model_specific",
+    "standardized_resnet18_is_secondary_comparator_not_ablation": true,
+    "expected_validation_locks": 320,
+    "expected_test_evaluations": 320,
+    "expected_classifier_fits": 180,
+    "expected_no_refit_analytical_evaluations": 140,
+    "lock_breakdown": {
+      "model_specific_learned": {
+        "arms": [
+          "whole_image_baseline",
+          "gt_roi_oracle",
+          "bbox_context",
+          "largest_component_without_quality_gates",
+          "geometry_only",
+          "mask_only",
+          "background_only_negative_control",
+          "random_roi_negative_control",
+          "appearance_plus_geometry"
+        ],
+        "arm_count": 9,
+        "seeds": 5,
+        "models": 4,
+        "locks": 180
+      },
+      "analytical_no_refit": {
+        "arms": ["aggregation_rule", "minimum_valid_frames"],
+        "variant_count": 7,
+        "seeds": 5,
+        "models": 4,
+        "locks": 140
+      }
+    },
+    "summary": "separate_immutable_ablation_summary",
+    "experiments": [
+      {
+        "name": "whole_image_baseline",
+        "question": "How much apparent discrimination is available without anatomical restriction?",
+        "input": "whole_image",
+        "role": "shortcut_reference_not_primary"
+      },
+      {
+        "name": "gt_roi_oracle",
+        "question": "What is the upper bound when localization is perfect?",
+        "input": "strict_ground_truth_roi",
+        "role": "non_deployable_oracle"
+      },
+      {
+        "name": "bbox_context",
+        "question": "Does unmasked context inside the predicted bounding box inflate performance?",
+        "input": "unmasked_predicted_bbox"
+      },
+      {
+        "name": "largest_component_without_quality_gates",
+        "question": "What is gained by area, edge and ambiguity rejection?",
+        "input": "largest_predicted_component_only"
+      },
+      {
+        "name": "geometry_only",
+        "question": "How much signal is carried by predicted ROI shape and size alone?",
+        "input": "predicted_mask_geometry_features_only"
+      },
+      {
+        "name": "mask_only",
+        "question": "Can the binary predicted mask classify disease without ROI appearance?",
+        "input": "binary_predicted_mask"
+      },
+      {
+        "name": "background_only_negative_control",
+        "question": "Is shortcut signal retained outside the predicted ROI?",
+        "input": "image_outside_predicted_roi_only"
+      },
+      {
+        "name": "random_roi_negative_control",
+        "question": "Would a size-matched random region perform similarly?",
+        "input": "patient_independent_size_matched_random_roi"
+      },
+      {
+        "name": "aggregation_rule",
+        "question": "How sensitive are eye decisions to the predeclared aggregation rule?",
+        "variants": ["mean", "median", "maximum", "predicted_mask_confidence_weighted_mean"]
+      },
+      {
+        "name": "minimum_valid_frames",
+        "question": "What is the risk-coverage trade-off of the four-of-seven requirement?",
+        "variants": [1, 4, 7]
+      },
+      {
+        "name": "appearance_plus_geometry",
+        "question": "Does predicted ROI geometry add independent value to appearance?",
+        "input": "strict_roi_appearance_plus_geometry"
+      }
+    ]
+  },
+  "test_access": {
+    "require_all_20_primary_locks_before_any_test": true,
+    "composite_model_seed_lock_count": 20,
+    "classifier_strategies_per_composite_lock": 2,
+    "classification_levels_per_strategy": 2,
+    "expected_strategy_lock_records": 40,
+    "expected_level_specific_calibration_threshold_lock_records": 80,
+    "expected_core_test_system_evaluations": 40,
+    "each_composite_lock_requires_both_classifier_strategies": true,
+    "immutable_evaluation_receipts": true,
+    "allow_test_threshold_tuning": false,
+    "allow_test_model_selection": false,
+    "allow_test_roi_quality_tuning": false,
+    "test_predictions_written_once_per_model_seed": true,
+    "failed_test_attempt_requires_same_code_config_and_locks": true
+  },
+  "reporting": {
+    "primary_summarize_scope": "primary_model_specific_20_model_seed_evaluations_only_immutable",
+    "secondary_standardized_summarize_scope": "standardized_resnet18_20_model_seed_evaluations_prespecified_and_separate",
+    "within_segmenter_strategy_contrasts": true,
+    "classifier_strategy_column_required": true,
+    "final_manuscript_synthesis": "future_merge_of_primary_and_separate_ablation_summaries",
+    "per_seed_results": true,
+    "five_seed_mean_plus_minus_sample_std": true,
+    "eye_and_patient_tables": true,
+    "calibration_tables_and_plots": true,
+    "confusion_matrices_with_abstention": true,
+    "segmentation_qualitative_examples": "model_blind_sha256_min_globally_unique_per_seed_and_original_3class_label_before_model_output_access",
+    "segmentation_qualitative_examples_per_class_per_seed": 1,
+    "failure_gallery_selection": "outcome_conditioned_sha256_min_per_model_seed_status_illustrative_only",
+    "failure_gallery": ["empty", "tiny", "oversegmentation", "ambiguous_multi_component", "edge_touch"],
+    "report_abstention_reasons": true,
+    "report_compute_and_parameter_counts": true,
+    "report_environment_and_weight_provenance": true,
+    "flops_policy": "not_reported_when_operator_coverage_and_end_to_end_path_are_not_comparable"
+  },
+  "note": "This new output is isolated from the earlier whole-image/joint study. All five patient memberships are copied byte-for-byte from their SHA-256-locked sources. The primary estimand pairs each segmenter with its separately trained model-specific strict-ROI classifier; a separately trained common ResNet-18 on the identical ROI artifacts is prespecified secondary. There is no ground-truth or full-image fallback in either deployable strategy."
+}

@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "scope": "core source package and synthetic regression verification",
+  "source_manifest": "core_source_manifest.json",
+  "status": "passed",
+  "runtime": {
+    "python": "3.12.7",
+    "torch": "2.8.0+cu126",
+    "timm": "1.0.19",
+    "pytest": "8.3.5"
+  },
+  "syntactic_parse": {
+    "files": 62,
+    "status": "passed"
+  },
+  "synthetic_test_groups": [
+    {
+      "passed": 100,
+      "deselected": 1,
+      "command": "python -B -m pytest --import-mode=importlib -p no:cacheprovider predicted_roi_study/tests/test_external_emcad_release.py predicted_roi_study/tests/test_release_evaluation_gate.py predicted_roi_study/tests/test_model_specific_classifiers.py predicted_roi_study/tests/test_roi.py predicted_roi_study/tests/test_metrics.py threeclass_roi_study/tests/test_data_models.py threeclass_roi_study/tests/test_metrics.py threeclass_roi_study/tests/test_cli.py -k 'not production_gradient' -q",
+      "scope": "ROI invariance, classifier contracts, metrics, CLI, external-source integrity, immutable gate alias and execution locking"
+    },
+    {
+      "passed": 29,
+      "deselected": 2,
+      "command": "python -B -m pytest --import-mode=importlib -p no:cacheprovider predicted_roi_study/tests/test_classifier_eligibility.py predicted_roi_study/tests/test_dual_protocol.py predicted_roi_study/tests/test_engine.py threeclass_roi_study/tests/test_engine_primary_statistics.py threeclass_roi_study/tests/test_engine_integrity.py -k 'not prepare_is_idempotent_and_attested_artifacts_are_not_overwritten and not locked_manifest_matches_patient_eye_frame_contract' -q",
+      "scope": "synthetic eligibility, receipt contracts, engine integrity and primary statistics; private archive/manifest tests excluded"
+    }
+  ],
+  "total_selected_tests_passed": 129,
+  "cli_checks": [
+    "python -m predicted_roi_study --help",
+    "python -m predicted_roi_study.release_evaluate --help",
+    "python -m threeclass_roi_study validate-config",
+    "python -m threeclass_roi_study plan"
+  ],
+  "emcad_external_source_parity": {
+    "scope": "new release adapter versus original adapter, with hash-pinned upstream source supplied in an OS temporary folder outside the release",
+    "device": "cpu",
+    "pretrained": false,
+    "input_shape": [
+      2,
+      3,
+      64,
+      64
+    ],
+    "state_entries": 404,
+    "state_tensors_exact": true,
+    "segmentation_logits_exact": true,
+    "classification_logits_exact": true,
+    "all_three_auxiliary_logits_exact": true,
+    "rtol": 0,
+    "atol": 0,
+    "source_compatibility_shim_required": false,
+    "upstream_timm_deprecation_and_registry_warnings_observed": true,
+    "temporary_source_copy_removed": true
+  },
+  "config_files_byte_identical": true,
+  "original_attested_sources_verified_unchanged": {
+    "binary_source_count": 73,
+    "threeclass_source_count": 11,
+    "status": "passed"
+  },
+  "test_inputs": "Synthetic tensors and temporary fixtures; no patient data, model fitting or inference on clinical images."
+}

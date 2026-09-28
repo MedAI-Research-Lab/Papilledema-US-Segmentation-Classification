@@ -1,0 +1,46 @@
+# Local Python and editor environments
+.venv*/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Private clinical inputs and study execution products
+/private_data/
+/study_data/
+/çalışma_ds/
+/*_results*/
+/runs/
+/outputs/
+/logs/
+*.log
+*.pt
+*.pth
+*.ckpt
+*.npz
+*.npy
+*.dcm
+*.dicom
+*.zip
+*.docx
+*.pdf
+
+# Credentials and machine-local configuration
+.env
+.env.*
+!.env.example
+*_credentials.json
+credentials.json
+token.json
+*.pem
+*.key
+local_config.*
+
+# Locally acquired third-party sources
+/external/

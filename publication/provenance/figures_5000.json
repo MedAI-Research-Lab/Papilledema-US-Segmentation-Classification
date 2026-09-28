@@ -1,0 +1,614 @@
+[
+  {
+    "section": "main",
+    "caption": "Figure 1. Study workflow: shared anatomical localization and two separate diagnostic tasks.",
+    "note": "Note. Patient-grouped repeated holdouts and inner out-of-fold predictions separate segmenter fitting from downstream classifier training. The green route assesses predicted masks directly against reference masks; segmentation metrics do not originate from either classifier. Blue and purple routes represent independently fitted binary and direct three-class analyses, respectively, not a diagnostic cascade. Strict predicted-ROI rejection has no manual, reference-mask or full-frame rescue. Raw frame probabilities are aggregated to eyes and then patients before level-specific temperature scaling. Test gates controlled access during execution but did not eliminate prior study-level exposure to the reused holdouts.",
+    "original_file": "Flowchart_2_visual.png",
+    "sha256": "eca91a31b131a662ece97f9963fb37bef54e577e0854a36efdca9739ce75b279",
+    "source": "methods_audit_20260925/Flowchart_2_visual.png",
+    "requires_private_images": false
+  },
+  {
+    "section": "main",
+    "caption": "Figure 2. Overall held-out anatomical ROI segmentation performance across the four frozen segmenters.",
+    "note": "Note. Points are five-split means and whiskers sample SD, not confidence intervals. Invalid postprocessed predictions are represented as empty masks: Dice, IoU, and surface Dice receive zero, while area error remains failure-inclusive. Boundary distances require nonempty predictions and must be read with coverage.",
+    "original_file": "segmentation_overall_five_split.png",
+    "sha256": "dc881f5d361989f4d1e82d0068d7fc5e474f7c6a6fb2f947d98e417a4a3efccb",
+    "source": "threeclass_q1_manuscript_20260922/segmentation_overall_five_split.png",
+    "requires_private_images": false
+  },
+  {
+    "section": "main",
+    "caption": "Figure 3. Four-model segmentation on identical frames from three held-out patients.",
+    "note": "Note. Qualitative comparison of postprocessed segmentations in three shared test patients. Rows identify the four models; each column uses an identical frame and reference mask across models. From all 252 frames of the 18 patients in fixed test split seed 17, frames were ranked by the mean Dice across the four models. The maximum, closest-to-median, and minimum means selected three distinct patients (0.943, 0.866, and 0.531, respectively); these are frame selections, not patient-average scores. Extrema were chosen first, then the closest-median frame; exact ties were resolved by ascending pseudonymous patient ID, frame ID, side, and case ID. No diagnosis quota was imposed. Cyan solid outlines denote reference masks and orange dashed outlines denote accepted-component masks. Dice is 2TP/(2TP+FP+FN) on the full 768-by-768 rasters; rejected ROIs are represented by empty predictions and Dice=0. Only common black letterbox padding was removed, with identical contrast and scale. Displayed case labels are de-identified and contain no direct patient identifiers. These retrospective, outcome-selected examples are descriptive, not representative, and cannot estimate prevalence or comparative performance. A column's rank is across the four-model mean, not each model's own rank.",
+    "original_file": "main_shared_patients_4x3.png",
+    "sha256": "a5b4353ef4e0a2bf4a8856a777d333ceca388da7c52c6daf28d42b4e14849023",
+    "source": "publication_revision_20260926/segmentation/main_shared_patients_4x3.png",
+    "requires_private_images": true
+  },
+  {
+    "section": "main",
+    "caption": "Figure 4. Binary eye-level confusion matrices across five test splits.",
+    "note": "Note. Each matrix presents eye-level predictions from the primary model-specific classifier. Cells show the arithmetic mean ± sample SD (ddof = 1) of within-seed true-row percentages for seeds 17, 42, 2026, 3407, and 9103. True rows include every intended eye, including abstentions, and sum to 100% before rounding. The colour scale is fixed at 0–100% for every panel. The diagonal reports failure-aware class recall (binary: specificity and sensitivity), agreeing with Table 3. These are descriptive summaries of overlapping holdouts, not pooled independent observations; SD is in percentage points.",
+    "original_file": "main_binary_confusion_mean_sd.png",
+    "sha256": "5ed98e3c4e08e4f24f6f7305fc510ab6edae0e1f907cf9f1c629532b9a619f9d",
+    "source": "publication_revision_20260926_restored_complete/classification_eye/main_binary_confusion_mean_sd.png",
+    "requires_private_images": false
+  },
+  {
+    "section": "main",
+    "caption": "Figure 5. Direct three-class eye-level confusion matrices across five test splits.",
+    "note": "Note. Each matrix presents eye-level predictions from the primary model-specific classifier. Cells show the arithmetic mean ± sample SD (ddof = 1) of within-seed true-row percentages for seeds 17, 42, 2026, 3407, and 9103. True rows include every intended eye, including abstentions, and sum to 100% before rounding. The colour scale is fixed at 0–100% for every panel. Diagonals report failure-aware eye-level class recall; aggregate eye-level outcomes are in Supplementary Table S24. Each seed includes 20 normal, 8 papilledema, and 8 pseudopapilledema eyes. Eyes within patients and overlapping seed holdouts are correlated; these summaries are descriptive, not pooled independent observations; SD is in percentage points.",
+    "original_file": "main_threeclass_confusion_mean_sd.png",
+    "sha256": "5ce7cfed4fd69590966e292873ac107e2e9664db1d126487d73b61964a2da709",
+    "source": "publication_revision_20260926_restored_complete/classification_eye/main_threeclass_confusion_mean_sd.png",
+    "requires_private_images": false
+  },
+  {
+    "section": "supplement",
+    "caption": "Supplementary Figure S1. Retrospective diagnosis-stratified segmentation and ROI coverage. Part 1 of 4.",
+    "note": "Note. Exploratory diagnosis-stratified anatomical segmentation for YOLO26. Panels A–C show normal, papilledema and pseudopapilledema strata. Colored points show the five split-specific all-intended-frame Dice means and strict predicted-ROI coverage; transparent lines connect the two measurements from the same seed and do not denote a causal relationship. Black diamonds and whiskers show the arithmetic mean ± sample SD across five splits (not a confidence interval); values beneath each category repeat that summary. Each split includes 140 normal, 56 papilledema and 56 pseudopapilledema frames. Invalid predictions contribute zero Dice and remain in coverage denominators. One shared anatomical ROI was learned across diagnoses; these retrospective strata do not represent diagnosis-specific lesion segmentation. Test memberships overlap, so summaries are descriptive rather than independent-sample inference.",
+    "original_file": "S2_yolo26_diagnosis_stratified_segmentation.png",
+    "sha256": "dd2af611cdf01f82d38bc5e75ae7b3973e5672341bede0eabcbc7f5be181a550",
+    "source": "publication_revision_20260926/segmentation_metrics/S2_yolo26_diagnosis_stratified_segmentation.png",
+    "requires_private_images": false
+  },
+  {
+    "section": "supplement",
+    "caption": "Supplementary Figure S1. Retrospective diagnosis-stratified segmentation and ROI coverage. Part 2 of 4.",
+    "note": "Note. Exploratory diagnosis-stratified anatomical segmentation for ViT Method2. Panels A–C show normal, papilledema and pseudopapilledema strata. Colored points show the five split-specific all-intended-frame Dice means and strict predicted-ROI coverage; transparent lines connect the two measurements from the same seed and do not denote a causal relationship. Black diamonds and whiskers show the arithmetic mean ± sample SD across five splits (not a confidence interval); values beneath each category repeat that summary. Each split includes 140 normal, 56 papilledema and 56 pseudopapilledema frames. Invalid predictions contribute zero Dice and remain in coverage denominators. One shared anatomical ROI was learned across diagnoses; these retrospective strata do not represent diagnosis-specific lesion segmentation. Test memberships overlap, so summaries are descriptive rather than independent-sample inference.",
+    "original_file": "S2_vit_method2_diagnosis_stratified_segmentation.png",
+    "sha256": "5b19adc4d20ec22d4202e96ca3762638e73e8c28ed4783b4207df0c6a5cedaa9",
+    "source": "publication_revision_20260926/segmentation_metrics/S2_vit_method2_diagnosis_stratified_segmentation.png",
+    "requires_private_images": false
+  },
+  {
+    "section": "supplement",
+    "caption": "Supplementary Figure S1. Retrospective diagnosis-stratified segmentation and ROI coverage. Part 3 of 4.",
+    "note": "Note. Exploratory diagnosis-stratified anatomical segmentation for EMCAD. Panels A–C show normal, papilledema and pseudopapilledema strata. Colored points show the five split-specific all-intended-frame Dice means and strict predicted-ROI coverage; transparent lines connect the two measurements from the same seed and do not denote a causal relationship. Black diamonds and whiskers show the arithmetic mean ± sample SD across five splits (not a confidence interval); values beneath each category repeat that summary. Each split includes 140 normal, 56 papilledema and 56 pseudopapilledema frames. Invalid predictions contribute zero Dice and remain in coverage denominators. One shared anatomical ROI was learned across diagnoses; these retrospective strata do not represent diagnosis-specific lesion segmentation. Test memberships overlap, so summaries are descriptive rather than independent-sample inference.",
+    "original_file": "S2_emcad_diagnosis_stratified_segmentation.png",
+    "sha256": "73223f9e3e182f7b489123aca3ce0ed344a6d8490b5584eb1dc7ed3dae737da4",
+    "source": "publication_revision_20260926/segmentation_metrics/S2_emcad_diagnosis_stratified_segmentation.png",
+    "requires_private_images": false
+  },
+  {
+    "section": "supplement",
+    "caption": "Supplementary Figure S1. Retrospective diagnosis-stratified segmentation and ROI coverage. Part 4 of 4.",
+    "note": "Note. Exploratory diagnosis-stratified anatomical segmentation for SAM2-U-Net. Panels A–C show normal, papilledema and pseudopapilledema strata. Colored points show the five split-specific all-intended-frame Dice means and strict predicted-ROI coverage; transparent lines connect the two measurements from the same seed and do not denote a causal relationship. Black diamonds and whiskers show the arithmetic mean ± sample SD across five splits (not a confidence interval); values beneath each category repeat that summary. Each split includes 140 normal, 56 papilledema and 56 pseudopapilledema frames. Invalid predictions contribute zero Dice and remain in coverage denominators. One shared anatomical ROI was learned across diagnoses; these retrospective strata do not represent diagnosis-specific lesion segmentation. Test memberships overlap, so summaries are descriptive rather than independent-sample inference.",
+    "original_file": "S2_sam2_unet_diagnosis_stratified_segmentation.png",
+    "sha256": "9c979431df8943c59f1c81ba6ecbf5959d35b9130a565f57e14d32ae147bc68f",
+    "source": "publication_revision_20260926/segmentation_metrics/S2_sam2_unet_diagnosis_stratified_segmentation.png",
+    "requires_private_images": false
+  },
+  {
+    "section": "supplement",
+    "caption": "Supplementary Figure S2. Descriptive raw-to-postprocessed segmentation changes. Part 1 of 4.",
+    "note": "Note. Descriptive raw-versus-postprocessed anatomical segmentation for YOLO26. Panels A–C show Dice, IoU and HD95. Colored points are split-specific means, and transparent lines pair summaries from the same seed. Black diamonds and whiskers show mean ± sample SD across the five split means, not confidence intervals; values beneath each category repeat that summary. Dice and IoU retain all 252 intended frames per split, including invalid predictions scored as empty masks. HD95 is conditional on nonempty predictions and measured in pixels in the resized 768 × 768 analysis space. Raw and postprocessed HD95 may use different nonempty-mask subsets, so connected points do not imply paired valid-frame populations. HD95 nonmissing counts for seeds 17, 42, 2026, 3407 and 9103 are [238, 246, 207, 234, 233] (raw) and [238, 245, 200, 234, 233] (postprocessed). Test memberships overlap; this is descriptive boundary/overlap assessment, and no raw-versus-postprocessed hypothesis test was prespecified.",
+    "original_file": "S3_yolo26_raw_postprocessed_segmentation.png",
+    "sha256": "7928efe90e5f97a0a5213529dcb44d22e741df9b858f541613cc20741c24a49b",
+    "source": "publication_revision_20260926/segmentation_metrics/S3_yolo26_raw_postprocessed_segmentation.png",
+    "requires_private_images": false
+  },
+  {
+    "section": "supplement",
+    "caption": "Supplementary Figure S2. Descriptive raw-to-postprocessed segmentation changes. Part 2 of 4.",
+    "note": "Note. Descriptive raw-versus-postprocessed anatomical segmentation for ViT Method2. Panels A–C show Dice, IoU and HD95. Colored points are split-specific means, and transparent lines pair summaries from the same seed. Black diamonds and whiskers show mean ± sample SD across the five split means, not confidence intervals; values beneath each category repeat that summary. Dice and IoU retain all 252 intended frames per split, including invalid predictions scored as empty masks. HD95 is conditional on nonempty predictions and measured in pixels in the resized 768 × 768 analysis space. Raw and postprocessed HD95 may use different nonempty-mask subsets, so connected points do not imply paired valid-frame populations. HD95 nonmissing counts for seeds 17, 42, 2026, 3407 and 9103 are [252, 252, 252, 252, 252] (raw) and [252, 248, 245, 244, 249] (postprocessed). Test memberships overlap; this is descriptive boundary/overlap assessment, and no raw-versus-postprocessed hypothesis test was prespecified.",
+    "original_file": "S3_vit_method2_raw_postprocessed_segmentation.png",
+    "sha256": "b82e7911c2bc35dfe09846aebe73cba8fa803d1824200c80fd7943599376bad4",
+    "source": "publication_revision_20260926/segmentation_metrics/S3_vit_method2_raw_postprocessed_segmentation.png",
+    "requires_private_images": false
+  },
+  {
+    "section": "supplement",
+    "caption": "Supplementary Figure S2. Descriptive raw-to-postprocessed segmentation changes. Part 3 of 4.",
+    "note": "Note. Descriptive raw-versus-postprocessed anatomical segmentation for EMCAD. Panels A–C show Dice, IoU and HD95. Colored points are split-specific means, and transparent lines pair summaries from the same seed. Black diamonds and whiskers show mean ± sample SD across the five split means, not confidence intervals; values beneath each category repeat that summary. Dice and IoU retain all 252 intended frames per split, including invalid predictions scored as empty masks. HD95 is conditional on nonempty predictions and measured in pixels in the resized 768 × 768 analysis space. Raw and postprocessed HD95 may use different nonempty-mask subsets, so connected points do not imply paired valid-frame populations. HD95 nonmissing counts for seeds 17, 42, 2026, 3407 and 9103 are [252, 252, 252, 249, 247] (raw) and [252, 252, 241, 243, 237] (postprocessed). Test memberships overlap; this is descriptive boundary/overlap assessment, and no raw-versus-postprocessed hypothesis test was prespecified.",
+    "original_file": "S3_emcad_raw_postprocessed_segmentation.png",
+    "sha256": "f74a0ad19e4d00bcc2e4695795488fd2841262da278a1e82c714aa6093c8ffdb",
+    "source": "publication_revision_20260926/segmentation_metrics/S3_emcad_raw_postprocessed_segmentation.png",
+    "requires_private_images": false
+  },
+  {
+    "section": "supplement",
+    "caption": "Supplementary Figure S2. Descriptive raw-to-postprocessed segmentation changes. Part 4 of 4.",
+    "note": "Note. Descriptive raw-versus-postprocessed anatomical segmentation for SAM2-U-Net. Panels A–C show Dice, IoU and HD95. Colored points are split-specific means, and transparent lines pair summaries from the same seed. Black diamonds and whiskers show mean ± sample SD across the five split means, not confidence intervals; values beneath each category repeat that summary. Dice and IoU retain all 252 intended frames per split, including invalid predictions scored as empty masks. HD95 is conditional on nonempty predictions and measured in pixels in the resized 768 × 768 analysis space. Raw and postprocessed HD95 may use different nonempty-mask subsets, so connected points do not imply paired valid-frame populations. HD95 nonmissing counts for seeds 17, 42, 2026, 3407 and 9103 are [252, 252, 252, 252, 252] (raw) and [252, 252, 252, 252, 252] (postprocessed). Test memberships overlap; this is descriptive boundary/overlap assessment, and no raw-versus-postprocessed hypothesis test was prespecified.",
+    "original_file": "S3_sam2_unet_raw_postprocessed_segmentation.png",
+    "sha256": "3a29c2f930da8d8f4d9f69d5bc9a6bf0ab21a7f93e34fb90048a94583f16aee5",
+    "source": "publication_revision_20260926/segmentation_metrics/S3_sam2_unet_raw_postprocessed_segmentation.png",
+    "requires_private_images": false
+  },
+  {
+    "section": "supplement",
+    "caption": "Supplementary Figure S3. Model-specific best, moderate and poor segmentation examples. Part 1 of 5.",
+    "note": "Note. Model-specific best, near-median, and worst postprocessed segmentations. For each model independently, all 252 frames from 18 patients in fixed test split seed 17 were ranked by full-frame Dice. The maximum and minimum were selected first, followed by the frame closest to the median; three distinct patients were used within each model. Exact ties were resolved by ascending pseudonymous patient ID, frame ID, side, and case ID, without diagnosis quotas. This distinct-patient condition did not change the extrema or closest-median distance. Cyan solid outlines denote reference masks and orange dashed outlines denote accepted-component predictions. Dice is 2TP/(2TP+FP+FN) on full 768-by-768 rasters; invalid ROIs yield empty predictions with Dice=0. Only fixed black letterbox padding was removed; contrast and scale are unchanged. Anonymous case labels are used and no personal identifiers are rendered. The displayed contours were derived from the fixed test predictions. These retrospective, outcome-selected examples are descriptive, not representative, and cannot estimate prevalence or comparative performance. Frames may differ across model-specific selections. Rows identify models and columns show best, near-median, and worst frames.",
+    "original_file": "supplement_per_model_extrema_4x3.png",
+    "sha256": "909061ff4c2160eaba41ff7d023f43d1a7813d55ce7fb143245d12e16aba75e8",
+    "source": "publication_revision_20260926/segmentation/supplement_per_model_extrema_4x3.png",
+    "requires_private_images": true
+  },
+  {
+    "section": "supplement",
+    "caption": "Supplementary Figure S3. Model-specific best, moderate and poor segmentation examples. Part 2 of 5.",
+    "note": "Note. YOLO26s-seg: Model-specific best, near-median, and worst postprocessed segmentations. For each model independently, all 252 frames from 18 patients in fixed test split seed 17 were ranked by full-frame Dice. The maximum and minimum were selected first, followed by the frame closest to the median; three distinct patients were used within each model. Exact ties were resolved by ascending pseudonymous patient ID, frame ID, side, and case ID, without diagnosis quotas. This distinct-patient condition did not change the extrema or closest-median distance. Cyan solid outlines denote reference masks and orange dashed outlines denote accepted-component predictions. Dice is 2TP/(2TP+FP+FN) on full 768-by-768 rasters; invalid ROIs yield empty predictions with Dice=0. Only fixed black letterbox padding was removed; contrast and scale are unchanged. Anonymous case labels are used and no personal identifiers are rendered. The displayed contours were derived from the fixed test predictions. These retrospective, outcome-selected examples are descriptive, not representative, and cannot estimate prevalence or comparative performance. Frames may differ across model-specific selections. The three rows reproduce this model's best, near-median, and worst frames from the supplementary matrix at a larger display size.",
+    "original_file": "supplement_yolo26_best_median_worst_3x1.png",
+    "sha256": "74c857cb60dc5716becc92e754f6eb0dc24645e3c1ed44adb32376d4e81fcc5f",
+    "source": "publication_revision_20260926/segmentation/supplement_yolo26_best_median_worst_3x1.png",
+    "requires_private_images": true
+  },
+  {
+    "section": "supplement",
+    "caption": "Supplementary Figure S3. Model-specific best, moderate and poor segmentation examples. Part 3 of 5.",
+    "note": "Note. ViT Method2: Model-specific best, near-median, and worst postprocessed segmentations. For each model independently, all 252 frames from 18 patients in fixed test split seed 17 were ranked by full-frame Dice. The maximum and minimum were selected first, followed by the frame closest to the median; three distinct patients were used within each model. Exact ties were resolved by ascending pseudonymous patient ID, frame ID, side, and case ID, without diagnosis quotas. This distinct-patient condition did not change the extrema or closest-median distance. Cyan solid outlines denote reference masks and orange dashed outlines denote accepted-component predictions. Dice is 2TP/(2TP+FP+FN) on full 768-by-768 rasters; invalid ROIs yield empty predictions with Dice=0. Only fixed black letterbox padding was removed; contrast and scale are unchanged. Anonymous case labels are used and no personal identifiers are rendered. The displayed contours were derived from the fixed test predictions. These retrospective, outcome-selected examples are descriptive, not representative, and cannot estimate prevalence or comparative performance. Frames may differ across model-specific selections. The three rows reproduce this model's best, near-median, and worst frames from the supplementary matrix at a larger display size.",
+    "original_file": "supplement_vit_method2_best_median_worst_3x1.png",
+    "sha256": "504776988824ae7fe0f9f1dd7649f8357844176c4b76ab26718ce3cd8220d6a7",
+    "source": "publication_revision_20260926/segmentation/supplement_vit_method2_best_median_worst_3x1.png",
+    "requires_private_images": true
+  },
+  {
+    "section": "supplement",
+    "caption": "Supplementary Figure S3. Model-specific best, moderate and poor segmentation examples. Part 4 of 5.",
+    "note": "Note. EMCAD: Model-specific best, near-median, and worst postprocessed segmentations. For each model independently, all 252 frames from 18 patients in fixed test split seed 17 were ranked by full-frame Dice. The maximum and minimum were selected first, followed by the frame closest to the median; three distinct patients were used within each model. Exact ties were resolved by ascending pseudonymous patient ID, frame ID, side, and case ID, without diagnosis quotas. This distinct-patient condition did not change the extrema or closest-median distance. Cyan solid outlines denote reference masks and orange dashed outlines denote accepted-component predictions. Dice is 2TP/(2TP+FP+FN) on full 768-by-768 rasters; invalid ROIs yield empty predictions with Dice=0. Only fixed black letterbox padding was removed; contrast and scale are unchanged. Anonymous case labels are used and no personal identifiers are rendered. The displayed contours were derived from the fixed test predictions. These retrospective, outcome-selected examples are descriptive, not representative, and cannot estimate prevalence or comparative performance. Frames may differ across model-specific selections. The three rows reproduce this model's best, near-median, and worst frames from the supplementary matrix at a larger display size.",
+    "original_file": "supplement_emcad_best_median_worst_3x1.png",
+    "sha256": "84b5beb64866cc7fc05fb9936ff0aee282b5c99c1e429aef7dbe281e18afa300",
+    "source": "publication_revision_20260926/segmentation/supplement_emcad_best_median_worst_3x1.png",
+    "requires_private_images": true
+  },
+  {
+    "section": "supplement",
+    "caption": "Supplementary Figure S3. Model-specific best, moderate and poor segmentation examples. Part 5 of 5.",
+    "note": "Note. SAM2-U-Net: Model-specific best, near-median, and worst postprocessed segmentations. For each model independently, all 252 frames from 18 patients in fixed test split seed 17 were ranked by full-frame Dice. The maximum and minimum were selected first, followed by the frame closest to the median; three distinct patients were used within each model. Exact ties were resolved by ascending pseudonymous patient ID, frame ID, side, and case ID, without diagnosis quotas. This distinct-patient condition did not change the extrema or closest-median distance. Cyan solid outlines denote reference masks and orange dashed outlines denote accepted-component predictions. Dice is 2TP/(2TP+FP+FN) on full 768-by-768 rasters; invalid ROIs yield empty predictions with Dice=0. Only fixed black letterbox padding was removed; contrast and scale are unchanged. Anonymous case labels are used and no personal identifiers are rendered. The displayed contours were derived from the fixed test predictions. These retrospective, outcome-selected examples are descriptive, not representative, and cannot estimate prevalence or comparative performance. Frames may differ across model-specific selections. The three rows reproduce this model's best, near-median, and worst frames from the supplementary matrix at a larger display size.",
+    "original_file": "supplement_sam2_unet_best_median_worst_3x1.png",
+    "sha256": "4df02b3750c670c42f1251737ce974842b338f704a2c3693f2d84036c6166cd1",
+    "source": "publication_revision_20260926/segmentation/supplement_sam2_unet_best_median_worst_3x1.png",
+    "requires_private_images": true
+  },
+  {
+    "section": "supplement",
+    "caption": "Supplementary Figure S4. Binary failure-aware eye balanced accuracy and coverage.",
+    "note": "Note. Four primary model-specific pipelines; points are five-split means and whiskers sample SD, not confidence intervals. All intended eyes are retained in failure-aware balanced accuracy.",
+    "original_file": "binary_eye_ba_coverage.png",
+    "sha256": "3c0ac2a4ebbf33c2b4d585ba7e01faba0bf728ed32b906ba44c32e6a78d22292",
+    "source": "threeclass_q1_manuscript_20260922/binary_eye_ba_coverage.png",
+    "requires_private_images": false
+  },
+  {
+    "section": "supplement",
+    "caption": "Supplementary Figure S5. Binary eye-level confusion matrices for every test seed. Part 1 of 8.",
+    "note": "Note. YOLO26: binary eye-level confusion, page A. Seed panels [17, 42, 2026] are arranged in three rows and one column; page B leaves the third slot empty. Each cell shows the count and percentage of the complete true-class row, including abstentions. A common 0–100% scale applies to all matrices. True-class row totals are displayed in each panel heading. Primary model-specific strategy only; no pooling across seeds.",
+    "original_file": "supp_binary_confusion_yolo26_A.png",
+    "sha256": "92d4ac371cdc0312adc2b83bbaa1987768035a08d27d6a7fc1a8f52e6ed32ca4",
+    "source": "publication_revision_20260926_restored_complete/classification_eye/supp_binary_confusion_yolo26_A.png",
+    "requires_private_images": false
+  },
+  {
+    "section": "supplement",
+    "caption": "Supplementary Figure S5. Binary eye-level confusion matrices for every test seed. Part 2 of 8.",
+    "note": "Note. YOLO26: binary eye-level confusion, page B. Seed panels [3407, 9103] are arranged in three rows and one column; page B leaves the third slot empty. Each cell shows the count and percentage of the complete true-class row, including abstentions. A common 0–100% scale applies to all matrices. True-class row totals are displayed in each panel heading. Primary model-specific strategy only; no pooling across seeds.",
+    "original_file": "supp_binary_confusion_yolo26_B.png",
+    "sha256": "20f4e42a05739c471f6e8dc0f007460ec5437283446c6cc41db5ddc8ba9b3e2d",
+    "source": "publication_revision_20260926_restored_complete/classification_eye/supp_binary_confusion_yolo26_B.png",
+    "requires_private_images": false
+  },
+  {
+    "section": "supplement",
+    "caption": "Supplementary Figure S5. Binary eye-level confusion matrices for every test seed. Part 3 of 8.",
+    "note": "Note. ViT-Method2: binary eye-level confusion, page A. Seed panels [17, 42, 2026] are arranged in three rows and one column; page B leaves the third slot empty. Each cell shows the count and percentage of the complete true-class row, including abstentions. A common 0–100% scale applies to all matrices. True-class row totals are displayed in each panel heading. Primary model-specific strategy only; no pooling across seeds.",
+    "original_file": "supp_binary_confusion_vit_method2_A.png",
+    "sha256": "6aa765a6b3c924636e0f7cdc725ce63f284de9b5cfc554d408ae21bcf3f29901",
+    "source": "publication_revision_20260926_restored_complete/classification_eye/supp_binary_confusion_vit_method2_A.png",
+    "requires_private_images": false
+  },
+  {
+    "section": "supplement",
+    "caption": "Supplementary Figure S5. Binary eye-level confusion matrices for every test seed. Part 4 of 8.",
+    "note": "Note. ViT-Method2: binary eye-level confusion, page B. Seed panels [3407, 9103] are arranged in three rows and one column; page B leaves the third slot empty. Each cell shows the count and percentage of the complete true-class row, including abstentions. A common 0–100% scale applies to all matrices. True-class row totals are displayed in each panel heading. Primary model-specific strategy only; no pooling across seeds.",
+    "original_file": "supp_binary_confusion_vit_method2_B.png",
+    "sha256": "5b416c2aaad5c79dd4ef8db6af663c285e39e1a1cd735a79663a7f75f71fbc91",
+    "source": "publication_revision_20260926_restored_complete/classification_eye/supp_binary_confusion_vit_method2_B.png",
+    "requires_private_images": false
+  },
+  {
+    "section": "supplement",
+    "caption": "Supplementary Figure S5. Binary eye-level confusion matrices for every test seed. Part 5 of 8.",
+    "note": "Note. EMCAD: binary eye-level confusion, page A. Seed panels [17, 42, 2026] are arranged in three rows and one column; page B leaves the third slot empty. Each cell shows the count and percentage of the complete true-class row, including abstentions. A common 0–100% scale applies to all matrices. True-class row totals are displayed in each panel heading. Primary model-specific strategy only; no pooling across seeds.",
+    "original_file": "supp_binary_confusion_emcad_A.png",
+    "sha256": "83cc86af568fe001e8f5069737a9c9c337567502101935a93efc8aff1a40df9d",
+    "source": "publication_revision_20260926_restored_complete/classification_eye/supp_binary_confusion_emcad_A.png",
+    "requires_private_images": false
+  },
+  {
+    "section": "supplement",
+    "caption": "Supplementary Figure S5. Binary eye-level confusion matrices for every test seed. Part 6 of 8.",
+    "note": "Note. EMCAD: binary eye-level confusion, page B. Seed panels [3407, 9103] are arranged in three rows and one column; page B leaves the third slot empty. Each cell shows the count and percentage of the complete true-class row, including abstentions. A common 0–100% scale applies to all matrices. True-class row totals are displayed in each panel heading. Primary model-specific strategy only; no pooling across seeds.",
+    "original_file": "supp_binary_confusion_emcad_B.png",
+    "sha256": "35ce86bb9846c85236bf697f190ad6de45685e96d594b0602f0d5cfc2fd1d938",
+    "source": "publication_revision_20260926_restored_complete/classification_eye/supp_binary_confusion_emcad_B.png",
+    "requires_private_images": false
+  },
+  {
+    "section": "supplement",
+    "caption": "Supplementary Figure S5. Binary eye-level confusion matrices for every test seed. Part 7 of 8.",
+    "note": "Note. SAM2-UNet: binary eye-level confusion, page A. Seed panels [17, 42, 2026] are arranged in three rows and one column; page B leaves the third slot empty. Each cell shows the count and percentage of the complete true-class row, including abstentions. A common 0–100% scale applies to all matrices. True-class row totals are displayed in each panel heading. Primary model-specific strategy only; no pooling across seeds.",
+    "original_file": "supp_binary_confusion_sam2_unet_A.png",
+    "sha256": "a9d2090ed461af68887ced6c7f6b9e47794fa13f257a99e4a64ec60563c2e885",
+    "source": "publication_revision_20260926_restored_complete/classification_eye/supp_binary_confusion_sam2_unet_A.png",
+    "requires_private_images": false
+  },
+  {
+    "section": "supplement",
+    "caption": "Supplementary Figure S5. Binary eye-level confusion matrices for every test seed. Part 8 of 8.",
+    "note": "Note. SAM2-UNet: binary eye-level confusion, page B. Seed panels [3407, 9103] are arranged in three rows and one column; page B leaves the third slot empty. Each cell shows the count and percentage of the complete true-class row, including abstentions. A common 0–100% scale applies to all matrices. True-class row totals are displayed in each panel heading. Primary model-specific strategy only; no pooling across seeds.",
+    "original_file": "supp_binary_confusion_sam2_unet_B.png",
+    "sha256": "ba9d577e6f009a4fc569ad194b2c75dbd0fb6487336f444be33f964bfa80b145",
+    "source": "publication_revision_20260926_restored_complete/classification_eye/supp_binary_confusion_sam2_unet_B.png",
+    "requires_private_images": false
+  },
+  {
+    "section": "supplement",
+    "caption": "Supplementary Figure S6. Conditional binary eye-level ROC and precision–recall curves. Part 1 of 4.",
+    "note": "Note. YOLO26 Abnormal versus normal discrimination at eye level. ROC curves are shown above precision–recall curves. Each of the five seed-specific traces uses the fixed calibrated test probabilities among evaluable observations. Legend values are seed-specific AUROC and average precision; evaluable denominators are reported in Supplementary Data S1. Structural abstentions have no probability and are excluded. Seed holdouts overlap and remain separate.",
+    "original_file": "supp_binary_roc_pr_yolo26_class1.png",
+    "sha256": "8093cc8dac93da2cdb230e71c115b945ce5ba27bb7fec94fd88f039520568178",
+    "source": "publication_revision_20260926/classification/supp_binary_roc_pr_yolo26_class1.png",
+    "requires_private_images": false
+  },
+  {
+    "section": "supplement",
+    "caption": "Supplementary Figure S6. Conditional binary eye-level ROC and precision–recall curves. Part 2 of 4.",
+    "note": "Note. ViT-Method2 Abnormal versus normal discrimination at eye level. ROC curves are shown above precision–recall curves. Each of the five seed-specific traces uses the fixed calibrated test probabilities among evaluable observations. Legend values are seed-specific AUROC and average precision; evaluable denominators are reported in Supplementary Data S1. Structural abstentions have no probability and are excluded. Seed holdouts overlap and remain separate.",
+    "original_file": "supp_binary_roc_pr_vit_method2_class1.png",
+    "sha256": "f37f650dcc0308c820cf09136e42d368e860a59e559d21844d9c0b5d2e489298",
+    "source": "publication_revision_20260926/classification/supp_binary_roc_pr_vit_method2_class1.png",
+    "requires_private_images": false
+  },
+  {
+    "section": "supplement",
+    "caption": "Supplementary Figure S6. Conditional binary eye-level ROC and precision–recall curves. Part 3 of 4.",
+    "note": "Note. EMCAD Abnormal versus normal discrimination at eye level. ROC curves are shown above precision–recall curves. Each of the five seed-specific traces uses the fixed calibrated test probabilities among evaluable observations. Legend values are seed-specific AUROC and average precision; evaluable denominators are reported in Supplementary Data S1. Structural abstentions have no probability and are excluded. Seed holdouts overlap and remain separate.",
+    "original_file": "supp_binary_roc_pr_emcad_class1.png",
+    "sha256": "56212cfb8a8852f87c9a0346008684c1cd27a33f2f97783a80bd8da16e67a032",
+    "source": "publication_revision_20260926/classification/supp_binary_roc_pr_emcad_class1.png",
+    "requires_private_images": false
+  },
+  {
+    "section": "supplement",
+    "caption": "Supplementary Figure S6. Conditional binary eye-level ROC and precision–recall curves. Part 4 of 4.",
+    "note": "Note. SAM2-UNet Abnormal versus normal discrimination at eye level. ROC curves are shown above precision–recall curves. Each of the five seed-specific traces uses the fixed calibrated test probabilities among evaluable observations. Legend values are seed-specific AUROC and average precision; evaluable denominators are reported in Supplementary Data S1. Structural abstentions have no probability and are excluded. Seed holdouts overlap and remain separate.",
+    "original_file": "supp_binary_roc_pr_sam2_unet_class1.png",
+    "sha256": "8d2e3ccedda6234a674a5141efce8d44673ffb041681eae53f0470dd75061f14",
+    "source": "publication_revision_20260926/classification/supp_binary_roc_pr_sam2_unet_class1.png",
+    "requires_private_images": false
+  },
+  {
+    "section": "supplement",
+    "caption": "Supplementary Figure S7. Binary eye-level reliability before and after calibration: YOLO26. Part 1 of 4.",
+    "note": "Note. The primary model-specific classifier is shown separately for seeds 17, 42, 2026, 3407 and 9103. Top: raw probabilities. Bottom: probabilities after temperature scaling fitted on tuning data. Each curve uses the same seed-specific evaluable test eyes and ten fixed-width probability bins; empty bins are omitted, and lines connect bin means descriptively. The positive category combines papilledema and pseudopapilledema. The diagonal denotes ideal calibration. Sparse-bin variability and overlapping holdouts preclude interpreting these traces as independent cohorts or evidence of consistent calibration improvement. No test-fitted recalibration or pooled curve is shown. Bin counts and coordinates are in data/binary_curve_coordinates.csv.",
+    "original_file": "S12_yolo26_binary_eye_reliability.png",
+    "sha256": "8e13bd12e8be2b7ae9c1dc850c06c15a08a442bd9bf1d2f33a8603e70aedb0b5",
+    "source": "publication_complete_supplements_20260928/work/new_figures/S12_yolo26_binary_eye_reliability.png",
+    "requires_private_images": false
+  },
+  {
+    "section": "supplement",
+    "caption": "Supplementary Figure S7. Binary eye-level reliability before and after calibration: ViT Method2. Part 2 of 4.",
+    "note": "Note. The primary model-specific classifier is shown separately for seeds 17, 42, 2026, 3407 and 9103. Top: raw probabilities. Bottom: probabilities after temperature scaling fitted on tuning data. Each curve uses the same seed-specific evaluable test eyes and ten fixed-width probability bins; empty bins are omitted, and lines connect bin means descriptively. The positive category combines papilledema and pseudopapilledema. The diagonal denotes ideal calibration. Sparse-bin variability and overlapping holdouts preclude interpreting these traces as independent cohorts or evidence of consistent calibration improvement. No test-fitted recalibration or pooled curve is shown. Bin counts and coordinates are in data/binary_curve_coordinates.csv.",
+    "original_file": "S12_vit_method2_binary_eye_reliability.png",
+    "sha256": "1d637bf33e7072efcf8842606b8b91664eb0684a05ea2fa2d9a322b610f48d7b",
+    "source": "publication_complete_supplements_20260928/work/new_figures/S12_vit_method2_binary_eye_reliability.png",
+    "requires_private_images": false
+  },
+  {
+    "section": "supplement",
+    "caption": "Supplementary Figure S7. Binary eye-level reliability before and after calibration: EMCAD. Part 3 of 4.",
+    "note": "Note. The primary model-specific classifier is shown separately for seeds 17, 42, 2026, 3407 and 9103. Top: raw probabilities. Bottom: probabilities after temperature scaling fitted on tuning data. Each curve uses the same seed-specific evaluable test eyes and ten fixed-width probability bins; empty bins are omitted, and lines connect bin means descriptively. The positive category combines papilledema and pseudopapilledema. The diagonal denotes ideal calibration. Sparse-bin variability and overlapping holdouts preclude interpreting these traces as independent cohorts or evidence of consistent calibration improvement. No test-fitted recalibration or pooled curve is shown. Bin counts and coordinates are in data/binary_curve_coordinates.csv.",
+    "original_file": "S12_emcad_binary_eye_reliability.png",
+    "sha256": "d6343a1e0fc35aac70c9f94e66fc138bf3f95ba554cdec6ef1dec9a543eb94fc",
+    "source": "publication_complete_supplements_20260928/work/new_figures/S12_emcad_binary_eye_reliability.png",
+    "requires_private_images": false
+  },
+  {
+    "section": "supplement",
+    "caption": "Supplementary Figure S7. Binary eye-level reliability before and after calibration: SAM2-U-Net. Part 4 of 4.",
+    "note": "Note. The primary model-specific classifier is shown separately for seeds 17, 42, 2026, 3407 and 9103. Top: raw probabilities. Bottom: probabilities after temperature scaling fitted on tuning data. Each curve uses the same seed-specific evaluable test eyes and ten fixed-width probability bins; empty bins are omitted, and lines connect bin means descriptively. The positive category combines papilledema and pseudopapilledema. The diagonal denotes ideal calibration. Sparse-bin variability and overlapping holdouts preclude interpreting these traces as independent cohorts or evidence of consistent calibration improvement. No test-fitted recalibration or pooled curve is shown. Bin counts and coordinates are in data/binary_curve_coordinates.csv.",
+    "original_file": "S12_sam2_unet_binary_eye_reliability.png",
+    "sha256": "959e45c00a8af1f02f4b1944f324e75ac02c6c7cf0c81916fabd68c093e2be6b",
+    "source": "publication_complete_supplements_20260928/work/new_figures/S12_sam2_unet_binary_eye_reliability.png",
+    "requires_private_images": false
+  },
+  {
+    "section": "supplement",
+    "caption": "Supplementary Figure S8. Binary eye-level failure-aware risk–coverage: YOLO26. Part 1 of 4.",
+    "note": "Note. Five separate seed curves for the primary model-specific classifier use operational temperature-scaled eye probabilities. Each ranks all 36 intended eyes by descending absolute distance from the locked decision threshold; structural abstentions are appended at lowest confidence and counted as errors. Coverage is retained rank divided by 36, and risk is cumulative ordinary misclassification proportion, not 1 minus balanced accuracy. The terminal risk therefore equals 1 minus failure-aware accuracy. The saved AURC summary is the mean over all 36 rank risks. Curves are descriptive and do not establish a deployment rejection threshold, prospective safety or clinical benefit. Coordinates are supplied in data/binary_curve_coordinates.csv.",
+    "original_file": "S13_yolo26_binary_eye_risk_coverage.png",
+    "sha256": "0b3458d1ac9bda4c3a4c2c40cebd89ee9375a43e4ec9fa1786fa5dc38e400cd6",
+    "source": "publication_complete_supplements_20260928/work/new_figures/S13_yolo26_binary_eye_risk_coverage.png",
+    "requires_private_images": false
+  },
+  {
+    "section": "supplement",
+    "caption": "Supplementary Figure S8. Binary eye-level failure-aware risk–coverage: ViT Method2. Part 2 of 4.",
+    "note": "Note. Five separate seed curves for the primary model-specific classifier use operational temperature-scaled eye probabilities. Each ranks all 36 intended eyes by descending absolute distance from the locked decision threshold; structural abstentions are appended at lowest confidence and counted as errors. Coverage is retained rank divided by 36, and risk is cumulative ordinary misclassification proportion, not 1 minus balanced accuracy. The terminal risk therefore equals 1 minus failure-aware accuracy. The saved AURC summary is the mean over all 36 rank risks. Curves are descriptive and do not establish a deployment rejection threshold, prospective safety or clinical benefit. Coordinates are supplied in data/binary_curve_coordinates.csv.",
+    "original_file": "S13_vit_method2_binary_eye_risk_coverage.png",
+    "sha256": "dfbbe4be6be1316a6dbbda2a7585c55347d133624435b635c540e9af12093974",
+    "source": "publication_complete_supplements_20260928/work/new_figures/S13_vit_method2_binary_eye_risk_coverage.png",
+    "requires_private_images": false
+  },
+  {
+    "section": "supplement",
+    "caption": "Supplementary Figure S8. Binary eye-level failure-aware risk–coverage: EMCAD. Part 3 of 4.",
+    "note": "Note. Five separate seed curves for the primary model-specific classifier use operational temperature-scaled eye probabilities. Each ranks all 36 intended eyes by descending absolute distance from the locked decision threshold; structural abstentions are appended at lowest confidence and counted as errors. Coverage is retained rank divided by 36, and risk is cumulative ordinary misclassification proportion, not 1 minus balanced accuracy. The terminal risk therefore equals 1 minus failure-aware accuracy. The saved AURC summary is the mean over all 36 rank risks. Curves are descriptive and do not establish a deployment rejection threshold, prospective safety or clinical benefit. Coordinates are supplied in data/binary_curve_coordinates.csv.",
+    "original_file": "S13_emcad_binary_eye_risk_coverage.png",
+    "sha256": "ab97f863821488ea364ca6f5c1dff42d2325c82b9f98f66951df65179fc61344",
+    "source": "publication_complete_supplements_20260928/work/new_figures/S13_emcad_binary_eye_risk_coverage.png",
+    "requires_private_images": false
+  },
+  {
+    "section": "supplement",
+    "caption": "Supplementary Figure S8. Binary eye-level failure-aware risk–coverage: SAM2-U-Net. Part 4 of 4.",
+    "note": "Note. Five separate seed curves for the primary model-specific classifier use operational temperature-scaled eye probabilities. Each ranks all 36 intended eyes by descending absolute distance from the locked decision threshold; structural abstentions are appended at lowest confidence and counted as errors. Coverage is retained rank divided by 36, and risk is cumulative ordinary misclassification proportion, not 1 minus balanced accuracy. The terminal risk therefore equals 1 minus failure-aware accuracy. The saved AURC summary is the mean over all 36 rank risks. Curves are descriptive and do not establish a deployment rejection threshold, prospective safety or clinical benefit. Coordinates are supplied in data/binary_curve_coordinates.csv.",
+    "original_file": "S13_sam2_unet_binary_eye_risk_coverage.png",
+    "sha256": "95351e5f5382ee5a054588a9e096099258cffdcfb14b7599991d171d22cb1434",
+    "source": "publication_complete_supplements_20260928/work/new_figures/S13_sam2_unet_binary_eye_risk_coverage.png",
+    "requires_private_images": false
+  },
+  {
+    "section": "supplement",
+    "caption": "Supplementary Figure S9. Three-class failure-aware patient balanced accuracy and coverage.",
+    "note": "Note. Four primary model-specific pipelines; points are five-split means and whiskers sample SD, not confidence intervals. All intended patients are retained in failure-aware balanced accuracy.",
+    "original_file": "threeclass_patient_ba_coverage.png",
+    "sha256": "108302bca106c3ac9bdd622b888e09547d98b9f74984bdef7a5ce057ab314d55",
+    "source": "threeclass_q1_manuscript_20260922/threeclass_patient_ba_coverage.png",
+    "requires_private_images": false
+  },
+  {
+    "section": "supplement",
+    "caption": "Supplementary Figure S10. Three-class eye-level confusion matrices for every test seed. Part 1 of 8.",
+    "note": "Note. YOLO26: three-class eye-level confusion, page A. Seed panels [17, 42, 2026] are arranged in three rows and one column; page B leaves the third slot empty. Each cell shows the count and percentage of the complete true-class row, including abstentions. A common 0–100% scale applies to all matrices. True-class rows contain 20 normal, 8 papilledema, and 8 pseudopapilledema eyes per seed. Primary model-specific strategy only; no pooling across seeds.",
+    "original_file": "supp_threeclass_confusion_yolo26_A.png",
+    "sha256": "ddb8bba9f1220693f832d44fef33a322573126cd17a59190975224bc1e3f1432",
+    "source": "publication_revision_20260926_restored_complete/classification_eye/supp_threeclass_confusion_yolo26_A.png",
+    "requires_private_images": false
+  },
+  {
+    "section": "supplement",
+    "caption": "Supplementary Figure S10. Three-class eye-level confusion matrices for every test seed. Part 2 of 8.",
+    "note": "Note. YOLO26: three-class eye-level confusion, page B. Seed panels [3407, 9103] are arranged in three rows and one column; page B leaves the third slot empty. Each cell shows the count and percentage of the complete true-class row, including abstentions. A common 0–100% scale applies to all matrices. True-class rows contain 20 normal, 8 papilledema, and 8 pseudopapilledema eyes per seed. Primary model-specific strategy only; no pooling across seeds.",
+    "original_file": "supp_threeclass_confusion_yolo26_B.png",
+    "sha256": "5819d57a30bcb3aeebce43b338091ed6b1249649e90ae84bbd6a14656c13c633",
+    "source": "publication_revision_20260926_restored_complete/classification_eye/supp_threeclass_confusion_yolo26_B.png",
+    "requires_private_images": false
+  },
+  {
+    "section": "supplement",
+    "caption": "Supplementary Figure S10. Three-class eye-level confusion matrices for every test seed. Part 3 of 8.",
+    "note": "Note. ViT-Method2: three-class eye-level confusion, page A. Seed panels [17, 42, 2026] are arranged in three rows and one column; page B leaves the third slot empty. Each cell shows the count and percentage of the complete true-class row, including abstentions. A common 0–100% scale applies to all matrices. True-class rows contain 20 normal, 8 papilledema, and 8 pseudopapilledema eyes per seed. Primary model-specific strategy only; no pooling across seeds.",
+    "original_file": "supp_threeclass_confusion_vit_method2_A.png",
+    "sha256": "9a9450f24a5f8dc7b9be6d50cccf48e3d137ae81b363215f5638b05dda9de057",
+    "source": "publication_revision_20260926_restored_complete/classification_eye/supp_threeclass_confusion_vit_method2_A.png",
+    "requires_private_images": false
+  },
+  {
+    "section": "supplement",
+    "caption": "Supplementary Figure S10. Three-class eye-level confusion matrices for every test seed. Part 4 of 8.",
+    "note": "Note. ViT-Method2: three-class eye-level confusion, page B. Seed panels [3407, 9103] are arranged in three rows and one column; page B leaves the third slot empty. Each cell shows the count and percentage of the complete true-class row, including abstentions. A common 0–100% scale applies to all matrices. True-class rows contain 20 normal, 8 papilledema, and 8 pseudopapilledema eyes per seed. Primary model-specific strategy only; no pooling across seeds.",
+    "original_file": "supp_threeclass_confusion_vit_method2_B.png",
+    "sha256": "bd486319491152a276a89cbff802f7b067bf9da13dc1d1b3295191dcc5461feb",
+    "source": "publication_revision_20260926_restored_complete/classification_eye/supp_threeclass_confusion_vit_method2_B.png",
+    "requires_private_images": false
+  },
+  {
+    "section": "supplement",
+    "caption": "Supplementary Figure S10. Three-class eye-level confusion matrices for every test seed. Part 5 of 8.",
+    "note": "Note. EMCAD: three-class eye-level confusion, page A. Seed panels [17, 42, 2026] are arranged in three rows and one column; page B leaves the third slot empty. Each cell shows the count and percentage of the complete true-class row, including abstentions. A common 0–100% scale applies to all matrices. True-class rows contain 20 normal, 8 papilledema, and 8 pseudopapilledema eyes per seed. Primary model-specific strategy only; no pooling across seeds.",
+    "original_file": "supp_threeclass_confusion_emcad_A.png",
+    "sha256": "31cb0aa06080890e8835449c9828845a28d68ceffd2c6f6ea83255f95eb2030c",
+    "source": "publication_revision_20260926_restored_complete/classification_eye/supp_threeclass_confusion_emcad_A.png",
+    "requires_private_images": false
+  },
+  {
+    "section": "supplement",
+    "caption": "Supplementary Figure S10. Three-class eye-level confusion matrices for every test seed. Part 6 of 8.",
+    "note": "Note. EMCAD: three-class eye-level confusion, page B. Seed panels [3407, 9103] are arranged in three rows and one column; page B leaves the third slot empty. Each cell shows the count and percentage of the complete true-class row, including abstentions. A common 0–100% scale applies to all matrices. True-class rows contain 20 normal, 8 papilledema, and 8 pseudopapilledema eyes per seed. Primary model-specific strategy only; no pooling across seeds.",
+    "original_file": "supp_threeclass_confusion_emcad_B.png",
+    "sha256": "e13a5072d7136e29f8bc868c8e25e59e2d128d348d63430351b1892fbdf20b07",
+    "source": "publication_revision_20260926_restored_complete/classification_eye/supp_threeclass_confusion_emcad_B.png",
+    "requires_private_images": false
+  },
+  {
+    "section": "supplement",
+    "caption": "Supplementary Figure S10. Three-class eye-level confusion matrices for every test seed. Part 7 of 8.",
+    "note": "Note. SAM2-UNet: three-class eye-level confusion, page A. Seed panels [17, 42, 2026] are arranged in three rows and one column; page B leaves the third slot empty. Each cell shows the count and percentage of the complete true-class row, including abstentions. A common 0–100% scale applies to all matrices. True-class rows contain 20 normal, 8 papilledema, and 8 pseudopapilledema eyes per seed. Primary model-specific strategy only; no pooling across seeds.",
+    "original_file": "supp_threeclass_confusion_sam2_unet_A.png",
+    "sha256": "383782d6ce70ad545a46dfe00947a6564789c5485946700fa8c02c8acae6dacd",
+    "source": "publication_revision_20260926_restored_complete/classification_eye/supp_threeclass_confusion_sam2_unet_A.png",
+    "requires_private_images": false
+  },
+  {
+    "section": "supplement",
+    "caption": "Supplementary Figure S10. Three-class eye-level confusion matrices for every test seed. Part 8 of 8.",
+    "note": "Note. SAM2-UNet: three-class eye-level confusion, page B. Seed panels [3407, 9103] are arranged in three rows and one column; page B leaves the third slot empty. Each cell shows the count and percentage of the complete true-class row, including abstentions. A common 0–100% scale applies to all matrices. True-class rows contain 20 normal, 8 papilledema, and 8 pseudopapilledema eyes per seed. Primary model-specific strategy only; no pooling across seeds.",
+    "original_file": "supp_threeclass_confusion_sam2_unet_B.png",
+    "sha256": "bdd655cad165cf07677c4507a82ca126095fb66fe441a22554ed5576d349d30b",
+    "source": "publication_revision_20260926_restored_complete/classification_eye/supp_threeclass_confusion_sam2_unet_B.png",
+    "requires_private_images": false
+  },
+  {
+    "section": "supplement",
+    "caption": "Supplementary Figure S11. Conditional three-class patient one-versus-rest ROC and precision–recall curves. Part 1 of 12.",
+    "note": "Note. YOLO26 Normal one-versus-rest discrimination at patient level. ROC curves are shown above precision–recall curves. Each of the five seed-specific traces uses the fixed calibrated test probabilities among evaluable observations. Legend values are seed-specific AUROC and average precision; evaluable denominators are reported in Supplementary Data S1. Structural abstentions have no probability and are excluded. Seed holdouts overlap and remain separate.",
+    "original_file": "supp_threeclass_roc_pr_yolo26_class0.png",
+    "sha256": "67af1a8da8bcff29669be91ac46bbe6d0ca39fe62f984f4e12601107de3a6960",
+    "source": "publication_revision_20260926/classification/supp_threeclass_roc_pr_yolo26_class0.png",
+    "requires_private_images": false
+  },
+  {
+    "section": "supplement",
+    "caption": "Supplementary Figure S11. Conditional three-class patient one-versus-rest ROC and precision–recall curves. Part 2 of 12.",
+    "note": "Note. YOLO26 Papilledema one-versus-rest discrimination at patient level. ROC curves are shown above precision–recall curves. Each of the five seed-specific traces uses the fixed calibrated test probabilities among evaluable observations. Legend values are seed-specific AUROC and average precision; evaluable denominators are reported in Supplementary Data S1. Structural abstentions have no probability and are excluded. Seed holdouts overlap and remain separate.",
+    "original_file": "supp_threeclass_roc_pr_yolo26_class1.png",
+    "sha256": "dd37b1c7b7702ecfbd22a53c28e800a85b1a1b43187dcdb4baa716aef5d5d004",
+    "source": "publication_revision_20260926/classification/supp_threeclass_roc_pr_yolo26_class1.png",
+    "requires_private_images": false
+  },
+  {
+    "section": "supplement",
+    "caption": "Supplementary Figure S11. Conditional three-class patient one-versus-rest ROC and precision–recall curves. Part 3 of 12.",
+    "note": "Note. YOLO26 Pseudopapilledema one-versus-rest discrimination at patient level. ROC curves are shown above precision–recall curves. Each of the five seed-specific traces uses the fixed calibrated test probabilities among evaluable observations. Legend values are seed-specific AUROC and average precision; evaluable denominators are reported in Supplementary Data S1. Structural abstentions have no probability and are excluded. Seed holdouts overlap and remain separate.",
+    "original_file": "supp_threeclass_roc_pr_yolo26_class2.png",
+    "sha256": "1f98da9971ba5b747d7aca9628d848aa8bbb0c1a5cf42eba9db5f0ed3eaa0deb",
+    "source": "publication_revision_20260926/classification/supp_threeclass_roc_pr_yolo26_class2.png",
+    "requires_private_images": false
+  },
+  {
+    "section": "supplement",
+    "caption": "Supplementary Figure S11. Conditional three-class patient one-versus-rest ROC and precision–recall curves. Part 4 of 12.",
+    "note": "Note. ViT-Method2 Normal one-versus-rest discrimination at patient level. ROC curves are shown above precision–recall curves. Each of the five seed-specific traces uses the fixed calibrated test probabilities among evaluable observations. Legend values are seed-specific AUROC and average precision; evaluable denominators are reported in Supplementary Data S1. Structural abstentions have no probability and are excluded. Seed holdouts overlap and remain separate.",
+    "original_file": "supp_threeclass_roc_pr_vit_method2_class0.png",
+    "sha256": "8682f0635628656b8155cf3de1e005151636a31128f78606eab426ed3b25b235",
+    "source": "publication_revision_20260926/classification/supp_threeclass_roc_pr_vit_method2_class0.png",
+    "requires_private_images": false
+  },
+  {
+    "section": "supplement",
+    "caption": "Supplementary Figure S11. Conditional three-class patient one-versus-rest ROC and precision–recall curves. Part 5 of 12.",
+    "note": "Note. ViT-Method2 Papilledema one-versus-rest discrimination at patient level. ROC curves are shown above precision–recall curves. Each of the five seed-specific traces uses the fixed calibrated test probabilities among evaluable observations. Legend values are seed-specific AUROC and average precision; evaluable denominators are reported in Supplementary Data S1. Structural abstentions have no probability and are excluded. Seed holdouts overlap and remain separate.",
+    "original_file": "supp_threeclass_roc_pr_vit_method2_class1.png",
+    "sha256": "ffe1c9c1398c9522946aa794cdd491e03cae00446f22c4bc24ffac0ed0e2f8e7",
+    "source": "publication_revision_20260926/classification/supp_threeclass_roc_pr_vit_method2_class1.png",
+    "requires_private_images": false
+  },
+  {
+    "section": "supplement",
+    "caption": "Supplementary Figure S11. Conditional three-class patient one-versus-rest ROC and precision–recall curves. Part 6 of 12.",
+    "note": "Note. ViT-Method2 Pseudopapilledema one-versus-rest discrimination at patient level. ROC curves are shown above precision–recall curves. Each of the five seed-specific traces uses the fixed calibrated test probabilities among evaluable observations. Legend values are seed-specific AUROC and average precision; evaluable denominators are reported in Supplementary Data S1. Structural abstentions have no probability and are excluded. Seed holdouts overlap and remain separate.",
+    "original_file": "supp_threeclass_roc_pr_vit_method2_class2.png",
+    "sha256": "a90bd1e120448b60270021f7ab22295c4702c484f0c8f05787fef9bdee47a812",
+    "source": "publication_revision_20260926/classification/supp_threeclass_roc_pr_vit_method2_class2.png",
+    "requires_private_images": false
+  },
+  {
+    "section": "supplement",
+    "caption": "Supplementary Figure S11. Conditional three-class patient one-versus-rest ROC and precision–recall curves. Part 7 of 12.",
+    "note": "Note. EMCAD Normal one-versus-rest discrimination at patient level. ROC curves are shown above precision–recall curves. Each of the five seed-specific traces uses the fixed calibrated test probabilities among evaluable observations. Legend values are seed-specific AUROC and average precision; evaluable denominators are reported in Supplementary Data S1. Structural abstentions have no probability and are excluded. Seed holdouts overlap and remain separate.",
+    "original_file": "supp_threeclass_roc_pr_emcad_class0.png",
+    "sha256": "78f6427805ba90507aaf29210e3a35e9c736f051a46180f9aaf0995f34c4fac5",
+    "source": "publication_revision_20260926/classification/supp_threeclass_roc_pr_emcad_class0.png",
+    "requires_private_images": false
+  },
+  {
+    "section": "supplement",
+    "caption": "Supplementary Figure S11. Conditional three-class patient one-versus-rest ROC and precision–recall curves. Part 8 of 12.",
+    "note": "Note. EMCAD Papilledema one-versus-rest discrimination at patient level. ROC curves are shown above precision–recall curves. Each of the five seed-specific traces uses the fixed calibrated test probabilities among evaluable observations. Legend values are seed-specific AUROC and average precision; evaluable denominators are reported in Supplementary Data S1. Structural abstentions have no probability and are excluded. Seed holdouts overlap and remain separate.",
+    "original_file": "supp_threeclass_roc_pr_emcad_class1.png",
+    "sha256": "f9934392ca0924665f256d360b3adf0a95d6ab4d9409689ef2f7af16c8b95060",
+    "source": "publication_revision_20260926/classification/supp_threeclass_roc_pr_emcad_class1.png",
+    "requires_private_images": false
+  },
+  {
+    "section": "supplement",
+    "caption": "Supplementary Figure S11. Conditional three-class patient one-versus-rest ROC and precision–recall curves. Part 9 of 12.",
+    "note": "Note. EMCAD Pseudopapilledema one-versus-rest discrimination at patient level. ROC curves are shown above precision–recall curves. Each of the five seed-specific traces uses the fixed calibrated test probabilities among evaluable observations. Legend values are seed-specific AUROC and average precision; evaluable denominators are reported in Supplementary Data S1. Structural abstentions have no probability and are excluded. Seed holdouts overlap and remain separate.",
+    "original_file": "supp_threeclass_roc_pr_emcad_class2.png",
+    "sha256": "c331a1a45d8f13aed9a39353292a23f9fb770d26be54c0c20b22a29b76586f07",
+    "source": "publication_revision_20260926/classification/supp_threeclass_roc_pr_emcad_class2.png",
+    "requires_private_images": false
+  },
+  {
+    "section": "supplement",
+    "caption": "Supplementary Figure S11. Conditional three-class patient one-versus-rest ROC and precision–recall curves. Part 10 of 12.",
+    "note": "Note. SAM2-UNet Normal one-versus-rest discrimination at patient level. ROC curves are shown above precision–recall curves. Each of the five seed-specific traces uses the fixed calibrated test probabilities among evaluable observations. Legend values are seed-specific AUROC and average precision; evaluable denominators are reported in Supplementary Data S1. Structural abstentions have no probability and are excluded. Seed holdouts overlap and remain separate.",
+    "original_file": "supp_threeclass_roc_pr_sam2_unet_class0.png",
+    "sha256": "d99b26ad8d0aabd0f3604dd4b7f1d6abbdad6412446d3960c22f49afa22faf23",
+    "source": "publication_revision_20260926/classification/supp_threeclass_roc_pr_sam2_unet_class0.png",
+    "requires_private_images": false
+  },
+  {
+    "section": "supplement",
+    "caption": "Supplementary Figure S11. Conditional three-class patient one-versus-rest ROC and precision–recall curves. Part 11 of 12.",
+    "note": "Note. SAM2-UNet Papilledema one-versus-rest discrimination at patient level. ROC curves are shown above precision–recall curves. Each of the five seed-specific traces uses the fixed calibrated test probabilities among evaluable observations. Legend values are seed-specific AUROC and average precision; evaluable denominators are reported in Supplementary Data S1. Structural abstentions have no probability and are excluded. Seed holdouts overlap and remain separate.",
+    "original_file": "supp_threeclass_roc_pr_sam2_unet_class1.png",
+    "sha256": "4d77b326c55a8bbd8b053fcec5d6b3a9ce7d77baffe897228c85dfc08eb640fc",
+    "source": "publication_revision_20260926/classification/supp_threeclass_roc_pr_sam2_unet_class1.png",
+    "requires_private_images": false
+  },
+  {
+    "section": "supplement",
+    "caption": "Supplementary Figure S11. Conditional three-class patient one-versus-rest ROC and precision–recall curves. Part 12 of 12.",
+    "note": "Note. SAM2-UNet Pseudopapilledema one-versus-rest discrimination at patient level. ROC curves are shown above precision–recall curves. Each of the five seed-specific traces uses the fixed calibrated test probabilities among evaluable observations. Legend values are seed-specific AUROC and average precision; evaluable denominators are reported in Supplementary Data S1. Structural abstentions have no probability and are excluded. Seed holdouts overlap and remain separate.",
+    "original_file": "supp_threeclass_roc_pr_sam2_unet_class2.png",
+    "sha256": "2dbc27ab9c6174a649916c008c0751cb0e6efb3408c17a46232d3cdf98a3b5f7",
+    "source": "publication_revision_20260926/classification/supp_threeclass_roc_pr_sam2_unet_class2.png",
+    "requires_private_images": false
+  },
+  {
+    "section": "supplement",
+    "caption": "Supplementary Figure S12. Conditional three-class patient reliability plots. Part 1 of 4.",
+    "note": "Note. YOLO26 classwise patient reliability, arranged as three rows and one column: normal, papilledema, and pseudopapilledema. Five fixed-width bins [0,0.2), [0.2,0.4), [0.4,0.6), [0.6,0.8), and [0.8,1] were used; empty bins were omitted. Each point pairs mean calibrated class probability with observed class frequency, conditional on evaluable patients. Five seeds remain separate. The diagonal indicates perfect calibration; exact per-bin counts and points are in reliability_points.csv.",
+    "original_file": "supp_threeclass_reliability_yolo26.png",
+    "sha256": "383cf9b1528eaeb9413fa5fde86d8a427544196479232674e8e8d9a6bb2cc5e7",
+    "source": "publication_revision_20260926/classification/supp_threeclass_reliability_yolo26.png",
+    "requires_private_images": false
+  },
+  {
+    "section": "supplement",
+    "caption": "Supplementary Figure S12. Conditional three-class patient reliability plots. Part 2 of 4.",
+    "note": "Note. ViT-Method2 classwise patient reliability, arranged as three rows and one column: normal, papilledema, and pseudopapilledema. Five fixed-width bins [0,0.2), [0.2,0.4), [0.4,0.6), [0.6,0.8), and [0.8,1] were used; empty bins were omitted. Each point pairs mean calibrated class probability with observed class frequency, conditional on evaluable patients. Five seeds remain separate. The diagonal indicates perfect calibration; exact per-bin counts and points are in reliability_points.csv.",
+    "original_file": "supp_threeclass_reliability_vit_method2.png",
+    "sha256": "a4fbb18ed5a58a78f423d25558b3bf0c6c3b4d0929006b262e920fb17b6be386",
+    "source": "publication_revision_20260926/classification/supp_threeclass_reliability_vit_method2.png",
+    "requires_private_images": false
+  },
+  {
+    "section": "supplement",
+    "caption": "Supplementary Figure S12. Conditional three-class patient reliability plots. Part 3 of 4.",
+    "note": "Note. EMCAD classwise patient reliability, arranged as three rows and one column: normal, papilledema, and pseudopapilledema. Five fixed-width bins [0,0.2), [0.2,0.4), [0.4,0.6), [0.6,0.8), and [0.8,1] were used; empty bins were omitted. Each point pairs mean calibrated class probability with observed class frequency, conditional on evaluable patients. Five seeds remain separate. The diagonal indicates perfect calibration; exact per-bin counts and points are in reliability_points.csv.",
+    "original_file": "supp_threeclass_reliability_emcad.png",
+    "sha256": "d67f5dacaa0f0a33c9ce80a0ba454f229fc5e7ab441f4e7467a169796ed7e61e",
+    "source": "publication_revision_20260926/classification/supp_threeclass_reliability_emcad.png",
+    "requires_private_images": false
+  },
+  {
+    "section": "supplement",
+    "caption": "Supplementary Figure S12. Conditional three-class patient reliability plots. Part 4 of 4.",
+    "note": "Note. SAM2-UNet classwise patient reliability, arranged as three rows and one column: normal, papilledema, and pseudopapilledema. Five fixed-width bins [0,0.2), [0.2,0.4), [0.4,0.6), [0.6,0.8), and [0.8,1] were used; empty bins were omitted. Each point pairs mean calibrated class probability with observed class frequency, conditional on evaluable patients. Five seeds remain separate. The diagonal indicates perfect calibration; exact per-bin counts and points are in reliability_points.csv.",
+    "original_file": "supp_threeclass_reliability_sam2_unet.png",
+    "sha256": "7def11c2e7d8db78c5cb5d5b53456f93d1294a40be2110b60ef1a9c9377215d7",
+    "source": "publication_revision_20260926/classification/supp_threeclass_reliability_sam2_unet.png",
+    "requires_private_images": false
+  },
+  {
+    "section": "supplement",
+    "caption": "Supplementary Figure S13. Three-class patient selective risk–coverage curves. Part 1 of 4.",
+    "note": "Note. YOLO26 patient-level selective risk–coverage for the three-class task. Patients are ranked within seed by maximum calibrated class probability. Structural abstentions are appended at lowest confidence and count as errors; coverage divides retained patients by all intended patients. Risk is the overall three-class error rate, not a class-specific error rate. All five seed traces remain separate; terminal risk equals one minus failure-aware accuracy.",
+    "original_file": "supp_threeclass_risk_coverage_yolo26.png",
+    "sha256": "b3619ccf7b053f76dff53a9a638a998226050c34b2135b7f3da728960785af93",
+    "source": "publication_revision_20260926/classification/supp_threeclass_risk_coverage_yolo26.png",
+    "requires_private_images": false
+  },
+  {
+    "section": "supplement",
+    "caption": "Supplementary Figure S13. Three-class patient selective risk–coverage curves. Part 2 of 4.",
+    "note": "Note. ViT-Method2 patient-level selective risk–coverage for the three-class task. Patients are ranked within seed by maximum calibrated class probability. Structural abstentions are appended at lowest confidence and count as errors; coverage divides retained patients by all intended patients. Risk is the overall three-class error rate, not a class-specific error rate. All five seed traces remain separate; terminal risk equals one minus failure-aware accuracy.",
+    "original_file": "supp_threeclass_risk_coverage_vit_method2.png",
+    "sha256": "681f8b67214c8fdd0139aa771b6f5ea3ac17ca2a62c4eedadf37c1d2e8c36087",
+    "source": "publication_revision_20260926/classification/supp_threeclass_risk_coverage_vit_method2.png",
+    "requires_private_images": false
+  },
+  {
+    "section": "supplement",
+    "caption": "Supplementary Figure S13. Three-class patient selective risk–coverage curves. Part 3 of 4.",
+    "note": "Note. EMCAD patient-level selective risk–coverage for the three-class task. Patients are ranked within seed by maximum calibrated class probability. Structural abstentions are appended at lowest confidence and count as errors; coverage divides retained patients by all intended patients. Risk is the overall three-class error rate, not a class-specific error rate. All five seed traces remain separate; terminal risk equals one minus failure-aware accuracy.",
+    "original_file": "supp_threeclass_risk_coverage_emcad.png",
+    "sha256": "95732881fca7cd16061dc33442398ad0c1e9353789283d1da7a6d38c69a6f895",
+    "source": "publication_revision_20260926/classification/supp_threeclass_risk_coverage_emcad.png",
+    "requires_private_images": false
+  },
+  {
+    "section": "supplement",
+    "caption": "Supplementary Figure S13. Three-class patient selective risk–coverage curves. Part 4 of 4.",
+    "note": "Note. SAM2-UNet patient-level selective risk–coverage for the three-class task. Patients are ranked within seed by maximum calibrated class probability. Structural abstentions are appended at lowest confidence and count as errors; coverage divides retained patients by all intended patients. Risk is the overall three-class error rate, not a class-specific error rate. All five seed traces remain separate; terminal risk equals one minus failure-aware accuracy.",
+    "original_file": "supp_threeclass_risk_coverage_sam2_unet.png",
+    "sha256": "5d1c949180596ce21b8890b4e807039350b90676981190f7b058d5a2da3d7864",
+    "source": "publication_revision_20260926/classification/supp_threeclass_risk_coverage_sam2_unet.png",
+    "requires_private_images": false
+  }
+]

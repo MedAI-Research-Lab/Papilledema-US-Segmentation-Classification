@@ -1,0 +1,3183 @@
+[
+  {
+    "section": "main",
+    "number": "1",
+    "caption": "Table 1. Contemporary literature and methodological context for ocular imaging classification and ultrasound automation. Reports from 2021–2026 are prioritized; the 2020 multicenter fundus study is retained as foundational context. Results retain each study's original task and unit of analysis. Differences in cohorts, modalities, reference standards, and testing designs preclude numerical ranking across rows.",
+    "rows": [
+      [
+        "Study",
+        "Modality and cohort",
+        "Task and evaluation",
+        "Selected reported result",
+        "Relevance and limitation"
+      ],
+      [
+        "Farazdaghi et al., 2021 [6]",
+        "B-scan ultrasound plus OCT; 181 eyes from 94 children",
+        "Papilledema versus pseudopapilledema; clinical diagnostic cohort with correlated eye-level analysis",
+        "ONSD >4.5 mm: sensitivity 86%, specificity 88%",
+        "Manual biomarkers; a different analytic approach from automated predicted-ROI classification."
+      ],
+      [
+        "Kohli et al., 2021 [7]",
+        "Ocular ultrasound; 49 participants",
+        "Prospective differential diagnosis using masked longitudinal reference assessment",
+        "Sensitivity 68% (17/25); specificity 54% (13/24)",
+        "Width plus 30-degree test; protocol differs from pediatric B-scan studies."
+      ],
+      [
+        "Milea et al., 2020 [11]",
+        "Fundus; 15,846 photographs; 6,779 development patients",
+        "Normal/papilledema/other abnormalities; 1,505 photographs from five independent test sites",
+        "External papilledema AUC 0.96; sensitivity 96.4%, specificity 84.7%",
+        "Different modality and broader comparator spectrum; not the pediatric ultrasound differential."
+      ],
+      [
+        "Sathianvichitr et al., 2024 [12]",
+        "Fundus; 4,508 images from 2,180 patients",
+        "Drusen versus papilledema; independent 421-image, 221-patient test cohort",
+        "External AUC 0.97; accuracy 90.5%",
+        "Drusen-only mimic spectrum; different modality and diagnostic population."
+      ],
+      [
+        "Chang et al., 2024 [13]",
+        "Pediatric fundus; 851 photographs from 235 children",
+        "Ten-fold cross-validation plus patient-disjoint, 161-photograph holdout from the same contributing sites",
+        "Holdout AUC 0.81; sensitivity 90.4%, specificity 56.4%",
+        "Authors termed holdout “external”; localization required manual crop rescue in <15% of photographs."
+      ],
+      [
+        "Girard et al., 2023 [15]",
+        "Three-dimensional OCT; 256 optic nerve heads from 241 patients",
+        "Deep tissue segmentation followed by random-forest classification of drusen/papilledema/healthy",
+        "Segmentation Dice 0.93 ± 0.03; class AUCs 0.98–0.99",
+        "Segmentation-to-classification in a different modality and drusen-only mimic spectrum."
+      ],
+      [
+        "Marzola et al., 2023 [16]",
+        "Transorbital ultrasound; 464 images from 110 subjects",
+        "Anatomical segmentation and diameters; five-fold cross-validation, eight-model ensemble, and separate held-out-device tests",
+        "Pooled cross-validation Dice 0.719 ± 0.139; ONSD correlation 0.69",
+        "Measurement rather than diagnosis; 45 images were unmeasurable by the reference observer."
+      ],
+      [
+        "Shenoy et al., 2026 [14]",
+        "OCT-acquired near-infrared images; 813 images from 289 patients",
+        "Normal/drusen/papilledema AutoML; 80/20 patient-disjoint internal split",
+        "Amazon model: AUC 0.90; F1 score 0.81",
+        "Single-center study without external testing; not an OCT B-scan or ultrasound classifier."
+      ],
+      [
+        "Hirzallah et al., 2023 [17]",
+        "Transorbital ultrasound; 873 images, 52 sessions, 46 patients",
+        "CNN measurement masks; 59-image, four-session test set",
+        "ONSD RMSE 0.27 mm; correlation 0.70",
+        "Small session-level diameter-estimation test; evaluation unit differs from patient-level diagnosis."
+      ]
+    ],
+    "note": ""
+  },
+  {
+    "section": "main",
+    "number": "2",
+    "caption": "Table 2. Held-out anatomical ROI segmentation performance",
+    "rows": [
+      [
+        "Frozen segmenter",
+        "Dice",
+        "Surface Dice (2 px)",
+        "HD95 (px)",
+        "Frame ROI coverage",
+        "Invalid split-frames"
+      ],
+      [
+        "YOLO26",
+        "0.766 ± 0.059",
+        "0.210 ± 0.057",
+        "21.42 ± 3.19",
+        "0.913 ± 0.069",
+        "110/1260"
+      ],
+      [
+        "ViT Method2",
+        "0.785 ± 0.038",
+        "0.179 ± 0.029",
+        "27.58 ± 5.19",
+        "0.983 ± 0.013",
+        "22/1260"
+      ],
+      [
+        "EMCAD",
+        "0.815 ± 0.039",
+        "0.219 ± 0.039",
+        "21.78 ± 4.24",
+        "0.972 ± 0.027",
+        "35/1260"
+      ],
+      [
+        "SAM2-U-Net",
+        "0.857 ± 0.011",
+        "0.292 ± 0.014",
+        "20.40 ± 1.64",
+        "1.000 ± 0.000",
+        "0/1260"
+      ]
+    ],
+    "note": "Note. Five-split mean ± sample SD. Invalid predictions score zero for Dice and surface Dice; HD95 uses nonempty masks. Counts are overlapping split-frame evaluations; failure reasons are in Supplementary Table S14."
+  },
+  {
+    "section": "main",
+    "number": "3",
+    "caption": "Table 3. Primary binary classification at the eye level",
+    "rows": [
+      [
+        "ROI stream",
+        "Failure aware BA",
+        "Coverage",
+        "Sensitivity",
+        "Specificity",
+        "Conditional AUROC"
+      ],
+      [
+        "YOLO26",
+        "0.829 ± 0.052",
+        "0.939 ± 0.063",
+        "0.738 ± 0.103",
+        "0.920 ± 0.067",
+        "0.902 ± 0.061"
+      ],
+      [
+        "ViT Method2",
+        "0.765 ± 0.093",
+        "0.983 ± 0.015",
+        "0.750 ± 0.140",
+        "0.780 ± 0.135",
+        "0.870 ± 0.055"
+      ],
+      [
+        "EMCAD",
+        "0.831 ± 0.044",
+        "0.972 ± 0.028",
+        "0.762 ± 0.093",
+        "0.900 ± 0.100",
+        "0.882 ± 0.067"
+      ],
+      [
+        "SAM2-U-Net",
+        "0.820 ± 0.060",
+        "1.000 ± 0.000",
+        "0.800 ± 0.103",
+        "0.840 ± 0.129",
+        "0.919 ± 0.046"
+      ]
+    ],
+    "note": "Note. Five-split mean ± sample SD. Positive denotes papilledema or pseudopapilledema. BA, sensitivity, and specificity use all intended eyes and count abstention as error. AUROC is conditional on evaluability and therefore has a different denominator."
+  },
+  {
+    "section": "main",
+    "number": "4",
+    "caption": "Table 4. Direct three-class patient classification outcomes",
+    "rows": [
+      [
+        "ROI stream",
+        "Classifier",
+        "Failure aware BA",
+        "Multiclass MCC",
+        "Coverage",
+        "Accuracy"
+      ],
+      [
+        "YOLO26",
+        "Model-specific",
+        "0.470 ± 0.093",
+        "0.411 ± 0.113",
+        "0.889 ± 0.104",
+        "0.633 ± 0.075"
+      ],
+      [
+        "YOLO26",
+        "ResNet-18",
+        "0.550 ± 0.178",
+        "0.476 ± 0.209",
+        "0.889 ± 0.104",
+        "0.667 ± 0.136"
+      ],
+      [
+        "ViT Method2",
+        "Model-specific",
+        "0.497 ± 0.173",
+        "0.363 ± 0.243",
+        "0.967 ± 0.030",
+        "0.578 ± 0.199"
+      ],
+      [
+        "ViT Method2",
+        "ResNet-18",
+        "0.590 ± 0.122",
+        "0.497 ± 0.155",
+        "0.967 ± 0.030",
+        "0.700 ± 0.084"
+      ],
+      [
+        "EMCAD",
+        "Model-specific",
+        "0.487 ± 0.145",
+        "0.380 ± 0.215",
+        "0.944 ± 0.056",
+        "0.611 ± 0.142"
+      ],
+      [
+        "EMCAD",
+        "ResNet-18",
+        "0.530 ± 0.114",
+        "0.416 ± 0.161",
+        "0.944 ± 0.056",
+        "0.633 ± 0.108"
+      ],
+      [
+        "SAM2-U-Net",
+        "Model-specific",
+        "0.513 ± 0.087",
+        "0.421 ± 0.121",
+        "1.000 ± 0.000",
+        "0.656 ± 0.072"
+      ],
+      [
+        "SAM2-U-Net",
+        "ResNet-18",
+        "0.567 ± 0.117",
+        "0.466 ± 0.197",
+        "1.000 ± 0.000",
+        "0.678 ± 0.133"
+      ]
+    ],
+    "note": "Note. Calibrated five-split mean ± sample SD. MCC here means Matthews correlation coefficient, not the three-class task. Abstentions count as errors. Model-specific rows form the primary estimand; ResNet-18 rows are secondary."
+  },
+  {
+    "section": "main",
+    "number": "5",
+    "caption": "Table 5. Failure-aware three-class patient recall by diagnosis",
+    "rows": [
+      [
+        "ROI stream",
+        "Classifier",
+        "Normal",
+        "Papilledema",
+        "Pseudopapilledema"
+      ],
+      [
+        "YOLO26",
+        "Model-specific",
+        "0.960 ± 0.089",
+        "0.200 ± 0.274",
+        "0.250 ± 0.250"
+      ],
+      [
+        "YOLO26",
+        "ResNet-18",
+        "0.900 ± 0.100",
+        "0.400 ± 0.379",
+        "0.350 ± 0.285"
+      ],
+      [
+        "ViT Method2",
+        "Model-specific",
+        "0.740 ± 0.365",
+        "0.350 ± 0.285",
+        "0.400 ± 0.379"
+      ],
+      [
+        "ViT Method2",
+        "ResNet-18",
+        "0.920 ± 0.084",
+        "0.450 ± 0.371",
+        "0.400 ± 0.224"
+      ],
+      [
+        "EMCAD",
+        "Model-specific",
+        "0.860 ± 0.167",
+        "0.550 ± 0.326",
+        "0.050 ± 0.112"
+      ],
+      [
+        "EMCAD",
+        "ResNet-18",
+        "0.840 ± 0.152",
+        "0.550 ± 0.326",
+        "0.200 ± 0.209"
+      ],
+      [
+        "SAM2-U-Net",
+        "Model-specific",
+        "0.940 ± 0.055",
+        "0.150 ± 0.137",
+        "0.450 ± 0.274"
+      ],
+      [
+        "SAM2-U-Net",
+        "ResNet-18",
+        "0.900 ± 0.173",
+        "0.450 ± 0.326",
+        "0.350 ± 0.224"
+      ]
+    ],
+    "note": "Note. Five-split mean ± sample SD. Each class denominator includes all intended test patients, including structural abstentions. Test class counts per split were 10/4/4."
+  },
+  {
+    "section": "supplement",
+    "number": "S2",
+    "caption": "Supplementary Table S2. Cohort and fixed patient-grouped partition composition.",
+    "rows": [
+      [
+        "Group",
+        "Entire cohort",
+        "Training / split",
+        "Validation / split",
+        "Test / split"
+      ],
+      [
+        "Patients, all",
+        "91",
+        "55",
+        "18",
+        "18"
+      ],
+      [
+        "Normal",
+        "48",
+        "28",
+        "10",
+        "10"
+      ],
+      [
+        "Papilledema",
+        "21",
+        "13",
+        "4",
+        "4"
+      ],
+      [
+        "Pseudopapilledema",
+        "22",
+        "14",
+        "4",
+        "4"
+      ],
+      [
+        "Eyes, all",
+        "182",
+        "110",
+        "36",
+        "36"
+      ],
+      [
+        "Selected frames, all",
+        "1,274",
+        "770",
+        "252",
+        "252"
+      ]
+    ],
+    "note": "Note. Counts recur in each of five seeds; outer holdouts overlap. Each patient contributes two eyes and each eye seven selected frames."
+  },
+  {
+    "section": "supplement",
+    "number": "S3",
+    "caption": "Supplementary Table S3. Exact segmentation and model-specific classifier architecture mapping",
+    "rows": [
+      [
+        "ROI family",
+        "Segmentation model",
+        "Primary classifier feature route and trainability",
+        "Initialization",
+        "Trainable classifier parameters binary / three class"
+      ],
+      [
+        "YOLO26",
+        "YOLO26s native instance-segmentation backbone, neck and head",
+        "Pooled multiscale backbone/neck features to new two- or three-logit MLP head; native segmentation head frozen for classification",
+        "Verified pretrained YOLO26s-seg",
+        "9,247,938 / 9,248,195"
+      ],
+      [
+        "ViT Method2",
+        "Patch 16; width 256; six transformer layers; eight heads; cross-attention and residual decoder",
+        "Patch embedding, transformer and cross-attention trainable with new head",
+        "Random; no compatible locked checkpoint",
+        "5,382,658 / 5,382,915"
+      ],
+      [
+        "EMCAD",
+        "Four-stage PVT-v2-B0 encoder plus EMCAD decoder",
+        "Full PVT-v2-B0 encoder and new head trainable; segmentation decoder excluded",
+        "Verified pretrained PVT-v2-B0 encoder",
+        "3,410,274 / 3,410,531"
+      ],
+      [
+        "SAM2-U-Net",
+        "Prompt-free SAM2 Hiera-tiny trunk, in-block adapters and U-Net-style decoder",
+        "Original Hiera trunk frozen; trainable bottleneck adapters and new head trainable",
+        "Verified pretrained Hiera-tiny encoder",
+        "264,002 / 264,771"
+      ]
+    ],
+    "note": "Note. All classifiers receive only the corresponding 224 × 224 strict predicted-ROI tensor; the fitted segmenter is frozen during classifier training. Parameter counts are run-verified seed-17 snapshots and differ between two- and three-logit heads. For each ROI family, a separately fitted, ImageNet-1K-V1-initialized ResNet-18 was the secondary classifier (11,178,562 binary and 11,179,075 three-class trainable parameters). Family-specific dropout was 0.10; ResNet-18 dropout was 0.20."
+  },
+  {
+    "section": "supplement",
+    "number": "S4",
+    "caption": "Supplementary Table S4. Stage-specific training, selection and test-lock settings",
+    "rows": [
+      [
+        "Parameter",
+        "Anatomical segmentation",
+        "Binary classification",
+        "Direct three-class classification"
+      ],
+      [
+        "Model input",
+        "768 × 768 RGB + binary mask",
+        "224 × 224 strict ROI",
+        "224 × 224 strict ROI"
+      ],
+      [
+        "Optimizer / schedule",
+        "AdamW / cosine",
+        "AdamW / cosine",
+        "AdamW / cosine"
+      ],
+      [
+        "Learning rate",
+        "3 × 10⁻⁴ except EMCAD 10⁻⁴",
+        "10⁻⁴",
+        "10⁻⁴"
+      ],
+      [
+        "Weight decay",
+        "10⁻⁴",
+        "10⁻⁴",
+        "10⁻⁴"
+      ],
+      [
+        "Epochs / patience",
+        "≤60 / 10",
+        "≤60 / 10",
+        "≤60 / 10"
+      ],
+      [
+        "Batch / accumulation",
+        "1 / 4",
+        "16 / 1",
+        "16 / 1"
+      ],
+      [
+        "Precision / clip",
+        "BF16 AMP / 1.0",
+        "BF16 AMP / 1.0",
+        "BF16 AMP / 1.0"
+      ],
+      [
+        "Loss",
+        "YOLO native instance loss; others BCE + soft Dice 1:1",
+        "Two-class weighted cross-entropy; equal eye mass within class",
+        "Three-class cross-entropy; equal class, then patient, eye and valid-frame mass"
+      ],
+      [
+        "Train augmentation",
+        "±7° rotation; 3% shift; 0.95–1.05 scale; 0.9–1.1 brightness; no flips",
+        "Same transforms after strict masking; no flips",
+        "Same transforms after strict masking; no flips"
+      ],
+      [
+        "Checkpoint",
+        "Maximum validation eye Dice at mask p=0.5; IoU then earlier epoch tie",
+        "Maximum validation eye AUROC; NLL tie",
+        "Minimum validation patient macro-NLL; failure-aware BA tie"
+      ],
+      [
+        "Post-fit validation",
+        "Mask p=0.1–0.9; component dominance 1.1–2.0; ≥80% eye coverage target",
+        "BA-maximizing threshold 0.05–0.95; eye/patient temperature",
+        "Separate eye/patient temperature after aggregation; argmax"
+      ],
+      [
+        "Test gate",
+        "No test ROI until validation locks",
+        "20 model–seed composite locks including both classifier strategies",
+        "All 40 classifier validation locks before global test"
+      ]
+    ],
+    "note": "Note. All selection and calibration decisions used outer-training or validation data only. Model-specific training ROI masks came from five patient-grouped inner out-of-fold segmenters; validation and test ROIs came from the outer-training full-fit segmenter. Three-class evaluation reused the already-inspected internal binary holdout memberships and is exploratory, not independent validation."
+  },
+  {
+    "section": "supplement",
+    "number": "S5",
+    "caption": "Supplementary Table S5. Segmenter architectures, initialization and trainability",
+    "rows": [
+      [
+        "Segmenter",
+        "Implemented architecture",
+        "Starting weights",
+        "Trainable components"
+      ],
+      [
+        "YOLO26s-seg",
+        "Native Ultralytics 8.4.138 end-to-end Segment26; one ROI object class; P3/P4/P5 outputs; s depth/width factors 0.50/0.50; reg_max=1",
+        "Verified official yolo26s-seg.pt; compatible pretrained tensors loaded, one-class output rows newly initialized",
+        "Backbone, neck and native segmentation/detection components; unused clinical head frozen"
+      ],
+      [
+        "ViT Method2",
+        "16×16 patches; width 256; 2,304 learned-position tokens at 768×768; six encoder blocks, eight attention heads, MLP ratio 4, dropout 0.1; cross-attention to initial embeddings; residual convolutional decoder widths 128/64/32/16 with four ×2 upsampling stages",
+        "Random; no compatible locked pretrained segmentation checkpoint",
+        "Transformer, cross-attention and decoder; unused clinical head frozen"
+      ],
+      [
+        "EMCAD (PVT-v2-B0)",
+        "Encoder widths 32/64/160/256, depths 2/2/2/2, heads 1/2/5/8 and spatial reductions 8/4/2/1; EMCAD decoder widths 256/160/64/32, kernels 1/3/5, expansion 2, parallel depthwise convolutions, additive fusion, attention-gate kernel 3, ReLU",
+        "Verified official ImageNet-pretrained PVT-v2-B0 encoder; original classifier omitted; new decoder/heads",
+        "Encoder and decoder; final head supervised; unused clinical head frozen"
+      ],
+      [
+        "SAM2-U-Net (Hiera-Tiny)",
+        "Prompt-free Hiera-Tiny trunk, initial width 96, stages 1/2/7/2, global-attention blocks 5/7/9; in-block adapters dim→32→dim; receptive-field blocks project 96/192/384/768-channel features to 64; three U-Net upsampling blocks",
+        "Verified complete SAM2 Hiera-Tiny image-encoder trunk; new adapters/decoder/heads",
+        "Original trunk frozen; adapters, receptive-field blocks and decoder trained; final head supervised; no SAM prompt/video model"
+      ]
+    ],
+    "note": ""
+  },
+  {
+    "section": "supplement",
+    "number": "S6",
+    "caption": "Supplementary Table S6. Independently initialized downstream classifiers",
+    "rows": [
+      [
+        "Classifier",
+        "ROI feature extraction and diagnostic head",
+        "Initialization and trainability"
+      ],
+      [
+        "YOLO26s family",
+        "Concatenated spatial means of multiscale one-to-many neck features; LayerNorm→Linear(256)→GELU→Dropout(0.10)→Linear(K)",
+        "Verified yolo26s-seg.pt; backbone/neck and new diagnostic head trainable; native detection/segmentation head frozen"
+      ],
+      [
+        "ViT Method2 family",
+        "196 patch-16 tokens at 224×224; width 256, six blocks, eight heads, cross-attention; concatenated global-token mean and hard-ROI-weighted token mean; LayerNorm(512)→Linear(256)→GELU→Dropout(0.10)→Linear(K)",
+        "Random; full classifier trainable; segmentation decoder absent"
+      ],
+      [
+        "EMCAD-associated PVT",
+        "PVT-v2-B0 encoder final 256-channel map→global average pooling→Dropout(0.10)→Linear(K)",
+        "Verified PVT-v2-B0 weights; complete encoder and new head trainable; EMCAD decoder absent"
+      ],
+      [
+        "SAM2-U-Net-associated Hiera",
+        "Hiera-Tiny with dim→32→dim adapters; final 768-channel map→global average pooling→Dropout(0.10)→Linear(K)",
+        "Verified SAM2 Hiera-Tiny trunk; original trunk frozen, adapters/new head trainable; U-Net decoder absent"
+      ],
+      [
+        "Standardized ResNet-18",
+        "ImageNet-1K V1 ResNet-18 features→512-dimensional pooled vector→LayerNorm→Dropout(0.20)→Linear(K)",
+        "Verified torchvision weights; entire encoder and new head trainable; separate fit for every ROI stream"
+      ]
+    ],
+    "note": ""
+  },
+  {
+    "section": "supplement",
+    "number": "S7",
+    "caption": "Supplementary Table S7. Optimization and checkpoint-selection rules",
+    "rows": [
+      [
+        "Setting",
+        "Segmentation",
+        "Binary classifiers",
+        "Three-class classifiers"
+      ],
+      [
+        "Input",
+        "768×768 RGB",
+        "224×224 strict ROI",
+        "Same immutable ROI streams"
+      ],
+      [
+        "Objective",
+        "Final BCE+soft Dice (weights 1:1; smoothing 10⁻⁶), except native YOLO loss",
+        "Weighted two-class cross-entropy",
+        "Weighted three-class cross-entropy"
+      ],
+      [
+        "Loss reduction",
+        "Mean image/pixel loss; accumulated gradients normalized by actual accumulation-group size",
+        "Weighted sum divided by fixed batch size 16, including final partial batch",
+        "Weighted mean over actual minibatch divided by fixed global weight mean; no minibatch-weight-sum renormalization"
+      ],
+      [
+        "AdamW learning rate",
+        "3×10⁻⁴; EMCAD 1×10⁻⁴",
+        "1×10⁻⁴",
+        "1×10⁻⁴"
+      ],
+      [
+        "Weight decay",
+        "1×10⁻⁴",
+        "1×10⁻⁴",
+        "1×10⁻⁴"
+      ],
+      [
+        "Scheduler",
+        "CosineAnnealingLR; T_max=60, including shorter inner fits",
+        "CosineAnnealingLR; T_max=60",
+        "CosineAnnealingLR; T_max=60"
+      ],
+      [
+        "Batch / accumulation",
+        "1 / 4 (nominal effective batch 4)",
+        "16 / 1",
+        "16 / 1"
+      ],
+      [
+        "Maximum / patience",
+        "Outer 60 / 10; inner fixed inherited epoch count",
+        "60 / 10",
+        "60 / 10"
+      ],
+      [
+        "Validation monitor",
+        "Raw mean-eye Dice at p≥0.5; IoU tie-breaker",
+        "Conditional raw eye AUROC; lower eye NLL tie-breaker",
+        "Conditional raw patient macro true-class NLL minimized; failure-aware patient BA maximized as tie-breaker"
+      ],
+      [
+        "Exact tie / final weights",
+        "Earlier epoch; restore selected outer checkpoint",
+        "Earlier epoch; selected checkpoint; no train+validation refit",
+        "Earlier epoch; selected checkpoint; no train+validation refit"
+      ],
+      [
+        "Precision / clipping / workers",
+        "CUDA bfloat16; gradient norm 1.0; workers 0",
+        "Same; GradScaler disabled",
+        "bfloat16; gradient norm 1.0; workers 0"
+      ],
+      [
+        "Deterministic algorithms",
+        "Requested with warn_only=True",
+        "Requested with warn_only=True",
+        "Requested with warn_only=False; flash/memory-efficient attention disabled"
+      ]
+    ],
+    "note": ""
+  },
+  {
+    "section": "supplement",
+    "number": "S8",
+    "caption": "Supplementary Table S8. Executed outer segmentation and ROI locks",
+    "rows": [
+      [
+        "Model",
+        "Seed",
+        "Selected epoch",
+        "Epochs run",
+        "Threshold t",
+        "Dominance",
+        "Validation eyes covered"
+      ],
+      [
+        "YOLO26s",
+        "17",
+        "5",
+        "15",
+        "0.3",
+        "1.5",
+        "33/36"
+      ],
+      [
+        "YOLO26s",
+        "42",
+        "7",
+        "17",
+        "0.1",
+        "1.5",
+        "31/36"
+      ],
+      [
+        "YOLO26s",
+        "2026",
+        "14",
+        "24",
+        "0.2",
+        "1.5",
+        "36/36"
+      ],
+      [
+        "YOLO26s",
+        "3407",
+        "2",
+        "12",
+        "0.1",
+        "1.5",
+        "33/36"
+      ],
+      [
+        "YOLO26s",
+        "9103",
+        "6",
+        "16",
+        "0.5",
+        "1.25",
+        "32/36"
+      ],
+      [
+        "ViT Method2",
+        "17",
+        "6",
+        "16",
+        "0.2",
+        "1.25",
+        "36/36"
+      ],
+      [
+        "ViT Method2",
+        "42",
+        "7",
+        "17",
+        "0.1",
+        "1.1",
+        "35/36"
+      ],
+      [
+        "ViT Method2",
+        "2026",
+        "3",
+        "13",
+        "0.5",
+        "1.5",
+        "36/36"
+      ],
+      [
+        "ViT Method2",
+        "3407",
+        "7",
+        "17",
+        "0.2",
+        "1.5",
+        "36/36"
+      ],
+      [
+        "ViT Method2",
+        "9103",
+        "7",
+        "17",
+        "0.9",
+        "1.5",
+        "36/36"
+      ],
+      [
+        "EMCAD",
+        "17",
+        "16",
+        "26",
+        "0.1",
+        "1.1",
+        "36/36"
+      ],
+      [
+        "EMCAD",
+        "42",
+        "5",
+        "15",
+        "0.4",
+        "1.5",
+        "35/36"
+      ],
+      [
+        "EMCAD",
+        "2026",
+        "18",
+        "28",
+        "0.1",
+        "1.5",
+        "36/36"
+      ],
+      [
+        "EMCAD",
+        "3407",
+        "5",
+        "15",
+        "0.1",
+        "1.5",
+        "36/36"
+      ],
+      [
+        "EMCAD",
+        "9103",
+        "6",
+        "16",
+        "0.4",
+        "1.1",
+        "34/36"
+      ],
+      [
+        "SAM2-U-Net",
+        "17",
+        "32",
+        "42",
+        "0.7",
+        "1.5",
+        "36/36"
+      ],
+      [
+        "SAM2-U-Net",
+        "42",
+        "13",
+        "23",
+        "0.2",
+        "1.5",
+        "36/36"
+      ],
+      [
+        "SAM2-U-Net",
+        "2026",
+        "25",
+        "35",
+        "0.1",
+        "1.5",
+        "36/36"
+      ],
+      [
+        "SAM2-U-Net",
+        "3407",
+        "19",
+        "29",
+        "0.1",
+        "1.5",
+        "36/36"
+      ],
+      [
+        "SAM2-U-Net",
+        "9103",
+        "37",
+        "47",
+        "0.2",
+        "1.1",
+        "36/36"
+      ]
+    ],
+    "note": ""
+  },
+  {
+    "section": "supplement",
+    "number": "S9",
+    "caption": "Supplementary Table S9. Endpoints, populations and inference",
+    "rows": [
+      [
+        "Analysis",
+        "Population and abstention convention",
+        "Statistical treatment"
+      ],
+      [
+        "Binary primary",
+        "Eye-level failure-aware BA; mean of two class recalls; all intended eyes retained and abstentions incorrect; 2×3 confusion matrix",
+        "Model-specific systems; paired patient-cluster effects; Holm over six pairs×five seeds=30"
+      ],
+      [
+        "Three-class primary",
+        "Patient-level failure-aware BA; mean of three class recalls; all intended patients retained and abstentions incorrect; 3×4 confusion matrix",
+        "Model-specific systems; paired whole-patient effects; separate Holm family of 30"
+      ],
+      [
+        "Discrimination/calibration",
+        "AUROC, AP, NLL, Brier and ECE conditional on evaluability, with overall/classwise coverage reported",
+        "Whole-patient bootstrap; probabilities/calibration/thresholds kept locked"
+      ],
+      [
+        "MCC",
+        "Binary MCC conditional; three-class failure-aware MCC includes abstention as a fourth predicted category with three true classes; separate conditional three-class MCC",
+        "Task-specific evaluation populations and MCC definitions reported separately"
+      ],
+      [
+        "Segmentation",
+        "Accepted masks, with rejected predictions empty, and pre-quality-gate masks; frame→eye→patient arithmetic means",
+        "Undefined values omitted with denominators; binary-label-stratified patient bootstrap; separate paired families by metric/representation"
+      ],
+      [
+        "Secondary analyses",
+        "Standardized ResNet-18; within-stream strategy effects; classwise/eye-level three-class results; risk–coverage and calibration",
+        "Binary standardized comparisons: separate 30-test family; binary within-stream strategy contrasts: 20-test family; these test families apply only to the specified binary contrasts"
+      ],
+      [
+        "Binary localized diagnostic success",
+        "Retrospective correct non-abstained diagnosis plus valid ROI IoU≥0.5 in ≥4/7 frames",
+        "Reference overlap is a scoring criterion, never an inference gate"
+      ]
+    ],
+    "note": ""
+  },
+  {
+    "section": "supplement",
+    "number": "S10",
+    "caption": "Supplementary Table S10. Computational reproducibility and partition safeguards",
+    "rows": [
+      [
+        "Component",
+        "Locked procedure",
+        "Interpretation"
+      ],
+      [
+        "Source inventory",
+        "91 patients, 182 eyes, 1,274 selected frames",
+        "Patient–eye–frame inventory reconciled"
+      ],
+      [
+        "Patient grouping",
+        "Both eyes and all frames kept together",
+        "Five fixed seeds"
+      ],
+      [
+        "Predicted ROI training",
+        "Five inner patient-fold OOF streams",
+        "Training ROIs derived from OOF predictions, not reference masks"
+      ],
+      [
+        "Strict ROI inference",
+        "Development-derived area/component/bbox; validation-locked",
+        "No reference-mask or full-frame fallback"
+      ],
+      [
+        "Binary classifiers",
+        "4 segmenters × 5 seeds × 2 classifier strategies = 40",
+        "Primary eye-level model-specific task"
+      ],
+      [
+        "Three-class classifiers",
+        "4 frozen ROI streams × 5 seeds × 2 strategies = 40",
+        "All 40 validation locks before test"
+      ],
+      [
+        "Three-class test evaluation",
+        "40 model–seed–strategy evaluations",
+        "No test refit"
+      ],
+      [
+        "Uncertainty",
+        "5,000 class-stratified whole-patient draws per seed",
+        "BCa; no five-seed CI"
+      ],
+      [
+        "Primary contrasts",
+        "6 pairs × 5 seeds = 30",
+        "Holm correction; exploratory"
+      ],
+      [
+        "Computational consistency",
+        "Checkpoints, ROI caches, predictions and stage records reconciled",
+        "Does not establish clinical validity or independent testing"
+      ]
+    ],
+    "note": "Note. These safeguards document computational reproducibility. Clinical provenance is described in Table S1; the previously examined holdouts support exploratory internal evaluation."
+  },
+  {
+    "section": "supplement",
+    "number": "S11",
+    "caption": "Supplementary Table S11. Holm-significant within-seed postprocessed Dice contrasts",
+    "rows": [
+      [
+        "Seed",
+        "Contrast",
+        "Mean difference",
+        "95% paired BCa CI",
+        "Holm p",
+        "Patients"
+      ],
+      [
+        "17",
+        "ViT Method2 − SAM2-U-Net",
+        "-0.030",
+        "[-0.052, -0.017]",
+        "0.0336",
+        "18"
+      ],
+      [
+        "42",
+        "ViT Method2 − EMCAD",
+        "-0.064",
+        "[-0.106, -0.038]",
+        "0.0120",
+        "18"
+      ],
+      [
+        "42",
+        "ViT Method2 − SAM2-U-Net",
+        "-0.074",
+        "[-0.109, -0.043]",
+        "0.0260",
+        "18"
+      ],
+      [
+        "42",
+        "YOLO26 − SAM2-U-Net",
+        "-0.050",
+        "[-0.085, -0.025]",
+        "0.0260",
+        "18"
+      ],
+      [
+        "2026",
+        "ViT Method2 − SAM2-U-Net",
+        "-0.088",
+        "[-0.163, -0.051]",
+        "0.0174",
+        "18"
+      ],
+      [
+        "2026",
+        "YOLO26 − EMCAD",
+        "-0.150",
+        "[-0.239, -0.078]",
+        "0.0462",
+        "18"
+      ],
+      [
+        "2026",
+        "YOLO26 − SAM2-U-Net",
+        "-0.192",
+        "[-0.315, -0.109]",
+        "0.0216",
+        "18"
+      ],
+      [
+        "3407",
+        "EMCAD − SAM2-U-Net",
+        "-0.076",
+        "[-0.175, -0.038]",
+        "0.0414",
+        "18"
+      ],
+      [
+        "3407",
+        "YOLO26 − SAM2-U-Net",
+        "-0.098",
+        "[-0.163, -0.053]",
+        "0.0174",
+        "18"
+      ],
+      [
+        "9103",
+        "ViT Method2 − SAM2-U-Net",
+        "-0.058",
+        "[-0.140, -0.026]",
+        "0.0440",
+        "18"
+      ]
+    ],
+    "note": "Note. Only the 10 rejected rows from the prespecified 30-comparison postprocessed-Dice family are shown. Estimates are model A minus model B. Bootstrap and whole-patient model-label-swap randomization each used 5,000 draws. Results are seed-specific, with no pooled across-seed hypothesis test; these contrasts therefore do not establish a general model ranking."
+  },
+  {
+    "section": "supplement",
+    "number": "S12",
+    "caption": "Supplementary Table S12. Postprocessed Dice by split with patient-cluster BCa intervals",
+    "rows": [
+      [
+        "Segmenter",
+        "Seed",
+        "Dice",
+        "95% BCa CI",
+        "Valid draws"
+      ],
+      [
+        "YOLO26",
+        "17",
+        "0.809",
+        "[0.730, 0.846]",
+        "5000"
+      ],
+      [
+        "YOLO26",
+        "42",
+        "0.805",
+        "[0.758, 0.839]",
+        "5000"
+      ],
+      [
+        "YOLO26",
+        "2026",
+        "0.672",
+        "[0.544, 0.758]",
+        "5000"
+      ],
+      [
+        "YOLO26",
+        "3407",
+        "0.745",
+        "[0.676, 0.794]",
+        "5000"
+      ],
+      [
+        "YOLO26",
+        "9103",
+        "0.799",
+        "[0.713, 0.851]",
+        "5000"
+      ],
+      [
+        "ViT Method2",
+        "17",
+        "0.840",
+        "[0.817, 0.861]",
+        "5000"
+      ],
+      [
+        "ViT Method2",
+        "42",
+        "0.780",
+        "[0.737, 0.812]",
+        "5000"
+      ],
+      [
+        "ViT Method2",
+        "2026",
+        "0.776",
+        "[0.708, 0.817]",
+        "5000"
+      ],
+      [
+        "ViT Method2",
+        "3407",
+        "0.734",
+        "[0.657, 0.792]",
+        "5000"
+      ],
+      [
+        "ViT Method2",
+        "9103",
+        "0.796",
+        "[0.717, 0.833]",
+        "5000"
+      ],
+      [
+        "EMCAD",
+        "17",
+        "0.859",
+        "[0.845, 0.871]",
+        "5000"
+      ],
+      [
+        "EMCAD",
+        "42",
+        "0.844",
+        "[0.831, 0.857]",
+        "5000"
+      ],
+      [
+        "EMCAD",
+        "2026",
+        "0.822",
+        "[0.743, 0.857]",
+        "5000"
+      ],
+      [
+        "EMCAD",
+        "3407",
+        "0.767",
+        "[0.663, 0.803]",
+        "5000"
+      ],
+      [
+        "EMCAD",
+        "9103",
+        "0.784",
+        "[0.698, 0.835]",
+        "5000"
+      ],
+      [
+        "SAM2-U-Net",
+        "17",
+        "0.871",
+        "[0.858, 0.884]",
+        "5000"
+      ],
+      [
+        "SAM2-U-Net",
+        "42",
+        "0.854",
+        "[0.837, 0.873]",
+        "5000"
+      ],
+      [
+        "SAM2-U-Net",
+        "2026",
+        "0.864",
+        "[0.842, 0.881]",
+        "5000"
+      ],
+      [
+        "SAM2-U-Net",
+        "3407",
+        "0.842",
+        "[0.816, 0.863]",
+        "5000"
+      ],
+      [
+        "SAM2-U-Net",
+        "9103",
+        "0.854",
+        "[0.835, 0.873]",
+        "5000"
+      ]
+    ],
+    "note": "Note. Each seed-specific interval uses class-stratified resampling of the 18 held-out patients, preserving both eyes and all frames. The five test cohorts overlap; these intervals therefore do not constitute independent-sample estimates."
+  },
+  {
+    "section": "supplement",
+    "number": "S13",
+    "caption": "Supplementary Table S13. Complete postprocessed Dice comparison family",
+    "rows": [
+      [
+        "Seed",
+        "Left",
+        "Right",
+        "Δ Dice (L−R)",
+        "95% paired CI",
+        "Holm p"
+      ],
+      [
+        "17",
+        "YOLO26",
+        "ViT Method2",
+        "-0.032",
+        "[-0.089, +0.005]",
+        "1.000"
+      ],
+      [
+        "17",
+        "YOLO26",
+        "EMCAD",
+        "-0.050",
+        "[-0.119, -0.016]",
+        "0.619"
+      ],
+      [
+        "17",
+        "YOLO26",
+        "SAM2-U-Net",
+        "-0.062",
+        "[-0.129, -0.027]",
+        "0.084"
+      ],
+      [
+        "17",
+        "ViT Method2",
+        "EMCAD",
+        "-0.019",
+        "[-0.040, -0.001]",
+        "1.000"
+      ],
+      [
+        "17",
+        "ViT Method2",
+        "SAM2-U-Net",
+        "-0.030",
+        "[-0.052, -0.017]",
+        "0.034"
+      ],
+      [
+        "17",
+        "EMCAD",
+        "SAM2-U-Net",
+        "-0.012",
+        "[-0.023, +0.001]",
+        "1.000"
+      ],
+      [
+        "42",
+        "YOLO26",
+        "ViT Method2",
+        "+0.024",
+        "[-0.012, +0.061]",
+        "1.000"
+      ],
+      [
+        "42",
+        "YOLO26",
+        "EMCAD",
+        "-0.040",
+        "[-0.075, -0.014]",
+        "1.000"
+      ],
+      [
+        "42",
+        "YOLO26",
+        "SAM2-U-Net",
+        "-0.050",
+        "[-0.085, -0.025]",
+        "0.026"
+      ],
+      [
+        "42",
+        "ViT Method2",
+        "EMCAD",
+        "-0.064",
+        "[-0.106, -0.038]",
+        "0.012"
+      ],
+      [
+        "42",
+        "ViT Method2",
+        "SAM2-U-Net",
+        "-0.074",
+        "[-0.109, -0.043]",
+        "0.026"
+      ],
+      [
+        "42",
+        "EMCAD",
+        "SAM2-U-Net",
+        "-0.010",
+        "[-0.023, +0.003]",
+        "1.000"
+      ],
+      [
+        "2026",
+        "YOLO26",
+        "ViT Method2",
+        "-0.104",
+        "[-0.234, -0.022]",
+        "1.000"
+      ],
+      [
+        "2026",
+        "YOLO26",
+        "EMCAD",
+        "-0.150",
+        "[-0.239, -0.078]",
+        "0.046"
+      ],
+      [
+        "2026",
+        "YOLO26",
+        "SAM2-U-Net",
+        "-0.192",
+        "[-0.315, -0.109]",
+        "0.022"
+      ],
+      [
+        "2026",
+        "ViT Method2",
+        "EMCAD",
+        "-0.046",
+        "[-0.097, +0.012]",
+        "1.000"
+      ],
+      [
+        "2026",
+        "ViT Method2",
+        "SAM2-U-Net",
+        "-0.088",
+        "[-0.163, -0.051]",
+        "0.017"
+      ],
+      [
+        "2026",
+        "EMCAD",
+        "SAM2-U-Net",
+        "-0.042",
+        "[-0.103, -0.008]",
+        "1.000"
+      ],
+      [
+        "3407",
+        "YOLO26",
+        "ViT Method2",
+        "+0.011",
+        "[-0.048, +0.094]",
+        "1.000"
+      ],
+      [
+        "3407",
+        "YOLO26",
+        "EMCAD",
+        "-0.022",
+        "[-0.087, +0.021]",
+        "1.000"
+      ],
+      [
+        "3407",
+        "YOLO26",
+        "SAM2-U-Net",
+        "-0.098",
+        "[-0.163, -0.053]",
+        "0.017"
+      ],
+      [
+        "3407",
+        "ViT Method2",
+        "EMCAD",
+        "-0.033",
+        "[-0.127, +0.048]",
+        "1.000"
+      ],
+      [
+        "3407",
+        "ViT Method2",
+        "SAM2-U-Net",
+        "-0.109",
+        "[-0.189, -0.055]",
+        "0.052"
+      ],
+      [
+        "3407",
+        "EMCAD",
+        "SAM2-U-Net",
+        "-0.076",
+        "[-0.175, -0.038]",
+        "0.041"
+      ],
+      [
+        "9103",
+        "YOLO26",
+        "ViT Method2",
+        "+0.003",
+        "[-0.066, +0.044]",
+        "1.000"
+      ],
+      [
+        "9103",
+        "YOLO26",
+        "EMCAD",
+        "+0.015",
+        "[-0.067, +0.071]",
+        "1.000"
+      ],
+      [
+        "9103",
+        "YOLO26",
+        "SAM2-U-Net",
+        "-0.055",
+        "[-0.136, -0.007]",
+        "1.000"
+      ],
+      [
+        "9103",
+        "ViT Method2",
+        "EMCAD",
+        "+0.012",
+        "[-0.029, +0.081]",
+        "1.000"
+      ],
+      [
+        "9103",
+        "ViT Method2",
+        "SAM2-U-Net",
+        "-0.058",
+        "[-0.140, -0.026]",
+        "0.044"
+      ],
+      [
+        "9103",
+        "EMCAD",
+        "SAM2-U-Net",
+        "-0.070",
+        "[-0.150, -0.023]",
+        "0.457"
+      ]
+    ],
+    "note": "Note. All 30 planned postprocessed Dice contrasts are shown, complementing the significant-only Table S11. Positive differences favor the left model. Each contrast uses 252 intended frames from 18 patients within seed, 5,000 patient-cluster bootstrap resamples for BCa intervals, and 5,000 paired patient-level randomization draws. Holm adjustment applies within the 30-contrast postprocessed Dice family. Values are rounded to three decimals; unrounded results, exact adjusted probabilities and rejection indicators are retained in data/segmentation_all_360_paired_comparisons.csv. That file contains 12 distinct metric–representation families, each with 30 contrasts, not a single 360-test family. Conditional distance metrics use the per-row common-frame and patient denominators; processed-image distances are in pixels. The raw-mask representation had already undergone small-hole filling."
+  },
+  {
+    "section": "supplement",
+    "number": "S14",
+    "caption": "Supplementary Table S14. Strict predicted-ROI availability and frame rejection profile",
+    "rows": [
+      [
+        "Segmenter",
+        "Valid / total",
+        "Empty",
+        "Tiny",
+        "Border",
+        "Ambiguous",
+        "Frame coverage",
+        "Eye coverage",
+        "Patient coverage"
+      ],
+      [
+        "YOLO26",
+        "1150/1260",
+        "102",
+        "1",
+        "7",
+        "0",
+        "0.913 ± 0.069",
+        "0.939 ± 0.063",
+        "0.889 ± 0.104"
+      ],
+      [
+        "ViT Method2",
+        "1238/1260",
+        "0",
+        "3",
+        "0",
+        "19",
+        "0.983 ± 0.013",
+        "0.983 ± 0.015",
+        "0.967 ± 0.030"
+      ],
+      [
+        "EMCAD",
+        "1225/1260",
+        "8",
+        "16",
+        "0",
+        "11",
+        "0.972 ± 0.027",
+        "0.972 ± 0.028",
+        "0.944 ± 0.056"
+      ],
+      [
+        "SAM2-U-Net",
+        "1260/1260",
+        "0",
+        "0",
+        "0",
+        "0",
+        "1.000 ± 0.000",
+        "1.000 ± 0.000",
+        "1.000 ± 0.000"
+      ]
+    ],
+    "note": "Note. Counts aggregate five overlapping held-out split appearances (252 frames per split; 1,260 per model) and are not counts of independent unique frames. Eye coverage requires at least four of seven valid frames; patient coverage requires both eyes. No held-out oversegmentation rejection was observed."
+  },
+  {
+    "section": "supplement",
+    "number": "S15",
+    "caption": "Supplementary Table S15. Retrospective diagnosis-stratified segmentation outcomes",
+    "rows": [
+      [
+        "Segmenter",
+        "Clinical class",
+        "Dice",
+        "IoU",
+        "Frame ROI coverage",
+        "ROI hit rate"
+      ],
+      [
+        "YOLO26",
+        "normal",
+        "0.809 ± 0.064",
+        "0.709",
+        "0.951 ± 0.077",
+        "0.930"
+      ],
+      [
+        "YOLO26",
+        "papilledema",
+        "0.690 ± 0.051",
+        "0.591",
+        "0.846 ± 0.048",
+        "0.786"
+      ],
+      [
+        "YOLO26",
+        "pseudopapilledema",
+        "0.734 ± 0.076",
+        "0.634",
+        "0.882 ± 0.084",
+        "0.861"
+      ],
+      [
+        "ViT Method2",
+        "normal",
+        "0.815 ± 0.026",
+        "0.698",
+        "1.000 ± 0.000",
+        "0.930"
+      ],
+      [
+        "ViT Method2",
+        "papilledema",
+        "0.739 ± 0.080",
+        "0.612",
+        "0.964 ± 0.055",
+        "0.761"
+      ],
+      [
+        "ViT Method2",
+        "pseudopapilledema",
+        "0.757 ± 0.088",
+        "0.637",
+        "0.957 ± 0.054",
+        "0.814"
+      ],
+      [
+        "EMCAD",
+        "normal",
+        "0.828 ± 0.032",
+        "0.721",
+        "0.984 ± 0.035",
+        "0.960"
+      ],
+      [
+        "EMCAD",
+        "papilledema",
+        "0.789 ± 0.090",
+        "0.680",
+        "0.950 ± 0.112",
+        "0.929"
+      ],
+      [
+        "EMCAD",
+        "pseudopapilledema",
+        "0.810 ± 0.077",
+        "0.705",
+        "0.964 ± 0.070",
+        "0.918"
+      ],
+      [
+        "SAM2-U-Net",
+        "normal",
+        "0.873 ± 0.014",
+        "0.780",
+        "1.000 ± 0.000",
+        "0.991"
+      ],
+      [
+        "SAM2-U-Net",
+        "papilledema",
+        "0.827 ± 0.018",
+        "0.711",
+        "1.000 ± 0.000",
+        "0.961"
+      ],
+      [
+        "SAM2-U-Net",
+        "pseudopapilledema",
+        "0.847 ± 0.016",
+        "0.739",
+        "1.000 ± 0.000",
+        "1.000"
+      ]
+    ],
+    "note": "Note. Five-seed descriptive mean ± sample SD when available. Each split contributed 140 normal, 56 papilledema, and 56 pseudopapilledema frame evaluations. ROI hit denotes overlap under the locked localization criterion. The target is one binary anatomical structure in every class; diagnosis labels do not define distinct ROI masks. No class-specific inferential test was prespecified."
+  },
+  {
+    "section": "supplement",
+    "number": "S16",
+    "caption": "Supplementary Table S16. Complementary held-out segmentation error measures",
+    "rows": [
+      [
+        "Segmenter",
+        "IoU",
+        "Sensitivity",
+        "Precision",
+        "Specificity",
+        "ASSD (px)",
+        "Relative area error",
+        "Centroid distance (px)"
+      ],
+      [
+        "YOLO26",
+        "0.666 ± 0.055",
+        "0.834 ± 0.071",
+        "0.798 ± 0.049",
+        "0.996 ± 0.001",
+        "8.25 ± 1.64",
+        "0.331 ± 0.087",
+        "8.96 ± 0.82"
+      ],
+      [
+        "ViT Method2",
+        "0.665 ± 0.045",
+        "0.867 ± 0.046",
+        "0.768 ± 0.049",
+        "0.995 ± 0.002",
+        "10.59 ± 2.00",
+        "0.358 ± 0.117",
+        "11.68 ± 1.99"
+      ],
+      [
+        "EMCAD",
+        "0.708 ± 0.046",
+        "0.879 ± 0.053",
+        "0.804 ± 0.049",
+        "0.996 ± 0.001",
+        "8.19 ± 1.62",
+        "0.273 ± 0.084",
+        "9.15 ± 1.89"
+      ],
+      [
+        "SAM2-U-Net",
+        "0.756 ± 0.016",
+        "0.895 ± 0.025",
+        "0.842 ± 0.024",
+        "0.997 ± 0.000",
+        "7.08 ± 0.56",
+        "0.197 ± 0.023",
+        "8.49 ± 0.91"
+      ]
+    ],
+    "note": "Note. Five-split mean ± sample SD at frame scope. IoU and relative area error retain structurally invalid predictions in the all-intended-frame estimand. Precision, ASSD, and centroid distance are conditional on a nonempty predicted mask; the corresponding coverage is reported in Supplementary Table S14. Distances are expressed in pixels in the resized 768 × 768 analysis space, without conversion to physical units."
+  },
+  {
+    "section": "supplement",
+    "number": "S17",
+    "caption": "Supplementary Table S17. Complete primary binary eye-level balanced-accuracy comparisons",
+    "rows": [
+      [
+        "Seed",
+        "Left",
+        "Right",
+        "Δ BA (L−R)",
+        "95% paired CI",
+        "Holm p"
+      ],
+      [
+        "17",
+        "YOLO26",
+        "ViT Method2",
+        "+0.062",
+        "[-0.069, +0.194]",
+        "1.000"
+      ],
+      [
+        "17",
+        "YOLO26",
+        "EMCAD",
+        "+0.038",
+        "[-0.087, +0.206]",
+        "1.000"
+      ],
+      [
+        "17",
+        "YOLO26",
+        "SAM2-U-Net",
+        "+0.044",
+        "[-0.062, +0.175]",
+        "1.000"
+      ],
+      [
+        "17",
+        "ViT Method2",
+        "EMCAD",
+        "-0.025",
+        "[-0.100, +0.050]",
+        "1.000"
+      ],
+      [
+        "17",
+        "ViT Method2",
+        "SAM2-U-Net",
+        "-0.019",
+        "[-0.119, +0.106]",
+        "1.000"
+      ],
+      [
+        "17",
+        "EMCAD",
+        "SAM2-U-Net",
+        "+0.006",
+        "[-0.150, +0.113]",
+        "1.000"
+      ],
+      [
+        "42",
+        "YOLO26",
+        "ViT Method2",
+        "+0.037",
+        "[-0.044, +0.131]",
+        "1.000"
+      ],
+      [
+        "42",
+        "YOLO26",
+        "EMCAD",
+        "+0.062",
+        "[-0.025, +0.250]",
+        "1.000"
+      ],
+      [
+        "42",
+        "YOLO26",
+        "SAM2-U-Net",
+        "+0.037",
+        "[-0.050, +0.250]",
+        "1.000"
+      ],
+      [
+        "42",
+        "ViT Method2",
+        "EMCAD",
+        "+0.025",
+        "[-0.069, +0.138]",
+        "1.000"
+      ],
+      [
+        "42",
+        "ViT Method2",
+        "SAM2-U-Net",
+        "+0.000",
+        "[-0.094, +0.094]",
+        "1.000"
+      ],
+      [
+        "42",
+        "EMCAD",
+        "SAM2-U-Net",
+        "-0.025",
+        "[-0.100, +0.000]",
+        "1.000"
+      ],
+      [
+        "2026",
+        "YOLO26",
+        "ViT Method2",
+        "+0.087",
+        "[-0.119, +0.312]",
+        "1.000"
+      ],
+      [
+        "2026",
+        "YOLO26",
+        "EMCAD",
+        "-0.094",
+        "[-0.231, +0.038]",
+        "1.000"
+      ],
+      [
+        "2026",
+        "YOLO26",
+        "SAM2-U-Net",
+        "-0.125",
+        "[-0.312, +0.025]",
+        "1.000"
+      ],
+      [
+        "2026",
+        "ViT Method2",
+        "EMCAD",
+        "-0.181",
+        "[-0.394, +0.025]",
+        "1.000"
+      ],
+      [
+        "2026",
+        "ViT Method2",
+        "SAM2-U-Net",
+        "-0.212",
+        "[-0.406, -0.044]",
+        "1.000"
+      ],
+      [
+        "2026",
+        "EMCAD",
+        "SAM2-U-Net",
+        "-0.031",
+        "[-0.169, +0.100]",
+        "1.000"
+      ],
+      [
+        "3407",
+        "YOLO26",
+        "ViT Method2",
+        "+0.144",
+        "[+0.000, +0.287]",
+        "1.000"
+      ],
+      [
+        "3407",
+        "YOLO26",
+        "EMCAD",
+        "+0.025",
+        "[-0.062, +0.125]",
+        "1.000"
+      ],
+      [
+        "3407",
+        "YOLO26",
+        "SAM2-U-Net",
+        "+0.019",
+        "[-0.069, +0.100]",
+        "1.000"
+      ],
+      [
+        "3407",
+        "ViT Method2",
+        "EMCAD",
+        "-0.119",
+        "[-0.269, +0.019]",
+        "1.000"
+      ],
+      [
+        "3407",
+        "ViT Method2",
+        "SAM2-U-Net",
+        "-0.125",
+        "[-0.281, +0.025]",
+        "1.000"
+      ],
+      [
+        "3407",
+        "EMCAD",
+        "SAM2-U-Net",
+        "-0.006",
+        "[-0.144, +0.131]",
+        "1.000"
+      ],
+      [
+        "9103",
+        "YOLO26",
+        "ViT Method2",
+        "-0.012",
+        "[-0.156, +0.169]",
+        "1.000"
+      ],
+      [
+        "9103",
+        "YOLO26",
+        "EMCAD",
+        "-0.044",
+        "[-0.200, +0.150]",
+        "1.000"
+      ],
+      [
+        "9103",
+        "YOLO26",
+        "SAM2-U-Net",
+        "+0.069",
+        "[-0.087, +0.306]",
+        "1.000"
+      ],
+      [
+        "9103",
+        "ViT Method2",
+        "EMCAD",
+        "-0.031",
+        "[-0.194, +0.106]",
+        "1.000"
+      ],
+      [
+        "9103",
+        "ViT Method2",
+        "SAM2-U-Net",
+        "+0.081",
+        "[-0.050, +0.212]",
+        "1.000"
+      ],
+      [
+        "9103",
+        "EMCAD",
+        "SAM2-U-Net",
+        "+0.112",
+        "[-0.019, +0.225]",
+        "1.000"
+      ]
+    ],
+    "note": "Note. All 30 planned contrasts compare the primary model-specific classifiers within a seed. Failure-aware balanced accuracy retains all 36 intended eyes from 18 patients, including structural abstentions as errors. Intervals are patient-cluster BCa 95% intervals from 5,000 resamples of paired observations; probabilities use 5,000 patient-level paired swaps with Holm adjustment across this 30-test family. All adjusted p-values are 1.000; this does not establish equivalence. Overlapping holdouts must not be pooled as independent cohorts. Unrounded estimates and unadjusted probabilities are included in data/binary_all_60_paired_comparisons.csv."
+  },
+  {
+    "section": "supplement",
+    "number": "S18",
+    "caption": "Supplementary Table S18. Binary classification five-seed summary across both classifier strategies",
+    "rows": [
+      [
+        "ROI stream",
+        "Classifier",
+        "Eye failure aware BA",
+        "Eye coverage",
+        "Eye conditional AUROC",
+        "Patient failure aware BA"
+      ],
+      [
+        "YOLO26",
+        "Model-specific",
+        "0.829 ± 0.052",
+        "0.939 ± 0.063",
+        "0.902 ± 0.061",
+        "0.805 ± 0.111"
+      ],
+      [
+        "YOLO26",
+        "ResNet-18",
+        "0.774 ± 0.107",
+        "0.939 ± 0.063",
+        "0.889 ± 0.061",
+        "0.722 ± 0.180"
+      ],
+      [
+        "ViT Method2",
+        "Model-specific",
+        "0.765 ± 0.093",
+        "0.983 ± 0.015",
+        "0.870 ± 0.055",
+        "0.765 ± 0.082"
+      ],
+      [
+        "ViT Method2",
+        "ResNet-18",
+        "0.840 ± 0.070",
+        "0.983 ± 0.015",
+        "0.910 ± 0.040",
+        "0.820 ± 0.120"
+      ],
+      [
+        "EMCAD",
+        "Model-specific",
+        "0.831 ± 0.044",
+        "0.972 ± 0.028",
+        "0.882 ± 0.067",
+        "0.823 ± 0.032"
+      ],
+      [
+        "EMCAD",
+        "ResNet-18",
+        "0.838 ± 0.057",
+        "0.972 ± 0.028",
+        "0.912 ± 0.056",
+        "0.783 ± 0.108"
+      ],
+      [
+        "SAM2-U-Net",
+        "Model-specific",
+        "0.820 ± 0.060",
+        "1.000 ± 0.000",
+        "0.919 ± 0.046",
+        "0.842 ± 0.057"
+      ],
+      [
+        "SAM2-U-Net",
+        "ResNet-18",
+        "0.826 ± 0.065",
+        "1.000 ± 0.000",
+        "0.918 ± 0.046",
+        "0.845 ± 0.044"
+      ]
+    ],
+    "note": "Note. Mean ± sample SD across five overlapping held-out patient splits. The primary binary estimand is model-specific eye failure-aware BA; ResNet-18 and patient-level outcomes are secondary. AUROC excludes structural abstentions."
+  },
+  {
+    "section": "supplement",
+    "number": "S19",
+    "caption": "Supplementary Table S19. Primary binary eye balanced accuracy by seed with patient-cluster BCa intervals",
+    "rows": [
+      [
+        "ROI stream",
+        "Seed",
+        "Failure aware eye BA",
+        "95% BCa CI",
+        "Eye coverage"
+      ],
+      [
+        "YOLO26",
+        "17",
+        "0.819",
+        "[0.637, 0.944]",
+        "0.972"
+      ],
+      [
+        "YOLO26",
+        "42",
+        "0.912",
+        "[0.700, 1.000]",
+        "1.000"
+      ],
+      [
+        "YOLO26",
+        "2026",
+        "0.769",
+        "[0.581, 0.906]",
+        "0.833"
+      ],
+      [
+        "YOLO26",
+        "3407",
+        "0.812",
+        "[0.656, 0.938]",
+        "0.944"
+      ],
+      [
+        "YOLO26",
+        "9103",
+        "0.831",
+        "[0.713, 0.938]",
+        "0.944"
+      ],
+      [
+        "ViT Method2",
+        "17",
+        "0.756",
+        "[0.554, 0.894]",
+        "1.000"
+      ],
+      [
+        "ViT Method2",
+        "42",
+        "0.875",
+        "[0.719, 0.969]",
+        "0.972"
+      ],
+      [
+        "ViT Method2",
+        "2026",
+        "0.681",
+        "[0.500, 0.844]",
+        "0.972"
+      ],
+      [
+        "ViT Method2",
+        "3407",
+        "0.669",
+        "[0.456, 0.825]",
+        "0.972"
+      ],
+      [
+        "ViT Method2",
+        "9103",
+        "0.844",
+        "[0.675, 0.950]",
+        "1.000"
+      ],
+      [
+        "EMCAD",
+        "17",
+        "0.781",
+        "[0.562, 0.925]",
+        "1.000"
+      ],
+      [
+        "EMCAD",
+        "42",
+        "0.850",
+        "[0.637, 0.975]",
+        "1.000"
+      ],
+      [
+        "EMCAD",
+        "2026",
+        "0.863",
+        "[0.650, 0.950]",
+        "0.944"
+      ],
+      [
+        "EMCAD",
+        "3407",
+        "0.787",
+        "[0.613, 0.912]",
+        "0.972"
+      ],
+      [
+        "EMCAD",
+        "9103",
+        "0.875",
+        "[0.719, 0.969]",
+        "0.944"
+      ],
+      [
+        "SAM2-U-Net",
+        "17",
+        "0.775",
+        "[0.537, 0.938]",
+        "1.000"
+      ],
+      [
+        "SAM2-U-Net",
+        "42",
+        "0.875",
+        "[0.688, 1.000]",
+        "1.000"
+      ],
+      [
+        "SAM2-U-Net",
+        "2026",
+        "0.894",
+        "[0.775, 0.975]",
+        "1.000"
+      ],
+      [
+        "SAM2-U-Net",
+        "3407",
+        "0.794",
+        "[0.588, 0.925]",
+        "1.000"
+      ],
+      [
+        "SAM2-U-Net",
+        "9103",
+        "0.762",
+        "[0.550, 0.875]",
+        "1.000"
+      ]
+    ],
+    "note": "Note. Each held-out split contains 18 patients and 36 eyes. BCa intervals resample complete patients, preserving both eyes; they are seed-specific and are not intervals for the five-seed mean."
+  },
+  {
+    "section": "supplement",
+    "number": "S20",
+    "caption": "Supplementary Table S20. Primary binary eye-level probability quality before and after calibration",
+    "rows": [
+      [
+        "ROI stream",
+        "Probability scale",
+        "Brier score",
+        "NLL",
+        "ECE (10 bins)"
+      ],
+      [
+        "YOLO26",
+        "Raw",
+        "0.094 ± 0.038",
+        "0.750 ± 0.512",
+        "0.106 ± 0.032"
+      ],
+      [
+        "YOLO26",
+        "Temperature-scaled",
+        "0.103 ± 0.041",
+        "0.404 ± 0.183",
+        "0.157 ± 0.068"
+      ],
+      [
+        "ViT Method2",
+        "Raw",
+        "0.124 ± 0.046",
+        "0.402 ± 0.098",
+        "0.122 ± 0.045"
+      ],
+      [
+        "ViT Method2",
+        "Temperature-scaled",
+        "0.126 ± 0.051",
+        "0.419 ± 0.110",
+        "0.129 ± 0.069"
+      ],
+      [
+        "EMCAD",
+        "Raw",
+        "0.108 ± 0.045",
+        "0.558 ± 0.205",
+        "0.121 ± 0.059"
+      ],
+      [
+        "EMCAD",
+        "Temperature-scaled",
+        "0.115 ± 0.034",
+        "0.397 ± 0.095",
+        "0.144 ± 0.058"
+      ],
+      [
+        "SAM2-U-Net",
+        "Raw",
+        "0.126 ± 0.077",
+        "0.536 ± 0.299",
+        "0.138 ± 0.074"
+      ],
+      [
+        "SAM2-U-Net",
+        "Temperature-scaled",
+        "0.119 ± 0.053",
+        "0.385 ± 0.125",
+        "0.136 ± 0.050"
+      ]
+    ],
+    "note": "Note. Values are arithmetic means ± sample SD across five overlapping holdouts, not confidence intervals; all entries use five valid seed estimates. Brier score, negative log-likelihood (NLL) and ten-bin equal-width expected calibration error (ECE) are conditional on evaluable eyes (30–36 of 36 intended eyes per model–seed unit). The positive category combines papilledema and pseudopapilledema. Temperatures were fitted on tuning data, not test outcomes. Lower values are preferable, but temperature scaling did not uniformly improve test probability quality; no significance test or equivalence claim is implied by this descriptive comparison. Raw and calibrated scores use the same evaluable population within a model–seed unit."
+  },
+  {
+    "section": "supplement",
+    "number": "S21",
+    "caption": "Supplementary Table S21. Complementary binary eye-level discrimination and selective-risk endpoints",
+    "rows": [
+      [
+        "ROI stream",
+        "Classifier strategy",
+        "Conditional MCC",
+        "Conditional AP",
+        "Failure-aware AURC"
+      ],
+      [
+        "YOLO26",
+        "Model-specific",
+        "0.791 ± 0.061",
+        "0.921 ± 0.047",
+        "0.064 ± 0.041"
+      ],
+      [
+        "YOLO26",
+        "Shared ResNet-18",
+        "0.671 ± 0.155",
+        "0.906 ± 0.065",
+        "0.125 ± 0.067"
+      ],
+      [
+        "ViT Method2",
+        "Model-specific",
+        "0.564 ± 0.193",
+        "0.878 ± 0.055",
+        "0.137 ± 0.038"
+      ],
+      [
+        "ViT Method2",
+        "Shared ResNet-18",
+        "0.722 ± 0.139",
+        "0.930 ± 0.029",
+        "0.077 ± 0.041"
+      ],
+      [
+        "EMCAD",
+        "Model-specific",
+        "0.729 ± 0.129",
+        "0.911 ± 0.054",
+        "0.068 ± 0.048"
+      ],
+      [
+        "EMCAD",
+        "Shared ResNet-18",
+        "0.738 ± 0.139",
+        "0.928 ± 0.042",
+        "0.071 ± 0.044"
+      ],
+      [
+        "SAM2-U-Net",
+        "Model-specific",
+        "0.652 ± 0.126",
+        "0.931 ± 0.038",
+        "0.084 ± 0.033"
+      ],
+      [
+        "SAM2-U-Net",
+        "Shared ResNet-18",
+        "0.654 ± 0.129",
+        "0.928 ± 0.041",
+        "0.089 ± 0.062"
+      ]
+    ],
+    "note": "Note. Values are arithmetic means ± sample SD over five overlapping holdouts. MCC denotes the Matthews correlation coefficient, not the three-class task; AP is average precision. Both are conditional on evaluable eyes and use the operational temperature-scaled probabilities and locked threshold where applicable. They must not be interpreted as all-eye endpoints. Model-specific classifiers are primary; the shared ResNet-18 strategy is secondary and uses separately fitted classifiers for each ROI stream. AURC is the area-under-risk–coverage summary implemented as the arithmetic mean of cumulative error proportions over all 36 ranks. Ranking uses absolute distance from each locked threshold, with structural abstentions appended at lowest confidence as errors. Risk is ordinary misclassification risk, not 1 minus balanced accuracy. Lower AURC is preferable. These descriptive selective-risk results do not validate a new rejection policy or clinical benefit."
+  },
+  {
+    "section": "supplement",
+    "number": "S22",
+    "caption": "Supplementary Table S22. Thirty paired primary patient BA model contrasts",
+    "rows": [
+      [
+        "Seed",
+        "Left",
+        "Right",
+        "Δ BA (L−R)",
+        "95% paired CI",
+        "Holm p"
+      ],
+      [
+        "17",
+        "YOLO26",
+        "ViT Method2",
+        "-0.167",
+        "[-0.417, +0.000]",
+        "1.000"
+      ],
+      [
+        "17",
+        "YOLO26",
+        "EMCAD",
+        "-0.050",
+        "[-0.250, +0.067]",
+        "1.000"
+      ],
+      [
+        "17",
+        "YOLO26",
+        "SAM2-U-Net",
+        "-0.083",
+        "[-0.250, +0.167]",
+        "1.000"
+      ],
+      [
+        "17",
+        "ViT Method2",
+        "EMCAD",
+        "+0.117",
+        "[+0.000, +0.350]",
+        "1.000"
+      ],
+      [
+        "17",
+        "ViT Method2",
+        "SAM2-U-Net",
+        "+0.083",
+        "[-0.167, +0.417]",
+        "1.000"
+      ],
+      [
+        "17",
+        "EMCAD",
+        "SAM2-U-Net",
+        "-0.033",
+        "[-0.267, +0.217]",
+        "1.000"
+      ],
+      [
+        "42",
+        "YOLO26",
+        "ViT Method2",
+        "+0.033",
+        "[-0.167, +0.250]",
+        "1.000"
+      ],
+      [
+        "42",
+        "YOLO26",
+        "EMCAD",
+        "-0.167",
+        "[-0.333, +0.000]",
+        "1.000"
+      ],
+      [
+        "42",
+        "YOLO26",
+        "SAM2-U-Net",
+        "-0.083",
+        "[-0.250, +0.000]",
+        "1.000"
+      ],
+      [
+        "42",
+        "ViT Method2",
+        "EMCAD",
+        "-0.200",
+        "[-0.367, +0.083]",
+        "1.000"
+      ],
+      [
+        "42",
+        "ViT Method2",
+        "SAM2-U-Net",
+        "-0.117",
+        "[-0.350, +0.000]",
+        "1.000"
+      ],
+      [
+        "42",
+        "EMCAD",
+        "SAM2-U-Net",
+        "+0.083",
+        "[-0.167, +0.250]",
+        "1.000"
+      ],
+      [
+        "2026",
+        "YOLO26",
+        "ViT Method2",
+        "+0.067",
+        "[-0.267, +0.367]",
+        "1.000"
+      ],
+      [
+        "2026",
+        "YOLO26",
+        "EMCAD",
+        "-0.083",
+        "[-0.283, +0.167]",
+        "1.000"
+      ],
+      [
+        "2026",
+        "YOLO26",
+        "SAM2-U-Net",
+        "-0.117",
+        "[-0.350, +0.033]",
+        "1.000"
+      ],
+      [
+        "2026",
+        "ViT Method2",
+        "EMCAD",
+        "-0.150",
+        "[-0.267, +0.083]",
+        "1.000"
+      ],
+      [
+        "2026",
+        "ViT Method2",
+        "SAM2-U-Net",
+        "-0.183",
+        "[-0.483, +0.183]",
+        "1.000"
+      ],
+      [
+        "2026",
+        "EMCAD",
+        "SAM2-U-Net",
+        "-0.033",
+        "[-0.283, +0.233]",
+        "1.000"
+      ],
+      [
+        "3407",
+        "YOLO26",
+        "ViT Method2",
+        "+0.033",
+        "[+0.000, +0.167]",
+        "1.000"
+      ],
+      [
+        "3407",
+        "YOLO26",
+        "EMCAD",
+        "+0.050",
+        "[-0.167, +0.200]",
+        "1.000"
+      ],
+      [
+        "3407",
+        "YOLO26",
+        "SAM2-U-Net",
+        "-0.133",
+        "[-0.300, +0.033]",
+        "1.000"
+      ],
+      [
+        "3407",
+        "ViT Method2",
+        "EMCAD",
+        "+0.017",
+        "[-0.183, +0.167]",
+        "1.000"
+      ],
+      [
+        "3407",
+        "ViT Method2",
+        "SAM2-U-Net",
+        "-0.167",
+        "[-0.367, +0.017]",
+        "1.000"
+      ],
+      [
+        "3407",
+        "EMCAD",
+        "SAM2-U-Net",
+        "-0.183",
+        "[-0.400, +0.067]",
+        "1.000"
+      ],
+      [
+        "9103",
+        "YOLO26",
+        "ViT Method2",
+        "-0.100",
+        "[-0.267, +0.183]",
+        "1.000"
+      ],
+      [
+        "9103",
+        "YOLO26",
+        "EMCAD",
+        "+0.167",
+        "[+0.000, +0.417]",
+        "1.000"
+      ],
+      [
+        "9103",
+        "YOLO26",
+        "SAM2-U-Net",
+        "+0.200",
+        "[+0.033, +0.486]",
+        "1.000"
+      ],
+      [
+        "9103",
+        "ViT Method2",
+        "EMCAD",
+        "+0.267",
+        "[+0.167, +0.333]",
+        "1.000"
+      ],
+      [
+        "9103",
+        "ViT Method2",
+        "SAM2-U-Net",
+        "+0.300",
+        "[+0.167, +0.333]",
+        "1.000"
+      ],
+      [
+        "9103",
+        "EMCAD",
+        "SAM2-U-Net",
+        "+0.033",
+        "[+0.000, +0.133]",
+        "1.000"
+      ]
+    ],
+    "note": "Note. All 30 planned model-specific pairwise comparisons are exploratory within-seed contrasts; none rejected at α=0.05. Each uses paired 18-patient predictions, 5,000 resamples and 5,000 sign-flip draws; Holm controls the stated 30-test family."
+  },
+  {
+    "section": "supplement",
+    "number": "S23",
+    "caption": "Supplementary Table S23. Full five-seed eye-level failure-aware outcomes",
+    "rows": [
+      [
+        "ROI stream",
+        "Classifier",
+        "BA",
+        "MCC",
+        "Coverage",
+        "Accuracy",
+        "Macro-F1"
+      ],
+      [
+        "YOLO26",
+        "Model-specific",
+        "0.513 ± 0.090",
+        "0.434 ± 0.105",
+        "0.939 ± 0.063",
+        "0.656 ± 0.064",
+        "0.483 ± 0.113"
+      ],
+      [
+        "YOLO26",
+        "ResNet-18",
+        "0.557 ± 0.118",
+        "0.454 ± 0.161",
+        "0.939 ± 0.063",
+        "0.661 ± 0.103",
+        "0.562 ± 0.124"
+      ],
+      [
+        "ViT Method2",
+        "Model-specific",
+        "0.483 ± 0.142",
+        "0.327 ± 0.216",
+        "0.983 ± 0.015",
+        "0.556 ± 0.187",
+        "0.466 ± 0.142"
+      ],
+      [
+        "ViT Method2",
+        "ResNet-18",
+        "0.548 ± 0.085",
+        "0.430 ± 0.132",
+        "0.983 ± 0.015",
+        "0.656 ± 0.080",
+        "0.538 ± 0.090"
+      ],
+      [
+        "EMCAD",
+        "Model-specific",
+        "0.480 ± 0.075",
+        "0.363 ± 0.123",
+        "0.972 ± 0.028",
+        "0.617 ± 0.080",
+        "0.463 ± 0.057"
+      ],
+      [
+        "EMCAD",
+        "ResNet-18",
+        "0.562 ± 0.111",
+        "0.447 ± 0.167",
+        "0.972 ± 0.028",
+        "0.661 ± 0.107",
+        "0.553 ± 0.101"
+      ],
+      [
+        "SAM2-U-Net",
+        "Model-specific",
+        "0.518 ± 0.044",
+        "0.403 ± 0.072",
+        "1.000 ± 0.000",
+        "0.639 ± 0.048",
+        "0.490 ± 0.070"
+      ],
+      [
+        "SAM2-U-Net",
+        "ResNet-18",
+        "0.520 ± 0.096",
+        "0.389 ± 0.158",
+        "1.000 ± 0.000",
+        "0.633 ± 0.099",
+        "0.509 ± 0.086"
+      ]
+    ],
+    "note": "Note. Mean ± sample SD. The patient remains the appropriate resampling cluster for any eye-level uncertainty analysis."
+  },
+  {
+    "section": "supplement",
+    "number": "S24",
+    "caption": "Supplementary Table S24. Patient BA and MCC with within-seed BCa 95% intervals",
+    "rows": [
+      [
+        "ROI stream",
+        "Classifier",
+        "Seed",
+        "BA [95% BCa CI]",
+        "MCC [95% BCa CI]"
+      ],
+      [
+        "YOLO26",
+        "Model-specific",
+        "17",
+        "0.500 [0.333, 0.667]",
+        "0.442 [0.211, 0.663]"
+      ],
+      [
+        "YOLO26",
+        "Model-specific",
+        "42",
+        "0.500 [0.333, 0.667]",
+        "0.433 [0.164, 0.685]"
+      ],
+      [
+        "YOLO26",
+        "Model-specific",
+        "2026",
+        "0.433 [0.240, 0.600]",
+        "0.376 [0.118, 0.585]"
+      ],
+      [
+        "YOLO26",
+        "Model-specific",
+        "3407",
+        "0.333 [0.333, 0.333]",
+        "0.246 [0.164, 0.326]"
+      ],
+      [
+        "YOLO26",
+        "Model-specific",
+        "9103",
+        "0.583 [0.417, 0.833]",
+        "0.556 [0.314, 0.756]"
+      ],
+      [
+        "YOLO26",
+        "ResNet-18",
+        "17",
+        "0.600 [0.367, 0.800]",
+        "0.451 [0.077, 0.737]"
+      ],
+      [
+        "YOLO26",
+        "ResNet-18",
+        "42",
+        "0.833 [0.667, 1.000]",
+        "0.821 [0.646, 0.911]"
+      ],
+      [
+        "YOLO26",
+        "ResNet-18",
+        "2026",
+        "0.433 [0.267, 0.717]",
+        "0.369 [0.123, 0.605]"
+      ],
+      [
+        "YOLO26",
+        "ResNet-18",
+        "3407",
+        "0.383 [0.267, 0.583]",
+        "0.267 [0.022, 0.500]"
+      ],
+      [
+        "YOLO26",
+        "ResNet-18",
+        "9103",
+        "0.500 [0.333, 0.667]",
+        "0.471 [0.251, 0.681]"
+      ],
+      [
+        "ViT Method2",
+        "Model-specific",
+        "17",
+        "0.667 [0.500, 0.833]",
+        "0.628 [0.286, 0.822]"
+      ],
+      [
+        "ViT Method2",
+        "Model-specific",
+        "42",
+        "0.467 [0.300, 0.750]",
+        "0.359 [0.103, 0.639]"
+      ],
+      [
+        "ViT Method2",
+        "Model-specific",
+        "2026",
+        "0.367 [0.167, 0.617]",
+        "0.096 [-0.222, 0.411]"
+      ],
+      [
+        "ViT Method2",
+        "Model-specific",
+        "3407",
+        "0.300 [0.200, 0.333]",
+        "0.149 [-0.031, 0.250]"
+      ],
+      [
+        "ViT Method2",
+        "Model-specific",
+        "9103",
+        "0.683 [0.567, 0.917]",
+        "0.584 [0.342, 0.821]"
+      ],
+      [
+        "ViT Method2",
+        "ResNet-18",
+        "17",
+        "0.600 [0.350, 0.833]",
+        "0.440 [0.063, 0.739]"
+      ],
+      [
+        "ViT Method2",
+        "ResNet-18",
+        "42",
+        "0.550 [0.350, 0.800]",
+        "0.436 [0.131, 0.736]"
+      ],
+      [
+        "ViT Method2",
+        "ResNet-18",
+        "2026",
+        "0.750 [0.667, 0.944]",
+        "0.740 [0.650, 0.911]"
+      ],
+      [
+        "ViT Method2",
+        "ResNet-18",
+        "3407",
+        "0.417 [0.333, 0.667]",
+        "0.329 [0.184, 0.569]"
+      ],
+      [
+        "ViT Method2",
+        "ResNet-18",
+        "9103",
+        "0.633 [0.417, 0.833]",
+        "0.543 [0.227, 0.817]"
+      ],
+      [
+        "EMCAD",
+        "Model-specific",
+        "17",
+        "0.550 [0.317, 0.667]",
+        "0.437 [0.103, 0.663]"
+      ],
+      [
+        "EMCAD",
+        "Model-specific",
+        "42",
+        "0.667 [0.667, 0.667]",
+        "0.650 [0.646, 0.685]"
+      ],
+      [
+        "EMCAD",
+        "Model-specific",
+        "2026",
+        "0.517 [0.317, 0.767]",
+        "0.395 [0.147, 0.687]"
+      ],
+      [
+        "EMCAD",
+        "Model-specific",
+        "3407",
+        "0.283 [0.133, 0.517]",
+        "0.049 [-0.184, 0.332]"
+      ],
+      [
+        "EMCAD",
+        "Model-specific",
+        "9103",
+        "0.417 [0.333, 0.667]",
+        "0.372 [0.209, 0.580]"
+      ],
+      [
+        "EMCAD",
+        "ResNet-18",
+        "17",
+        "0.550 [0.348, 0.767]",
+        "0.427 [0.103, 0.723]"
+      ],
+      [
+        "EMCAD",
+        "ResNet-18",
+        "42",
+        "0.667 [0.500, 0.833]",
+        "0.624 [0.306, 0.821]"
+      ],
+      [
+        "EMCAD",
+        "ResNet-18",
+        "2026",
+        "0.600 [0.500, 0.667]",
+        "0.513 [0.355, 0.663]"
+      ],
+      [
+        "EMCAD",
+        "ResNet-18",
+        "3407",
+        "0.450 [0.250, 0.733]",
+        "0.227 [-0.071, 0.565]"
+      ],
+      [
+        "EMCAD",
+        "ResNet-18",
+        "9103",
+        "0.383 [0.267, 0.583]",
+        "0.290 [0.053, 0.489]"
+      ],
+      [
+        "SAM2-U-Net",
+        "Model-specific",
+        "17",
+        "0.583 [0.417, 0.833]",
+        "0.513 [0.182, 0.739]"
+      ],
+      [
+        "SAM2-U-Net",
+        "Model-specific",
+        "42",
+        "0.583 [0.417, 0.833]",
+        "0.523 [0.164, 0.755]"
+      ],
+      [
+        "SAM2-U-Net",
+        "Model-specific",
+        "2026",
+        "0.550 [0.317, 0.667]",
+        "0.479 [0.137, 0.685]"
+      ],
+      [
+        "SAM2-U-Net",
+        "Model-specific",
+        "3407",
+        "0.467 [0.283, 0.633]",
+        "0.336 [0.000, 0.584]"
+      ],
+      [
+        "SAM2-U-Net",
+        "Model-specific",
+        "9103",
+        "0.383 [0.267, 0.583]",
+        "0.251 [0.060, 0.558]"
+      ],
+      [
+        "SAM2-U-Net",
+        "ResNet-18",
+        "17",
+        "0.583 [0.417, 0.833]",
+        "0.513 [0.182, 0.739]"
+      ],
+      [
+        "SAM2-U-Net",
+        "ResNet-18",
+        "42",
+        "0.583 [0.417, 0.667]",
+        "0.538 [0.306, 0.685]"
+      ],
+      [
+        "SAM2-U-Net",
+        "ResNet-18",
+        "2026",
+        "0.667 [0.500, 0.833]",
+        "0.624 [0.306, 0.821]"
+      ],
+      [
+        "SAM2-U-Net",
+        "ResNet-18",
+        "3407",
+        "0.367 [0.167, 0.567]",
+        "0.122 [-0.183, 0.440]"
+      ],
+      [
+        "SAM2-U-Net",
+        "ResNet-18",
+        "9103",
+        "0.633 [0.383, 0.850]",
+        "0.531 [0.183, 0.812]"
+      ]
+    ],
+    "note": "Note. Each row contains 18 intended test patients; intervals use 5,000 whole-patient class-stratified draws. No pooled or five-seed CI was estimated."
+  },
+  {
+    "section": "supplement",
+    "number": "S25",
+    "caption": "Supplementary Table S25. Failure-aware class recall and class-conditional patient coverage",
+    "rows": [
+      [
+        "ROI stream",
+        "Classifier",
+        "Recall N",
+        "Recall P",
+        "Recall Ps",
+        "Coverage N",
+        "Coverage P",
+        "Coverage Ps"
+      ],
+      [
+        "YOLO26",
+        "Model-specific",
+        "0.960 ± 0.089",
+        "0.200 ± 0.274",
+        "0.250 ± 0.250",
+        "0.960 ± 0.089",
+        "0.750 ± 0.177",
+        "0.850 ± 0.137"
+      ],
+      [
+        "YOLO26",
+        "ResNet-18",
+        "0.900 ± 0.100",
+        "0.400 ± 0.379",
+        "0.350 ± 0.285",
+        "0.960 ± 0.089",
+        "0.750 ± 0.177",
+        "0.850 ± 0.137"
+      ],
+      [
+        "ViT Method2",
+        "Model-specific",
+        "0.740 ± 0.365",
+        "0.350 ± 0.285",
+        "0.400 ± 0.379",
+        "1.000 ± 0.000",
+        "0.950 ± 0.112",
+        "0.900 ± 0.137"
+      ],
+      [
+        "ViT Method2",
+        "ResNet-18",
+        "0.920 ± 0.084",
+        "0.450 ± 0.371",
+        "0.400 ± 0.224",
+        "1.000 ± 0.000",
+        "0.950 ± 0.112",
+        "0.900 ± 0.137"
+      ],
+      [
+        "EMCAD",
+        "Model-specific",
+        "0.860 ± 0.167",
+        "0.550 ± 0.326",
+        "0.050 ± 0.112",
+        "0.960 ± 0.089",
+        "0.900 ± 0.224",
+        "0.950 ± 0.112"
+      ],
+      [
+        "EMCAD",
+        "ResNet-18",
+        "0.840 ± 0.152",
+        "0.550 ± 0.326",
+        "0.200 ± 0.209",
+        "0.960 ± 0.089",
+        "0.900 ± 0.224",
+        "0.950 ± 0.112"
+      ],
+      [
+        "SAM2-U-Net",
+        "Model-specific",
+        "0.940 ± 0.055",
+        "0.150 ± 0.137",
+        "0.450 ± 0.274",
+        "1.000 ± 0.000",
+        "1.000 ± 0.000",
+        "1.000 ± 0.000"
+      ],
+      [
+        "SAM2-U-Net",
+        "ResNet-18",
+        "0.900 ± 0.173",
+        "0.450 ± 0.326",
+        "0.350 ± 0.224",
+        "1.000 ± 0.000",
+        "1.000 ± 0.000",
+        "1.000 ± 0.000"
+      ]
+    ],
+    "note": "Note. N = normal; P = papilledema; Ps = pseudopapilledema. Mean ± sample SD across overlapping test splits."
+  },
+  {
+    "section": "supplement",
+    "number": "S26",
+    "caption": "Supplementary Table S26. Conditional discrimination and calibration among evaluable patients",
+    "rows": [
+      [
+        "ROI stream",
+        "Classifier",
+        "Macro AUROC",
+        "Macro AP",
+        "Top-label ECE",
+        "Brier",
+        "NLL"
+      ],
+      [
+        "YOLO26",
+        "Model-specific",
+        "0.738 ± 0.138",
+        "0.570 ± 0.102",
+        "0.268 ± 0.059",
+        "0.472 ± 0.094",
+        "0.820 ± 0.213"
+      ],
+      [
+        "YOLO26",
+        "ResNet-18",
+        "0.789 ± 0.075",
+        "0.659 ± 0.095",
+        "0.221 ± 0.034",
+        "0.427 ± 0.118",
+        "0.780 ± 0.285"
+      ],
+      [
+        "ViT Method2",
+        "Model-specific",
+        "0.754 ± 0.110",
+        "0.621 ± 0.116",
+        "0.180 ± 0.088",
+        "0.499 ± 0.138",
+        "0.920 ± 0.233"
+      ],
+      [
+        "ViT Method2",
+        "ResNet-18",
+        "0.814 ± 0.082",
+        "0.661 ± 0.116",
+        "0.232 ± 0.044",
+        "0.448 ± 0.082",
+        "1.045 ± 0.567"
+      ],
+      [
+        "EMCAD",
+        "Model-specific",
+        "0.770 ± 0.063",
+        "0.614 ± 0.074",
+        "0.194 ± 0.074",
+        "0.433 ± 0.090",
+        "0.715 ± 0.135"
+      ],
+      [
+        "EMCAD",
+        "ResNet-18",
+        "0.803 ± 0.071",
+        "0.671 ± 0.104",
+        "0.229 ± 0.060",
+        "0.462 ± 0.117",
+        "0.879 ± 0.285"
+      ],
+      [
+        "SAM2-U-Net",
+        "Model-specific",
+        "0.793 ± 0.041",
+        "0.617 ± 0.060",
+        "0.175 ± 0.053",
+        "0.443 ± 0.039",
+        "0.754 ± 0.100"
+      ],
+      [
+        "SAM2-U-Net",
+        "ResNet-18",
+        "0.744 ± 0.092",
+        "0.604 ± 0.068",
+        "0.242 ± 0.082",
+        "0.500 ± 0.147",
+        "0.985 ± 0.426"
+      ]
+    ],
+    "note": "Note. Conditional metrics exclude structural abstentions; corresponding coverage and failure-aware BA are reported in main-text Table 4. Macro AUROC/AP are one-vs-rest summaries. Values are mean ± sample SD."
+  }
+]

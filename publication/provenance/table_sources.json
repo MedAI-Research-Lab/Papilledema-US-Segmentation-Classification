@@ -1,0 +1,22 @@
+[
+  {
+    "source": "publication_natural_20260928/under_3000/Manuscript_3000.docx",
+    "sha256": "d792f4fbfee969082fbb20f7c76cf9f8259f6d558211bdf58b63b2515534595d",
+    "operation": "Only table cell text, captions and table notes exported; no OOXML, media, or other manuscript prose."
+  },
+  {
+    "source": "publication_natural_20260928/under_3000/Supplementary_3000.docx",
+    "sha256": "80d019f1921ab5c81369d8c8e7ef427115ca50d4d932f872a4036233a73f7cee",
+    "operation": "Only table cell text, captions and table notes exported; no OOXML, media, or other manuscript prose."
+  },
+  {
+    "source": "publication_natural_20260928/under_5000/Manuscript_5000.docx",
+    "sha256": "e536b383e2d6f0262efb9a98051a2ef4d147b6c06bb6a0d41bc144177e36f2de",
+    "operation": "Only table cell text, captions and table notes exported; no OOXML, media, or other manuscript prose."
+  },
+  {
+    "source": "publication_natural_20260928/under_5000/Supplementary_5000.docx",
+    "sha256": "1c34c876df19f5acee0dc5ba7e9db3e740c2425331f5fb700d42579d10834be2",
+    "operation": "Only table cell text, captions and table notes exported; no OOXML, media, or other manuscript prose."
+  }
+]

@@ -1,0 +1,50 @@
+{
+  "checked_on": "2026-09-28",
+  "scope": "Publication aggregate-data adapters; no model runs and no private-image rendering",
+  "public_figure_replay": {
+    "rendered_png_count": 62,
+    "byte_identical_to_final_document_assets": 62,
+    "editions_verified": [3000, 5000],
+    "private_qualitative_panels_not_distributed": 6,
+    "representative_full_size_visual_checks": [
+      "main_threeclass_confusion_mean_sd.png",
+      "supp_binary_confusion_yolo26_A.png",
+      "supp_threeclass_roc_pr_yolo26_class2.png",
+      "S3_emcad_raw_postprocessed_segmentation.png",
+      "Flowchart_2_visual.png",
+      "S12_yolo26_binary_eye_reliability.png",
+      "supp_threeclass_risk_coverage_sam2_unet.png"
+    ],
+    "visual_result": "Original geometry, labels, spacing and notes preserved; no new clipping or overlap observed."
+  },
+  "tables": {
+    "public_records_per_edition": 30,
+    "authorized_local_document_records_per_edition": 31,
+    "local_full_csv_exports_identical_to_exact_final_document_extraction": true,
+    "csv_round_trip_checks_passed": true,
+    "clinical_provenance_content_excluded_by_explicit_public_allowlist": true
+  },
+  "integrity": {
+    "archived_generator_units_verified": 8,
+    "aggregate_csv_source_hashes_verified": 24,
+    "confusion_mean_and_sample_sd_cells_independently_verified": 72,
+    "full_segmentation_contrasts_verified": 360,
+    "segmentation_families": 12,
+    "contrasts_per_segmentation_family": 30,
+    "private_output_repository_guard_test_passed": true,
+    "public_data_identifier_and_absolute_path_column_checks_passed": true
+  },
+  "tested_rendering_environment": {
+    "matplotlib": "3.10.7",
+    "numpy": "2.5.3",
+    "pandas": "3.0.1",
+    "Pillow": "12.3.0",
+    "scipy": "1.18.1",
+    "scikit-learn": "1.7.2",
+    "reportlab": "4.4.9",
+    "lxml": "6.1.1",
+    "sharp": "0.35.4",
+    "Poppler": "26.07.0",
+    "fonts": "Locally licensed Arial regular/bold; Matplotlib bundled DejaVu Sans; no font files distributed"
+  }
+}

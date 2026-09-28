@@ -1,0 +1,497 @@
+{
+  "schema_version": 1,
+  "purpose": "Core-source provenance; not an original run receipt or an attestation of a new clinical run.",
+  "original_binary_aggregate_code_fingerprint": "914ec1505a0d417b8b6766b3663160673b94d5ce107da68f81d3142bbf493776",
+  "original_binary_inventory_sha256": "59dadfcda559654bd399f27de52ee93937f2508ddb49a0fdc1ac7ddbd69af218",
+  "original_threeclass_inventory_sha256": "c97bb6ad4ad056fff39b44dc930e1aebe927d3ee15676e587caf148eef08040f",
+  "original_receipts_modified": false,
+  "release_is_historical_fingerprint_identical": false,
+  "release_changes": [
+    "Inactive PConv/Hybrid-TALON implementation branches excluded from four-family registries and associated tests.",
+    "EMCAD restricted source is not bundled; an independent external-source adapter is supplied.",
+    "SAM adaptation notices are added; tensor operations are unchanged.",
+    "Patient data, manifests, split membership, weights, logs, results and caches are excluded.",
+    "A separately named release_evaluate entry point supplies a byte-identical canonical gate alias after original current-source/current-config/all-lock checks. Original receipt validators and historical recovery remain unchanged."
+  ],
+  "copied_or_adapted_sources": [
+    {
+      "path": "binary_study/__init__.py",
+      "original_sha256": "40f6933cb736a91d1ef64216498f97a0feb28b626e25af420603c15b3347d0ec",
+      "release_sha256": "40f6933cb736a91d1ef64216498f97a0feb28b626e25af420603c15b3347d0ec",
+      "byte_identical": true
+    },
+    {
+      "path": "binary_study/models/__init__.py",
+      "original_sha256": "cebe9530252bb8a0b1368a3b3e7da8cc29f9ccf4fbe9947112bfe50629766498",
+      "release_sha256": "276fe8c3cbbd5350c64e98b1c75d89f0873acf3a3d389ac2252b37ef469a8efc",
+      "byte_identical": false
+    },
+    {
+      "path": "binary_study/models/sam2_unet.py",
+      "original_sha256": "6aae4b65f09a03337e4ebc9066a962a71e549e30396afa33fa6acd38ea53f74d",
+      "release_sha256": "edb7b04de2f84760b93fcf9dc621d95fb108e2de7b941460193de4ae010cc385",
+      "byte_identical": false
+    },
+    {
+      "path": "binary_study/models/vendor/__init__.py",
+      "original_sha256": "089d00e08293c24e85349de26284422128acdc78bce0122aaa2a231a63b8eb60",
+      "release_sha256": "089d00e08293c24e85349de26284422128acdc78bce0122aaa2a231a63b8eb60",
+      "byte_identical": true
+    },
+    {
+      "path": "binary_study/models/vendor/emcad_sam/__init__.py",
+      "original_sha256": "1ba049bf262ba9114b8d8270ccb4b422cdb7d0059fd29977c6fe094d97ac7fe3",
+      "release_sha256": "89f42adda9b97d2f00394a06ebb9fafddebd4846bc5970638ec71b0e99a5874e",
+      "byte_identical": false
+    },
+    {
+      "path": "binary_study/models/vendor/emcad_sam/hiera_utils.py",
+      "original_sha256": "84bd48cda1ad468fb8c231d0c2eb83ad53386633d6e63ddaa6ed929c5521bdba",
+      "release_sha256": "c4247ac478e92f51a388ce83a20fec3face7b731b0553269624edec895f74d09",
+      "byte_identical": false
+    },
+    {
+      "path": "binary_study/models/vendor/emcad_sam/hieradet.py",
+      "original_sha256": "4f756428547694599cc01f60c492fc548cc4afb11af0a91e96096524d8680647",
+      "release_sha256": "f5563da957e6bce331d1fde7bb2fd11a2277bdbf5660be67a82ca18d20c4bde6",
+      "byte_identical": false
+    },
+    {
+      "path": "binary_study/models/vendor/emcad_sam/sam2_unet_blocks.py",
+      "original_sha256": "afafd08c34cfb6ae109d24834bfa7d0f89540a39c2ad593dade269019a7ed8d2",
+      "release_sha256": "15bf71fa5f9403cf59f8d5671bbdf18a5b56863f94bc5e3ea997cc30e8bd8a64",
+      "byte_identical": false
+    },
+    {
+      "path": "binary_study/models/vendor/emcad_sam/sam2_utils.py",
+      "original_sha256": "85f5b9474b382b2ee7e87f6f25db0590ba2b2fb7534bc4ace33f6ea9bc65c143",
+      "release_sha256": "86cfd3d0d7cca4dadcade243b6ecad7017f7d66a21167fc6d1e04eba4880d1e5",
+      "byte_identical": false
+    },
+    {
+      "path": "binary_study/models/vendor/emcad_sam/weights.py",
+      "original_sha256": "bce3b73d2a1370e546ceb373462ba402c1c773a022f7f6c37a264d52e013fbe3",
+      "release_sha256": "bce3b73d2a1370e546ceb373462ba402c1c773a022f7f6c37a264d52e013fbe3",
+      "byte_identical": true
+    },
+    {
+      "path": "binary_study/models/vendor/emcad_sam/weights_lock.json",
+      "original_sha256": "0b4b44fcad468a0ccefdb7555fbc5147ed2f55578526f9c24605463334278a1d",
+      "release_sha256": "0b4b44fcad468a0ccefdb7555fbc5147ed2f55578526f9c24605463334278a1d",
+      "byte_identical": true
+    },
+    {
+      "path": "binary_study/models/vit_method2.py",
+      "original_sha256": "3e0a669081313d39edb4891cd958bd5336aff51be75f27c1615f9fc9ebc7da8f",
+      "release_sha256": "a376914fd680443791581130cea78356abc1cd6782edefd1d249830a4479dcfd",
+      "byte_identical": false
+    },
+    {
+      "path": "binary_study/models/yolo_joint.py",
+      "original_sha256": "14b7185dc8a664810d3d7b906b436af82001c4e89766b3e6afe3a051dd5444df",
+      "release_sha256": "14b7185dc8a664810d3d7b906b436af82001c4e89766b3e6afe3a051dd5444df",
+      "byte_identical": true
+    },
+    {
+      "path": "binary_study/requirements-lock.txt",
+      "original_sha256": "311805ecc689b6114393881818546cf526eab3bd05d9de29b63368fe1e47bbf5",
+      "release_sha256": "311805ecc689b6114393881818546cf526eab3bd05d9de29b63368fe1e47bbf5",
+      "byte_identical": true
+    },
+    {
+      "path": "binary_study/requirements.txt",
+      "original_sha256": "fbdebd80ae956051760f67934317142e2be3ab359582f9db29a9cd79296833e0",
+      "release_sha256": "fbdebd80ae956051760f67934317142e2be3ab359582f9db29a9cd79296833e0",
+      "byte_identical": true
+    },
+    {
+      "path": "predicted_roi_study/__init__.py",
+      "original_sha256": "1a67ce63fc2dc47b5cd33d270251937e8a283d4c6907351e2dae4cbe0f3b87a1",
+      "release_sha256": "1a67ce63fc2dc47b5cd33d270251937e8a283d4c6907351e2dae4cbe0f3b87a1",
+      "byte_identical": true
+    },
+    {
+      "path": "predicted_roi_study/__main__.py",
+      "original_sha256": "cb49d5081ca691e7559af773b767276441ca7d1aa275913d0007570edc223ed9",
+      "release_sha256": "cb49d5081ca691e7559af773b767276441ca7d1aa275913d0007570edc223ed9",
+      "byte_identical": true
+    },
+    {
+      "path": "predicted_roi_study/ablations.py",
+      "original_sha256": "791c7218d5522d4b82dd2a764151a314572bad16487f27b06a1dc19784a6b441",
+      "release_sha256": "791c7218d5522d4b82dd2a764151a314572bad16487f27b06a1dc19784a6b441",
+      "byte_identical": true
+    },
+    {
+      "path": "predicted_roi_study/config.py",
+      "original_sha256": "b025ab3a96c0e3478f4095e3ebbe1f57576105c709780ad6e5519040c92fd98d",
+      "release_sha256": "b025ab3a96c0e3478f4095e3ebbe1f57576105c709780ad6e5519040c92fd98d",
+      "byte_identical": true
+    },
+    {
+      "path": "predicted_roi_study/config_strict_roi.json",
+      "original_sha256": "f9ad4cfd5e4222b50dfd91f9084c7ffe4c8ba60f12e8ff54d1d4c623c324c7ad",
+      "release_sha256": "f9ad4cfd5e4222b50dfd91f9084c7ffe4c8ba60f12e8ff54d1d4c623c324c7ad",
+      "byte_identical": true
+    },
+    {
+      "path": "predicted_roi_study/data.py",
+      "original_sha256": "493bc3defbb108993128238448a5c88f357c3e2b61f636a64010739fce23643a",
+      "release_sha256": "493bc3defbb108993128238448a5c88f357c3e2b61f636a64010739fce23643a",
+      "byte_identical": true
+    },
+    {
+      "path": "predicted_roi_study/engine.py",
+      "original_sha256": "a57e4cddb87d03441b79da13b292772592d6d0d492d82b31deedd9932f11a320",
+      "release_sha256": "a57e4cddb87d03441b79da13b292772592d6d0d492d82b31deedd9932f11a320",
+      "byte_identical": true
+    },
+    {
+      "path": "predicted_roi_study/metrics.py",
+      "original_sha256": "f47e0b61e78fd1fb1e9b1b011a01ea6e2b7e8947e7043e7742d3576c996f9b60",
+      "release_sha256": "f47e0b61e78fd1fb1e9b1b011a01ea6e2b7e8947e7043e7742d3576c996f9b60",
+      "byte_identical": true
+    },
+    {
+      "path": "predicted_roi_study/models.py",
+      "original_sha256": "7d8d5e70513592883e15bee077915257316b04041de81c19a2cf59b0ed7ba2b4",
+      "release_sha256": "2b8228a54d6ec707e232f17145430f9ac7811a8a467cc2df5a191b6906029612",
+      "byte_identical": false
+    },
+    {
+      "path": "predicted_roi_study/PROTOCOL.md",
+      "original_sha256": "61f6f6b90d08ee673d590017ec158c6e7a34885fcc1cf954c882dd89318df74e",
+      "release_sha256": "61f6f6b90d08ee673d590017ec158c6e7a34885fcc1cf954c882dd89318df74e",
+      "byte_identical": true
+    },
+    {
+      "path": "predicted_roi_study/protocol.py",
+      "original_sha256": "ca3ec73761f439fee122c68a756b8b2a05289f0a75cfcc2d891ebe3a3041c323",
+      "release_sha256": "ca3ec73761f439fee122c68a756b8b2a05289f0a75cfcc2d891ebe3a3041c323",
+      "byte_identical": true
+    },
+    {
+      "path": "predicted_roi_study/qualitative.py",
+      "original_sha256": "c41df813670d88a9952344ca613ae72e273c2b06bec4fba7d340db6a6a93a620",
+      "release_sha256": "c41df813670d88a9952344ca613ae72e273c2b06bec4fba7d340db6a6a93a620",
+      "byte_identical": true
+    },
+    {
+      "path": "predicted_roi_study/reporting.py",
+      "original_sha256": "cff64bae7acf7d01d25ad38c0747a6937b3e4d072342b7ad38302b31c56ff928",
+      "release_sha256": "cff64bae7acf7d01d25ad38c0747a6937b3e4d072342b7ad38302b31c56ff928",
+      "byte_identical": true
+    },
+    {
+      "path": "predicted_roi_study/resource_reporting.py",
+      "original_sha256": "b604cf1bbb49e348ace0b086d287b94fa7cefb53de6488ca387cf3859aad9e30",
+      "release_sha256": "b604cf1bbb49e348ace0b086d287b94fa7cefb53de6488ca387cf3859aad9e30",
+      "byte_identical": true
+    },
+    {
+      "path": "predicted_roi_study/roi.py",
+      "original_sha256": "d6f6fc8a3eaf7b4096234d087702ff60e19363fb2a8d2d4cbd9d85d885bf5f9b",
+      "release_sha256": "d6f6fc8a3eaf7b4096234d087702ff60e19363fb2a8d2d4cbd9d85d885bf5f9b",
+      "byte_identical": true
+    },
+    {
+      "path": "predicted_roi_study/tests/test_ablations.py",
+      "original_sha256": "a590a62661b4dea4db7decf88a7b78eb0f1ca9a486fe73f6bbdbdeb2245d070a",
+      "release_sha256": "a590a62661b4dea4db7decf88a7b78eb0f1ca9a486fe73f6bbdbdeb2245d070a",
+      "byte_identical": true
+    },
+    {
+      "path": "predicted_roi_study/tests/test_classifier_eligibility.py",
+      "original_sha256": "5172c94c15fedd3cec37256fbd95a009764986358f4b9942a654d61b3d9a21df",
+      "release_sha256": "5172c94c15fedd3cec37256fbd95a009764986358f4b9942a654d61b3d9a21df",
+      "byte_identical": true
+    },
+    {
+      "path": "predicted_roi_study/tests/test_config.py",
+      "original_sha256": "c19b23a4ca30925ab822683150d78624c53a4f339e19d92e465e83a726d44519",
+      "release_sha256": "c19b23a4ca30925ab822683150d78624c53a4f339e19d92e465e83a726d44519",
+      "byte_identical": true
+    },
+    {
+      "path": "predicted_roi_study/tests/test_dual_protocol.py",
+      "original_sha256": "2ccd170badbfeb3a409d9e8d09266ff92d8c19098f8113ba151b11e632c6d871",
+      "release_sha256": "2ccd170badbfeb3a409d9e8d09266ff92d8c19098f8113ba151b11e632c6d871",
+      "byte_identical": true
+    },
+    {
+      "path": "predicted_roi_study/tests/test_engine.py",
+      "original_sha256": "a186b1524bdf64581775eb45ea7c6b3e28db4ef48c554a9e107b29459897a5dd",
+      "release_sha256": "a186b1524bdf64581775eb45ea7c6b3e28db4ef48c554a9e107b29459897a5dd",
+      "byte_identical": true
+    },
+    {
+      "path": "predicted_roi_study/tests/test_metrics.py",
+      "original_sha256": "3fc150914a8ca06de8edf63992e7b2ef7e211a1e21c089fe7de194a29adb9683",
+      "release_sha256": "3fc150914a8ca06de8edf63992e7b2ef7e211a1e21c089fe7de194a29adb9683",
+      "byte_identical": true
+    },
+    {
+      "path": "predicted_roi_study/tests/test_model_specific_classifiers.py",
+      "original_sha256": "d400ae11e61cd155d9ded1cf7db7783324023cde20cbd584a4b40e27a786405b",
+      "release_sha256": "aebe64f1405801985dfabf1002dff4168d8c066055b92dd8f0c001afd94c2790",
+      "byte_identical": false
+    },
+    {
+      "path": "predicted_roi_study/tests/test_qualitative.py",
+      "original_sha256": "a93a1c56f1cae3ce860345edf890009055d6b6c7050adbe3730d07f44910b87f",
+      "release_sha256": "a93a1c56f1cae3ce860345edf890009055d6b6c7050adbe3730d07f44910b87f",
+      "byte_identical": true
+    },
+    {
+      "path": "predicted_roi_study/tests/test_resource_reporting.py",
+      "original_sha256": "5b40c12f11fb9a49245cf10498ee3f27e3b4d821bf8891b07c227ac798e0e68b",
+      "release_sha256": "5b40c12f11fb9a49245cf10498ee3f27e3b4d821bf8891b07c227ac798e0e68b",
+      "byte_identical": true
+    },
+    {
+      "path": "predicted_roi_study/tests/test_roi.py",
+      "original_sha256": "ac93309599fc18c149537edae5752dd2ad6d8c08ec6dda923c3386434cd48794",
+      "release_sha256": "ac93309599fc18c149537edae5752dd2ad6d8c08ec6dda923c3386434cd48794",
+      "byte_identical": true
+    },
+    {
+      "path": "recovery_tests/test_evaluation_gate_path_recovery.py",
+      "original_sha256": "53611fbdb709b8854f39530b4112d910cf976d6b8eb0f900bc596be9c0c91418",
+      "release_sha256": "53611fbdb709b8854f39530b4112d910cf976d6b8eb0f900bc596be9c0c91418",
+      "byte_identical": true
+    },
+    {
+      "path": "scripts/EVALUATION_ONLY_RECOVERY_AMENDMENT_v1_2_0.md",
+      "original_sha256": "8504e8def7bcea257a75f54173baf68a47e045f391bccacf10d0ad2c86e61dde",
+      "release_sha256": "8504e8def7bcea257a75f54173baf68a47e045f391bccacf10d0ad2c86e61dde",
+      "byte_identical": true
+    },
+    {
+      "path": "scripts/monitor_strict_roi_4model.ps1",
+      "original_sha256": "c4de3dd24805b35f8b98aff15f442ec619e2c204ca2aa89bff71a81e1e459cbe",
+      "release_sha256": "c4de3dd24805b35f8b98aff15f442ec619e2c204ca2aa89bff71a81e1e459cbe",
+      "byte_identical": true
+    },
+    {
+      "path": "scripts/preprocess_dataset.py",
+      "original_sha256": "32f585024849cef0e63bf105621dfedc4b0343f3c7c581a05125419adac1bbed",
+      "release_sha256": "32f585024849cef0e63bf105621dfedc4b0343f3c7c581a05125419adac1bbed",
+      "byte_identical": true
+    },
+    {
+      "path": "scripts/recover_strict_roi_evaluation_v1.py",
+      "original_sha256": "9f44841ec34389a0f6ada48004434323a38535e7e8339ba0aa28e344c0668263",
+      "release_sha256": "9f44841ec34389a0f6ada48004434323a38535e7e8339ba0aa28e344c0668263",
+      "byte_identical": true
+    },
+    {
+      "path": "scripts/resume_strict_roi_seed17_when_gpu_free.ps1",
+      "original_sha256": "c971d1f865cdc89146dfd3d1378279da963a37cf8241ff1297e5bf4297269d48",
+      "release_sha256": "c971d1f865cdc89146dfd3d1378279da963a37cf8241ff1297e5bf4297269d48",
+      "byte_identical": true
+    },
+    {
+      "path": "scripts/run_strict_roi_4model_five_seeds.ps1",
+      "original_sha256": "bbba65447af11b2ee207b1c7971530c7322ec1c1cfe0ce724975af7b0f124180",
+      "release_sha256": "bbba65447af11b2ee207b1c7971530c7322ec1c1cfe0ce724975af7b0f124180",
+      "byte_identical": true
+    },
+    {
+      "path": "scripts/run_strict_roi_clean_seed.ps1",
+      "original_sha256": "bdf8b60b77a158ad42ab91e81bf253f2f0fc82c77b0e900d77d991ff8481835c",
+      "release_sha256": "bdf8b60b77a158ad42ab91e81bf253f2f0fc82c77b0e900d77d991ff8481835c",
+      "byte_identical": true
+    },
+    {
+      "path": "scripts/run_strict_roi_seed17.ps1",
+      "original_sha256": "0d100c96b2908430ff4ec88d5b381906f4fe54f165d5506af8a64bbcee3e3592",
+      "release_sha256": "0d100c96b2908430ff4ec88d5b381906f4fe54f165d5506af8a64bbcee3e3592",
+      "byte_identical": true
+    },
+    {
+      "path": "scripts/run_threeclass_roi_4model_five_seeds.ps1",
+      "original_sha256": "e458202eca7816f4838f84ae649cbb9605eea927afaef7764883a2a06ec3dd43",
+      "release_sha256": "e458202eca7816f4838f84ae649cbb9605eea927afaef7764883a2a06ec3dd43",
+      "byte_identical": true
+    },
+    {
+      "path": "threeclass_roi_study/__init__.py",
+      "original_sha256": "1ec7c99f4507f3209f8af90c9da6f22c1c56253d1681eb9e4d89a205b8618d79",
+      "release_sha256": "1ec7c99f4507f3209f8af90c9da6f22c1c56253d1681eb9e4d89a205b8618d79",
+      "byte_identical": true
+    },
+    {
+      "path": "threeclass_roi_study/__main__.py",
+      "original_sha256": "364598d659b593c7754b2e13e833d120e36ead107ccc66d4871b968c68dd5723",
+      "release_sha256": "364598d659b593c7754b2e13e833d120e36ead107ccc66d4871b968c68dd5723",
+      "byte_identical": true
+    },
+    {
+      "path": "threeclass_roi_study/config.py",
+      "original_sha256": "97498d6a62ae8d755fea6b2f4bf95341ec1b77ae687309c82b616e4f31771ab8",
+      "release_sha256": "97498d6a62ae8d755fea6b2f4bf95341ec1b77ae687309c82b616e4f31771ab8",
+      "byte_identical": true
+    },
+    {
+      "path": "threeclass_roi_study/config_threeclass_roi.json",
+      "original_sha256": "f71eb141954903c427704c73a94b9a4fdb5cd2f714601cabf4b1e9083449d29b",
+      "release_sha256": "f71eb141954903c427704c73a94b9a4fdb5cd2f714601cabf4b1e9083449d29b",
+      "byte_identical": true
+    },
+    {
+      "path": "threeclass_roi_study/data.py",
+      "original_sha256": "9954127ac8c6d66c95a34d07dc6efc63dc2f0e8d19db0917325c1a0943792fea",
+      "release_sha256": "9954127ac8c6d66c95a34d07dc6efc63dc2f0e8d19db0917325c1a0943792fea",
+      "byte_identical": true
+    },
+    {
+      "path": "threeclass_roi_study/engine.py",
+      "original_sha256": "980e9aad7aed8c764efd800ec37e3e99ccff08a4e2e2fb517a6e35dc527c2616",
+      "release_sha256": "980e9aad7aed8c764efd800ec37e3e99ccff08a4e2e2fb517a6e35dc527c2616",
+      "byte_identical": true
+    },
+    {
+      "path": "threeclass_roi_study/metrics.py",
+      "original_sha256": "55b8a74b6158fe85399ef6c649457b786f9fa01bcb84b43b45346791d68506f1",
+      "release_sha256": "55b8a74b6158fe85399ef6c649457b786f9fa01bcb84b43b45346791d68506f1",
+      "byte_identical": true
+    },
+    {
+      "path": "threeclass_roi_study/models.py",
+      "original_sha256": "8c9c90b89c74b7191706707886a93a1919ef1bd2b2266541b8e567981725b777",
+      "release_sha256": "8c9c90b89c74b7191706707886a93a1919ef1bd2b2266541b8e567981725b777",
+      "byte_identical": true
+    },
+    {
+      "path": "threeclass_roi_study/PROTOCOL.md",
+      "original_sha256": "507f35ff707895155aca6ac490094e43078e3f3d38aff6878365159674407945",
+      "release_sha256": "507f35ff707895155aca6ac490094e43078e3f3d38aff6878365159674407945",
+      "byte_identical": true
+    },
+    {
+      "path": "threeclass_roi_study/protocol.py",
+      "original_sha256": "076c997070ca6ad9e642fe1f7a28e1d3fdac42166825f2b898b73a0736d021ac",
+      "release_sha256": "076c997070ca6ad9e642fe1f7a28e1d3fdac42166825f2b898b73a0736d021ac",
+      "byte_identical": true
+    },
+    {
+      "path": "threeclass_roi_study/publication_exports.py",
+      "original_sha256": "d5114722935d7c75596f13872b51df864a60c5ca300f476b96e52b6cbf24befb",
+      "release_sha256": "d5114722935d7c75596f13872b51df864a60c5ca300f476b96e52b6cbf24befb",
+      "byte_identical": true
+    },
+    {
+      "path": "threeclass_roi_study/publication_figures.py",
+      "original_sha256": "c0997dface63fc02a42554769d940a5c987f9972def4aa22e675680d5ce6b2d9",
+      "release_sha256": "c0997dface63fc02a42554769d940a5c987f9972def4aa22e675680d5ce6b2d9",
+      "byte_identical": true
+    },
+    {
+      "path": "threeclass_roi_study/reporting.py",
+      "original_sha256": "c252fde8ede5bdd09ba089c7d3932195c563a3aad5dbaa3168867aea7aeaf118",
+      "release_sha256": "c252fde8ede5bdd09ba089c7d3932195c563a3aad5dbaa3168867aea7aeaf118",
+      "byte_identical": true
+    },
+    {
+      "path": "threeclass_roi_study/tests/test_cli.py",
+      "original_sha256": "ca7a544aac19c292775f37f1e12a46cec9bc0d1d9f2114c61b1e0877e7a03c07",
+      "release_sha256": "ca7a544aac19c292775f37f1e12a46cec9bc0d1d9f2114c61b1e0877e7a03c07",
+      "byte_identical": true
+    },
+    {
+      "path": "threeclass_roi_study/tests/test_config_protocol_reporting.py",
+      "original_sha256": "f2bc1a7599ac307bb8833d8ef1fdf3fb1d42d5838ebee5754526a731abd055f4",
+      "release_sha256": "f2bc1a7599ac307bb8833d8ef1fdf3fb1d42d5838ebee5754526a731abd055f4",
+      "byte_identical": true
+    },
+    {
+      "path": "threeclass_roi_study/tests/test_data_models.py",
+      "original_sha256": "17e5cdf8ad1d138fa7ea02912ad76afcab6a2251a69f1a88690034dae6ab68e9",
+      "release_sha256": "17e5cdf8ad1d138fa7ea02912ad76afcab6a2251a69f1a88690034dae6ab68e9",
+      "byte_identical": true
+    },
+    {
+      "path": "threeclass_roi_study/tests/test_engine_integrity.py",
+      "original_sha256": "6980f730b7a7e5049ca1e68dc86396dcbd33ef72e490f82ed0e09709112b0d9c",
+      "release_sha256": "6980f730b7a7e5049ca1e68dc86396dcbd33ef72e490f82ed0e09709112b0d9c",
+      "byte_identical": true
+    },
+    {
+      "path": "threeclass_roi_study/tests/test_engine_primary_statistics.py",
+      "original_sha256": "458816d5c21b6e61f834e2b8975c67a5dce5dcc30b6ab0a56917f6ca52947104",
+      "release_sha256": "458816d5c21b6e61f834e2b8975c67a5dce5dcc30b6ab0a56917f6ca52947104",
+      "byte_identical": true
+    },
+    {
+      "path": "threeclass_roi_study/tests/test_metrics.py",
+      "original_sha256": "25f5ac6f0a02ee61f6177c92b454fdcca63c14401cc1834d8509bf4eb25c4512",
+      "release_sha256": "25f5ac6f0a02ee61f6177c92b454fdcca63c14401cc1834d8509bf4eb25c4512",
+      "byte_identical": true
+    },
+    {
+      "path": "threeclass_roi_study/tests/test_publication_exports.py",
+      "original_sha256": "1df10f8e7010bb891d3c263b98f2725c8b165cb437542768de7f85f1cd29d149",
+      "release_sha256": "1df10f8e7010bb891d3c263b98f2725c8b165cb437542768de7f85f1cd29d149",
+      "byte_identical": true
+    },
+    {
+      "path": "threeclass_roi_study/tests/test_publication_figures.py",
+      "original_sha256": "45ac5aba6984d32ab05619516a7c69abf358ca2b1f2a8a77801a9fa5c0337dbd",
+      "release_sha256": "45ac5aba6984d32ab05619516a7c69abf358ca2b1f2a8a77801a9fa5c0337dbd",
+      "byte_identical": true
+    }
+  ],
+  "root_requirements": [
+    {
+      "path": "requirements.txt",
+      "original_path": "binary_study/requirements.txt",
+      "sha256": "fbdebd80ae956051760f67934317142e2be3ab359582f9db29a9cd79296833e0",
+      "byte_identical": true
+    },
+    {
+      "path": "requirements-lock.txt",
+      "original_path": "binary_study/requirements-lock.txt",
+      "sha256": "311805ecc689b6114393881818546cf526eab3bd05d9de29b63368fe1e47bbf5",
+      "byte_identical": true
+    }
+  ],
+  "new_release_files": [
+    {
+      "path": "binary_study/models/emcad_external.py",
+      "release_sha256": "25dc2a0f5016fd15c8d308e988ecbe5015ae509c2275fb42fdd438a684a67afe"
+    },
+    {
+      "path": "binary_study/models/emcad_joint.py",
+      "release_sha256": "11130a100e2e38fd7a247a5174f4fdd11584a8d3e999aabfafe71706820e8928"
+    },
+    {
+      "path": "predicted_roi_study/release_evaluate.py",
+      "release_sha256": "aaf8ead57aa65757efdc82d646182789aeec62ad672ef9333da7588c9b3da1e7"
+    },
+    {
+      "path": "predicted_roi_study/tests/test_external_emcad_release.py",
+      "release_sha256": "16505c5abf3b1ed6b79462b3924c9324e6b380c6641f75b13cd482f11857f75f"
+    },
+    {
+      "path": "predicted_roi_study/tests/test_release_evaluation_gate.py",
+      "release_sha256": "7546fe955a9cf182d6a47f7476160083d4d7f84fdf1ddb358a503040c2d7c546"
+    },
+    {
+      "path": "docs/EXPERIMENTS.md",
+      "release_sha256": "b1e55313d1c959598f45011a7916fc08a13cff7d960280587285dfe69313c112"
+    }
+  ],
+  "independent_emcad_adapter": {
+    "release_path": "binary_study/models/emcad_joint.py",
+    "original_corresponding_path": "binary_study/models/emcad_joint.py",
+    "original_sha256": "ca9f47e7f4aafe8df48633c4e30a365c0d3200dece6ae3ea846aa33bb82cb369",
+    "release_sha256": "11130a100e2e38fd7a247a5174f4fdd11584a8d3e999aabfafe71706820e8928",
+    "classification": "independently authored interface-compatible release adapter; original wrapper not bundled"
+  },
+  "current_release_binary_code_fingerprint": "a819169a32ddaab693f5767e8657f15da8de239c6bc8a417cdd29ad0c29b35fd",
+  "original_attested_sources_verified_unchanged": {
+    "binary_source_count": 73,
+    "threeclass_source_count": 11,
+    "status": "passed"
+  }
+}

@@ -1,0 +1,69 @@
+[
+  {
+    "original_source": "publication_revision_20260926/classification/build_classification_figures.py",
+    "original_sha256": "7834d9a41ece54e1c763af65c94236b39884884f4c907d38138b4c210516020f",
+    "packaged_source": "original_generators/classification.py",
+    "packaged_sha256": "3cfa8d47d766b7551263d77910908241bec91096b2aff44910fede7a4145c775",
+    "adaptation": "Runtime paths parameterized; historical data dependencies preserved; .figure_deps path removed. Run through publication CLI."
+  },
+  {
+    "original_source": "publication_revision_20260926_v3/classification/build_classification_figures.py",
+    "original_sha256": "c8b53502c287dbf900fe629488e4e24209e7a29a67ad27514730ad3b1489c061",
+    "packaged_source": "original_generators/classification_eye_validator.py",
+    "packaged_sha256": "19df34896e09d7b78a1e71817a815b5e1fb7627ccbfdc2785dcc6e6c582a6994",
+    "adaptation": "Runtime paths parameterized; historical data dependencies preserved; .figure_deps path removed. Run through publication CLI."
+  },
+  {
+    "original_source": "publication_revision_20260926_restored_complete/classification_eye/build_eye_confusions.py",
+    "original_sha256": "c5e0a9b7a8cc1e3977806a96a2c2df4d70e75862d1f2e3219adf99b9d8ce47d9",
+    "packaged_source": "original_generators/restored_eye_confusions.py",
+    "packaged_sha256": "098975e90eb165f40a341e6104fe85fa9db6ceeb86e67c74d24123ea585df6aa",
+    "adaptation": "Runtime paths parameterized; historical data dependencies preserved; .figure_deps path removed. Run through publication CLI."
+  },
+  {
+    "original_source": "publication_revision_20260926/segmentation_metrics/build_segmentation_figures.py",
+    "original_sha256": "7139933175b25401cbe933fb791f56c796175f3f06817a12bb78a0cbbdda8cdc",
+    "packaged_source": "original_generators/segmentation_metrics.py",
+    "packaged_sha256": "5e27ac19cea92b7ec9962ce95f32369580e3b4fc082ec304676431595ee9a82c",
+    "adaptation": "Runtime paths parameterized; historical data dependencies preserved; .figure_deps path removed. Run through publication CLI."
+  },
+  {
+    "original_source": "publication_revision_20260926/segmentation/build_segmentation_panels.py",
+    "original_sha256": "5cd96d5ee216fadf0b7e614b410a2af9ee7cf39e2009fa88c72fcc25fb0a4ed3",
+    "packaged_source": "original_generators/qualitative.py",
+    "packaged_sha256": "f3bfceece1ef85a492ed1240a77806f7e68e4691c08537f809e91d63eece4811",
+    "adaptation": "Runtime paths parameterized; historical data dependencies preserved; .figure_deps path removed. Run through publication CLI."
+  },
+  {
+    "original_source": "methods_audit_20260925/build_flowchart_2_visual.py",
+    "original_sha256": "727b202e6aeb05ea8813919cc5e9a16a11485fa92fc59813da92a3364c444ad9",
+    "packaged_source": "original_generators/methods_flowchart.py",
+    "packaged_sha256": "9fae05229cf34963bb268e9784c0f6365745b6ce550485cdcd99789db02f9702",
+    "adaptation": "Runtime paths parameterized; historical data dependencies preserved; .figure_deps path removed. Run through publication CLI."
+  },
+  {
+    "original_source": "publication_complete_supplements_20260928/work/build_binary_supp_figures.py",
+    "original_sha256": "09b6c3317a7dc9945fc0e53a20914ab9c613c1139b427e2d183bde88c0faa727",
+    "packaged_source": "original_generators/binary_curves.py",
+    "packaged_sha256": "44134a1b0f9aba73cd30871f648505b0d08dc26cbdf26d151a36c4b26f5dff7a",
+    "adaptation": "Runtime paths parameterized; historical data dependencies preserved; .figure_deps path removed. Run through publication CLI."
+  },
+  {
+    "original_source": "threeclass_q1_manuscript_20260922/build_manuscript.py",
+    "original_sha256": "a7c1e3bfb4ec1ee089e4f75b567c4ee079025e26c2bfb2eeac219a90cd91fe62",
+    "packaged_source": "original_generators/legacy_summaries.py",
+    "packaged_sha256": "0f5d509160ac7350ca13d0ca3653601d74a3f71a57a4904f4ffb2da8ab977d28",
+    "adaptation": "Exact figure/helper function extraction only; historical manuscript prose and all document-building functions excluded; local font paths parameterized.",
+    "functions": [
+      "binary_eye_figure",
+      "bms",
+      "bseg",
+      "bseg_level",
+      "bv",
+      "ms",
+      "segmentation_overall_figure",
+      "threeclass_patient_figure",
+      "v"
+    ]
+  }
+]

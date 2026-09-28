@@ -1,0 +1,26 @@
+{
+  "release": "1.0.0",
+  "checked_on": "2026-09-28",
+  "status": "passed",
+  "scope": "Local source distribution and aggregate publication reproduction",
+  "core_selected_synthetic_tests_passed": 129,
+  "core_details": "core_verification.json",
+  "publication_details": "../publication/provenance/release_checks.json",
+  "public_figure_pngs_identical_to_manuscript_assets": 62,
+  "public_table_records_per_edition": 30,
+  "authorized_local_full_table_export_per_edition": 31,
+  "aggregate_csv_files": 24,
+  "editions_verified": [3000, 5000],
+  "citation_author_count": 13,
+  "citation_author_order_checked": true,
+  "source_protocol_jsons_byte_identical": true,
+  "historical_attested_sources_unchanged": true,
+  "data_boundary_checks": {
+    "aggregate_column_and_value_checks": "passed",
+    "clinical_image_and_checkpoint_exclusion": "passed",
+    "personal_path_and_credential_pattern_scan": "passed",
+    "clinical_source_table_local_input_boundary": "passed",
+    "third_party_source_acquisition_boundary": "passed"
+  },
+  "integrity_command": "python tools/verify_release.py"
+}

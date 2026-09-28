@@ -1,0 +1,12 @@
+{
+  "emcad_joint": {
+    "url": "https://github.com/whai362/PVT/releases/download/v2/pvt_v2_b0.pth",
+    "sha256": "fbb931ad59ab4d64e3f4370991326803e3af882fcaa877b81550d368d1fbab1f",
+    "bytes": 14693066
+  },
+  "sam2_unet": {
+    "url": "https://dl.fbaipublicfiles.com/segment_anything_2/072824/sam2_hiera_tiny.pt",
+    "sha256": "65b50056e05bcb13694174f51bb6da89c894b57b75ccdf0ba6352c597c5d1125",
+    "bytes": 155906050
+  }
+}

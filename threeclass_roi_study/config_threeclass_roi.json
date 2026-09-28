@@ -1,0 +1,368 @@
+{
+  "schema_version": 1,
+  "study_id": "strict_predicted_roi_threeclass_4model_v1_0_0",
+  "protocol_version": "1.0.0",
+  "task": "three_class_classification",
+  "study_design": "frozen_upstream_strict_predicted_roi_extension",
+  "analysis_status": "exploratory_post_hoc_internal",
+  "output": "threeclass_roi_results_4model_v1_0_0",
+  "classes": {
+    "order": [0, 1, 2],
+    "names": {
+      "0": "normal",
+      "1": "papilledema",
+      "2": "pseudopapilledema"
+    },
+    "classifier_outputs": 3,
+    "decision_rule": "argmax_of_calibrated_probability_vector"
+  },
+  "models": [
+    "yolo26",
+    "vit_method2",
+    "emcad",
+    "sam2_unet"
+  ],
+  "split_seeds": [17, 42, 2026, 3407, 9103],
+  "dataset": {
+    "root": "çalışma_ds",
+    "manifest": "çalışma_ds/manifest.csv",
+    "manifest_sha256": "4efe349f7f3a5a7eda430251592526311df3b644a02139afb8c423b256668b48",
+    "patients": 91,
+    "eyes": 182,
+    "frames": 1274,
+    "frames_per_eye": 7,
+    "eyes_per_patient": 2,
+    "patient_counts_by_class": {
+      "0": 48,
+      "1": 21,
+      "2": 22
+    },
+    "reference_standard": "locked_patient_level_clinical_diagnosis_and_locked_anatomical_roi_masks",
+    "reference_standard_terminology": "CLAIM_2024_reference_standard_not_ground_truth"
+  },
+  "split_policy": {
+    "unit": "patient",
+    "stratify_by": "label_3class",
+    "reuse_exact_binary_study_memberships": true,
+    "regenerate": false,
+    "both_eyes_and_all_frames_same_partition": true,
+    "class_quotas_train_validation_test": {
+      "0": [28, 10, 10],
+      "1": [13, 4, 4],
+      "2": [14, 4, 4]
+    },
+    "sources": {
+      "17": {
+        "path": "strict_roi_results_4model_v1_2_0/splits/seed_17_patients.csv",
+        "sha256": "0d62e5f7360620fe4a634a4596acab5ca72f9137db88a9c92ff16669b3d67a3d"
+      },
+      "42": {
+        "path": "strict_roi_results_4model_v1_2_0/splits/seed_42_patients.csv",
+        "sha256": "3df9deee3dad6b57a701ad9f055c6427bf63262c411507dcbe465df557bb2cdd"
+      },
+      "2026": {
+        "path": "strict_roi_results_4model_v1_2_0/splits/seed_2026_patients.csv",
+        "sha256": "426b8f7cd2c6bdb466b751ae29260ee4d7436cdd562224ba4fe9dee82463c792"
+      },
+      "3407": {
+        "path": "strict_roi_results_4model_v1_2_0/splits/seed_3407_patients.csv",
+        "sha256": "e4c2ff1b2e4ee106d2cc8e811dd3db46d333a6c69ca8dcf28dbf29fb9616a0f5"
+      },
+      "9103": {
+        "path": "strict_roi_results_4model_v1_2_0/splits/seed_9103_patients.csv",
+        "sha256": "6545232811a92276c600d27bb6bb33bca705df3329e9d8bd9b0b1feea13a1175"
+      }
+    },
+    "leakage_checks": [
+      "no_patient_overlap_within_seed",
+      "both_eyes_and_all_frames_same_partition",
+      "consistent_patient_labels",
+      "exact_cross_patient_image_duplicates",
+      "perceptual_near_duplicate_audit",
+      "seven_unique_frames_per_eye"
+    ]
+  },
+  "frozen_upstream": {
+    "source_study_id": "strict_predicted_roi_binary_4model_v1_2_0_clean",
+    "source_output": "strict_roi_results_4model_v1_2_0",
+    "source_protocol_version": "1.2.0",
+    "mode": "immutable_import_by_sha256_receipt",
+    "segmenter_training_was_classification_label_blind": true,
+    "classifier_loss_during_segmenter_training": 0.0,
+    "segmenter_and_roi_parameters_frozen": true,
+    "allow_retraining_or_retuning_upstream": false,
+    "allow_binary_classifier_artifacts": false,
+    "allow_binary_logits_probabilities_thresholds_or_calibrators": false,
+    "development_import_roles": [
+      "source_build_roi_receipt",
+      "source_segmenter_lock",
+      "source_segmenter_checkpoint",
+      "train_oof_roi_index",
+      "validation_roi_index"
+    ],
+    "deferred_test_import_roles": [
+      "source_evaluate_receipt",
+      "test_roi_index"
+    ],
+    "test_artifacts_deferred_until_global_lock": true,
+    "source_anchors": {
+      "prepare_receipt": {
+        "path": "strict_roi_results_4model_v1_2_0/state/receipts/prepare.json",
+        "sha256": "123d49d14a261baa8fef6b4d757e4f69baf01527e20a447f8e944ff50d572006"
+      },
+      "source_config_snapshot": {
+        "path": "strict_roi_results_4model_v1_2_0/provenance/config_strict_roi.snapshot.json",
+        "sha256": "f9ad4cfd5e4222b50dfd91f9084c7ffe4c8ba60f12e8ff54d1d4c623c324c7ad"
+      },
+      "source_protocol_snapshot": {
+        "path": "strict_roi_results_4model_v1_2_0/provenance/PROTOCOL.snapshot.md",
+        "sha256": "61f6f6b90d08ee673d590017ec158c6e7a34885fcc1cf954c882dd89318df74e"
+      },
+      "source_test_access_sentinel": {
+        "path": "strict_roi_results_4model_v1_2_0/state/test_access_opened.json",
+        "sha256": "4fb2bb8f298e4fa131d848c72db8e3b6fc0e533f478e37e8d30bde3b33c18bdd"
+      }
+    },
+    "development_artifact_patterns": {
+      "source_build_roi_receipt": "strict_roi_results_4model_v1_2_0/state/receipts/build-rois/{model}/seed_{seed}.json",
+      "source_segmenter_lock": "strict_roi_results_4model_v1_2_0/runs/{model}/seed_{seed}/segmenter/segmenter_lock.json",
+      "source_segmenter_checkpoint": "strict_roi_results_4model_v1_2_0/runs/{model}/seed_{seed}/segmenter/selected.pt",
+      "train_oof_roi_index": "strict_roi_results_4model_v1_2_0/runs/{model}/seed_{seed}/roi/train_oof_index.csv",
+      "validation_roi_index": "strict_roi_results_4model_v1_2_0/runs/{model}/seed_{seed}/roi/validation/index.csv"
+    },
+    "deferred_test_artifact_patterns": {
+      "source_evaluate_receipt": "strict_roi_results_4model_v1_2_0/state/receipts/evaluate/{model}/seed_{seed}.json",
+      "test_roi_index": "strict_roi_results_4model_v1_2_0/runs/{model}/seed_{seed}/evaluation/test_rois/index.csv"
+    },
+    "required_development_import_receipts": 20,
+    "required_deferred_test_import_receipts": 20
+  },
+  "prior_test_use": {
+    "source_binary_test_was_opened": true,
+    "source_binary_results_were_examined": true,
+    "same_patient_memberships_are_reused": true,
+    "test_open_sentinel": "strict_roi_results_4model_v1_2_0/state/test_access_opened.json",
+    "required_disclosure": "The same internal patient holdouts were previously opened and analysed for the binary normal-versus-disease study; this three-class extension is therefore exploratory, post-hoc, and not an independent internal or external validation.",
+    "confirmatory_claim_allowed": false,
+    "required_confirmatory_evaluation": "locked_one_time_evaluation_in_a_never_seen_temporal_or_external_patient_cohort"
+  },
+  "classifier": {
+    "strategy_order": [
+      "model_specific",
+      "standardized_resnet18"
+    ],
+    "primary_strategy": "model_specific",
+    "secondary_strategy": "standardized_resnet18",
+    "formulation": "direct_flat_three_class_softmax",
+    "classes": 3,
+    "replace_binary_head": true,
+    "reuse_binary_head": false,
+    "reuse_binary_threshold_or_calibrator": false,
+    "input": "frozen_strict_predicted_roi",
+    "loss": "patient_class_balanced_cross_entropy",
+    "loss_weighting": "equal_total_weight_per_patient_within_each_class",
+    "optimizer": "adamw",
+    "scheduler": "cosine_annealing",
+    "maximum_epochs": 60,
+    "patience": 10,
+    "early_stopping_monitor": "validation_patient_macro_nll",
+    "early_stopping_tie_breaker": "validation_patient_failure_aware_balanced_accuracy",
+    "test_used_for_training_selection_or_stopping": false,
+    "model_specific_architecture_by_segmenter": {
+      "yolo26": "yolo26s_roi_classifier_three_logit",
+      "vit_method2": "vit_method2_roi_classifier_three_logit",
+      "emcad": "pvt_v2_b0_roi_classifier_three_logit",
+      "sam2_unet": "sam2_hiera_tiny_roi_classifier_three_logit"
+    },
+    "standardized_architecture": "torchvision_resnet18_three_logit",
+    "expected_fits": {
+      "model_specific": 20,
+      "standardized_resnet18": 20,
+      "total": 40
+    },
+    "initialization_by_segmenter": {
+      "yolo26": {
+        "pretrained": true,
+        "checkpoint": "binary_study/models/vendor/yolo26_sources/weights/yolo26s-seg.pt",
+        "sha256": "3da1d83e31caec96f9300eb4064f4f62882c133c7c264d63dfe61a7c197837a4",
+        "source": "https://github.com/ultralytics/assets/releases/download/v8.4.0/yolo26s-seg.pt",
+        "network_download_during_run": false
+      },
+      "vit_method2": {
+        "pretrained": false,
+        "checkpoint": null,
+        "sha256": null,
+        "source": "random_initialization_no_compatible_locked_checkpoint",
+        "network_download_during_run": false
+      },
+      "emcad": {
+        "pretrained": true,
+        "checkpoint": "binary_study/weights/emcad_joint/pvt_v2_b0.pth",
+        "sha256": "fbb931ad59ab4d64e3f4370991326803e3af882fcaa877b81550d368d1fbab1f",
+        "source": "https://github.com/whai362/PVT/releases/download/v2/pvt_v2_b0.pth",
+        "network_download_during_run": false
+      },
+      "sam2_unet": {
+        "pretrained": true,
+        "checkpoint": "binary_study/weights/sam2_unet/sam2_hiera_tiny.pt",
+        "sha256": "65b50056e05bcb13694174f51bb6da89c894b57b75ccdf0ba6352c597c5d1125",
+        "source": "https://dl.fbaipublicfiles.com/segment_anything_2/072824/sam2_hiera_tiny.pt",
+        "network_download_during_run": false
+      }
+    },
+    "standardized_initialization": {
+      "pretrained": true,
+      "checkpoint": "predicted_roi_study/weights/resnet18-f37072fd.pth",
+      "sha256": "f37072fd47e89c5e827621c5baffa7500819f7896bbacec160b1a16c560e07ec",
+      "source": "https://download.pytorch.org/models/resnet18-f37072fd.pth",
+      "network_download_during_run": false
+    }
+  },
+  "training": {
+    "learning_rate": 0.0001,
+    "weight_decay": 0.0001,
+    "batch_size": 16,
+    "gradient_accumulation": 1,
+    "gradient_clip": 1.0,
+    "amp": true,
+    "amp_dtype": "bfloat16",
+    "num_workers": 0,
+    "deterministic_algorithms_warn_only": false,
+    "augmentation": {
+      "rotation_degrees": 7.0,
+      "translation_fraction": 0.03,
+      "scale": [0.95, 1.05],
+      "brightness": [0.9, 1.1],
+      "flips": false,
+      "apply_same_spatial_transform_to_image_and_mask": true,
+      "classifier_augmentation_occurs_after_strict_masking": true
+    },
+    "seed_offsets": {
+      "classifier": 40000,
+      "augmentation": 20000,
+      "bootstrap": 50000,
+      "standardized_resnet18": 500009
+    }
+  },
+  "aggregation": {
+    "frame_output": "three_class_probability_vector",
+    "frame_to_eye": "arithmetic_mean_of_valid_frame_probability_vectors",
+    "minimum_valid_frames_per_eye": 4,
+    "insufficient_frames": "abstain_eye",
+    "eye_to_patient": "arithmetic_mean_of_right_and_left_eye_probability_vectors",
+    "require_both_eyes": true,
+    "insufficient_eyes": "abstain_patient",
+    "primary_prediction_level": "patient",
+    "eye_level_role": "mandatory_secondary"
+  },
+  "calibration": {
+    "method": "single_scalar_temperature_scaling",
+    "fit_partition": "validation",
+    "fit_after_level_specific_aggregation": true,
+    "fit_separately_per_model_seed_strategy_level": true,
+    "levels": ["eye", "patient"],
+    "selection_loss": "multiclass_nll",
+    "report_raw_and_calibrated": true,
+    "vector_or_dirichlet_calibration_allowed": false,
+    "test_refitting": false,
+    "undefined_fit_policy": "fail_closed_before_global_test_access_without_default_temperature"
+  },
+  "abstention": {
+    "primary_policy": "structural_roi_gate_only",
+    "structural_failures": [
+      "insufficient_valid_frames",
+      "missing_or_abstained_eye"
+    ],
+    "classification_uncertainty_policy": "prespecified_secondary_only",
+    "secondary_score": "maximum_calibrated_patient_probability",
+    "secondary_threshold_source": "validation_only",
+    "test_threshold_tuning": false,
+    "failure_aware_metrics_count_abstention_as_incorrect": true
+  },
+  "evaluation": {
+    "primary_estimand": {
+      "unit": "patient",
+      "population": "all_intended_held_out_test_patients_including_abstentions",
+      "endpoint": "three_class_failure_aware_balanced_accuracy",
+      "definition": "mean_of_the_three_class_recalls_with_abstentions_counted_as_errors",
+      "confusion_matrix": "three_true_classes_by_normal_papilledema_pseudopapilledema_abstain"
+    },
+    "mandatory_secondary_endpoints": [
+      "overall_and_class_conditional_coverage",
+      "conditional_three_class_balanced_accuracy",
+      "per_class_recall_precision_and_f1",
+      "macro_f1",
+      "multiclass_mcc",
+      "one_vs_rest_auroc_and_average_precision",
+      "macro_auroc_and_average_precision",
+      "normal_vs_abnormal_discrimination",
+      "papilledema_vs_pseudopapilledema_discrimination_among_disease_patients",
+      "multiclass_nll",
+      "multiclass_brier_score",
+      "classwise_and_top_label_ece",
+      "risk_coverage_curve_and_aurc",
+      "localized_diagnostic_success",
+      "eye_level_supportive_results",
+      "class_conditional_segmentation_coverage_dice_and_failure_reasons"
+    ],
+    "localized_success": {
+      "enabled": true,
+      "definition": "correct_three_class_classification_and_source_locked_gt_roi_hit_in_at_least_four_of_seven_frames_per_eye_in_both_eyes",
+      "frame_hit_source": "immutable_source_evaluation_roi_hit",
+      "frame_hit_iou_threshold": 0.5,
+      "minimum_hit_frames_per_eye": 4,
+      "require_both_eyes": true,
+      "gt_used_for_retrospective_evaluation_only": true,
+      "gt_used_for_inference_selection_or_abstention": false
+    },
+    "test_selection_or_refitting": false
+  },
+  "statistics": {
+    "confidence_level": 0.95,
+    "bootstrap_draws": 5000,
+    "bootstrap_unit": "patient",
+    "bootstrap_stratify_by_class": true,
+    "paired_model_comparisons": true,
+    "paired_comparison_unit": "same_seed_same_patient",
+    "paired_comparison_count": 30,
+    "paired_interval_method": "class_stratified_patient_level_bca_bootstrap",
+    "paired_test_method": "whole_patient_sign_flip_randomization_two_sided",
+    "multiplicity_correction": "holm_across_all_30_seed_specific_primary_model_pair_tests",
+    "report_each_seed": true,
+    "five_seed_summary": "arithmetic_mean_and_sample_standard_deviation_descriptive_only",
+    "overlapping_seed_holdouts_treated_as_independent": false,
+    "effect_sizes_and_confidence_intervals_required": true,
+    "small_test_class_warning": "Each seed has only four papilledema and four pseudopapilledema test patients; one error changes class recall by 25 percentage points."
+  },
+  "test_access": {
+    "global_gate": true,
+    "required_development_import_receipts": 20,
+    "required_validation_locks": 40,
+    "validation_locks_per_model_seed": 2,
+    "require_all_locks_before_any_test_artifact_read": true,
+    "deferred_test_artifacts_may_be_read_only_after_sentinel": true,
+    "allow_test_hyperparameter_threshold_calibration_or_model_selection": false,
+    "sentinel": "state/test_access_opened.json",
+    "sentinel_requires_prior_use_disclosure": true
+  },
+  "reporting": {
+    "frameworks": {
+      "claim": "CLAIM_2024_Update",
+      "tripod": "TRIPOD_plus_AI_2024"
+    },
+    "terminology": {
+      "validation_partition": "tuning_partition",
+      "held_out_test": "internal_testing",
+      "ground_truth": "reference_standard"
+    },
+    "q1_metadata_schema_version": "1.0.0",
+    "output_schema_version": "1.0.0",
+    "patient_level_primary_table_required": true,
+    "three_by_four_failure_aware_confusion_required": true,
+    "class_conditional_segmentation_table_required": true,
+    "calibration_and_selective_prediction_outputs_required": true,
+    "prior_test_use_disclosure_required": true,
+    "external_validation_status_required": true,
+    "demographic_metadata_status": "unavailable_in_locked_manifest_and_must_be_reported_as_a_limitation"
+  }
+}
