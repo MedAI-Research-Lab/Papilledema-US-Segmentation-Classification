@@ -60,13 +60,6 @@ python -m publication.tables --edition 5000 --output outputs/tables_5000
 
 Numerical figure replay uses `python -m publication.reproduce` with the locally installed fonts and renderer paths specified in the publication guide. This command reproduces 62 nonclinical figure panels; the six qualitative ultrasound panels use the separate private-input command.
 
-## Verification
-
-The package includes synthetic tests for metric calculations, ROI handling and protocol behavior. Archive-backed integration tests use the original controlled study inputs. Release checks cover source syntax, selected synthetic tests, aggregate-data schemas, table counts, figure outputs and public-file integrity. See the release verification record in `provenance/`.
-
-```bash
-python tools/verify_release.py
-```
 
 ## Citation
 
