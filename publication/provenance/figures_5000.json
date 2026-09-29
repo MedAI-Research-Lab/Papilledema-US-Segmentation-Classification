@@ -578,7 +578,7 @@
   {
     "section": "supplement",
     "caption": "Supplementary Figure S13. Three-class patient selective risk–coverage curves. Part 1 of 4.",
-    "note": "Note. YOLO26 patient-level selective risk–coverage for the three-class task. Patients are ranked within seed by maximum calibrated class probability. Structural abstentions are appended at lowest confidence and count as errors; coverage divides retained patients by all intended patients. Risk is the overall three-class error rate, not a class-specific error rate. All five seed traces remain separate; terminal risk equals one minus failure-aware accuracy.",
+    "note": "Note. YOLO26 patient-level selective risk–coverage for the three-class task. Patients are ranked within seed by maximum calibrated class probability. Structural abstentions are appended at lowest confidence and count as errors; The horizontal coordinate is the included rank divided by all intended patients; after structural abstentions are appended, it is an accounting fraction rather than attainable prediction coverage.. Risk is the overall three-class error rate, not a class-specific error rate. All five seed traces remain separate; terminal risk equals one minus failure-aware accuracy.",
     "original_file": "supp_threeclass_risk_coverage_yolo26.png",
     "sha256": "b3619ccf7b053f76dff53a9a638a998226050c34b2135b7f3da728960785af93",
     "source": "publication_revision_20260926/classification/supp_threeclass_risk_coverage_yolo26.png",
@@ -587,7 +587,7 @@
   {
     "section": "supplement",
     "caption": "Supplementary Figure S13. Three-class patient selective risk–coverage curves. Part 2 of 4.",
-    "note": "Note. ViT-Method2 patient-level selective risk–coverage for the three-class task. Patients are ranked within seed by maximum calibrated class probability. Structural abstentions are appended at lowest confidence and count as errors; coverage divides retained patients by all intended patients. Risk is the overall three-class error rate, not a class-specific error rate. All five seed traces remain separate; terminal risk equals one minus failure-aware accuracy.",
+    "note": "Note. ViT-Method2 patient-level selective risk–coverage for the three-class task. Patients are ranked within seed by maximum calibrated class probability. Structural abstentions are appended at lowest confidence and count as errors; The horizontal coordinate is the included rank divided by all intended patients; after structural abstentions are appended, it is an accounting fraction rather than attainable prediction coverage.. Risk is the overall three-class error rate, not a class-specific error rate. All five seed traces remain separate; terminal risk equals one minus failure-aware accuracy.",
     "original_file": "supp_threeclass_risk_coverage_vit_method2.png",
     "sha256": "681f8b67214c8fdd0139aa771b6f5ea3ac17ca2a62c4eedadf37c1d2e8c36087",
     "source": "publication_revision_20260926/classification/supp_threeclass_risk_coverage_vit_method2.png",
@@ -596,7 +596,7 @@
   {
     "section": "supplement",
     "caption": "Supplementary Figure S13. Three-class patient selective risk–coverage curves. Part 3 of 4.",
-    "note": "Note. EMCAD patient-level selective risk–coverage for the three-class task. Patients are ranked within seed by maximum calibrated class probability. Structural abstentions are appended at lowest confidence and count as errors; coverage divides retained patients by all intended patients. Risk is the overall three-class error rate, not a class-specific error rate. All five seed traces remain separate; terminal risk equals one minus failure-aware accuracy.",
+    "note": "Note. EMCAD patient-level selective risk–coverage for the three-class task. Patients are ranked within seed by maximum calibrated class probability. Structural abstentions are appended at lowest confidence and count as errors; The horizontal coordinate is the included rank divided by all intended patients; after structural abstentions are appended, it is an accounting fraction rather than attainable prediction coverage.. Risk is the overall three-class error rate, not a class-specific error rate. All five seed traces remain separate; terminal risk equals one minus failure-aware accuracy.",
     "original_file": "supp_threeclass_risk_coverage_emcad.png",
     "sha256": "95732881fca7cd16061dc33442398ad0c1e9353789283d1da7a6d38c69a6f895",
     "source": "publication_revision_20260926/classification/supp_threeclass_risk_coverage_emcad.png",
@@ -605,7 +605,7 @@
   {
     "section": "supplement",
     "caption": "Supplementary Figure S13. Three-class patient selective risk–coverage curves. Part 4 of 4.",
-    "note": "Note. SAM2-UNet patient-level selective risk–coverage for the three-class task. Patients are ranked within seed by maximum calibrated class probability. Structural abstentions are appended at lowest confidence and count as errors; coverage divides retained patients by all intended patients. Risk is the overall three-class error rate, not a class-specific error rate. All five seed traces remain separate; terminal risk equals one minus failure-aware accuracy.",
+    "note": "Note. SAM2-UNet patient-level selective risk–coverage for the three-class task. Patients are ranked within seed by maximum calibrated class probability. Structural abstentions are appended at lowest confidence and count as errors; The horizontal coordinate is the included rank divided by all intended patients; after structural abstentions are appended, it is an accounting fraction rather than attainable prediction coverage.. Risk is the overall three-class error rate, not a class-specific error rate. All five seed traces remain separate; terminal risk equals one minus failure-aware accuracy.",
     "original_file": "supp_threeclass_risk_coverage_sam2_unet.png",
     "sha256": "5d1c949180596ce21b8890b4e807039350b90676981190f7b058d5a2da3d7864",
     "source": "publication_revision_20260926/classification/supp_threeclass_risk_coverage_sam2_unet.png",
