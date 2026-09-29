@@ -65,7 +65,7 @@ Numerical figure replay uses `python -m publication.reproduce` with the locally 
 
 Use the author metadata in [CITATION.cff](CITATION.cff) when citing this software. The manuscript's code-availability statement identifies this repository:
 
-> The analysis code and scripts used to generate the tables and figures will be available at https://github.com/MedAI-Research-Lab/Papilledema-US-Segmentation-Classification.
+> The analysis code and scripts used to generate the tables and figures are be available at https://github.com/MedAI-Research-Lab/Papilledema-US-Segmentation-Classification.
 
 ## Data and component terms
 
