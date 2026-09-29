@@ -1,6 +1,6 @@
 # Papilledema US Segmentation and Classification
 
-Analysis and publication-generation code for **Anatomical segmentation and strict predicted-ROI binary and three-class classification of normal, papilledema, and pseudopapilledema cases using transorbital ultrasound**.
+Analysis and publication-generation code for **From anatomical segmentation to diagnostic classification in transorbital ultrasound: an exploratory study of papilledema and pseudopapilledema**.
 
 The workflow evaluates anatomical segmentation separately from diagnostic classification. A predicted anatomical region of interest is passed to independently trained binary and direct three-class classifiers. Patient-grouped development, out-of-fold training ROIs, validation-only model selection, and a global test-access gate organize the analysis.
 
