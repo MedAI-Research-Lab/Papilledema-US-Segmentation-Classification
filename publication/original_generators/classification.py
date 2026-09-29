@@ -158,7 +158,7 @@ def cm_axis(ax, matrix, task, sd=None, counts=None, fontsize=12):
     ax.grid(which='minor', color='white', linewidth=1.3)
     ax.tick_params(which='both', length=0)
     for (r, c), value in np.ndenumerate(matrix):
-        label = f'{value:.1f}\n± {sd[r,c]:.1f}' if sd is not None else f'{value:.1f}%\n(n = {counts[r,c]})'
+        label = f'{value:.1f}%\n± {sd[r,c]:.1f}' if sd is not None else f'{value:.1f}%\n(n = {counts[r,c]})'
         ax.text(c, r, label, ha='center', va='center', fontsize=fontsize,
                 color='white' if value >= 58 else '#182B3A', linespacing=1.35)
     for spine in ax.spines.values():
