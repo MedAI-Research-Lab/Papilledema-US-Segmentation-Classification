@@ -2303,7 +2303,7 @@
       ],
       [
         "YOLO26",
-        "Shared ResNet-18",
+        "Separately fitted ResNet-18",
         "0.671 ± 0.155",
         "0.906 ± 0.065",
         "0.125 ± 0.067"
@@ -2317,7 +2317,7 @@
       ],
       [
         "ViT Method2",
-        "Shared ResNet-18",
+        "Separately fitted ResNet-18",
         "0.722 ± 0.139",
         "0.930 ± 0.029",
         "0.077 ± 0.041"
@@ -2331,7 +2331,7 @@
       ],
       [
         "EMCAD",
-        "Shared ResNet-18",
+        "Separately fitted ResNet-18",
         "0.738 ± 0.139",
         "0.928 ± 0.042",
         "0.071 ± 0.044"
@@ -2345,13 +2345,13 @@
       ],
       [
         "SAM2-U-Net",
-        "Shared ResNet-18",
+        "Separately fitted ResNet-18",
         "0.654 ± 0.129",
         "0.928 ± 0.041",
         "0.089 ± 0.062"
       ]
     ],
-    "note": "Note. Values are arithmetic means ± sample SD over five overlapping holdouts. MCC denotes the Matthews correlation coefficient, not the three-class task; AP is average precision. Both are conditional on evaluable eyes and use the operational temperature-scaled probabilities and locked threshold where applicable. They must not be interpreted as all-eye endpoints. Model-specific classifiers are primary; the shared ResNet-18 strategy is secondary and uses separately fitted classifiers for each ROI stream. AURC is the area-under-risk–coverage summary implemented as the arithmetic mean of cumulative error proportions over all 36 ranks. Ranking uses absolute distance from each locked threshold, with structural abstentions appended at lowest confidence as errors. Risk is ordinary misclassification risk, not 1 minus balanced accuracy. Lower AURC is preferable. These descriptive selective-risk results do not validate a new rejection policy or clinical benefit."
+    "note": "Note. Values are arithmetic means ± sample SD over five overlapping holdouts. MCC denotes the Matthews correlation coefficient, not the three-class task; AP is average precision. Both are conditional on evaluable eyes and use the operational temperature-scaled probabilities and locked threshold where applicable. They must not be interpreted as all-eye endpoints. Model-specific classifiers are primary; the Separately fitted ResNet-18 strategy is secondary and uses separately fitted classifiers for each ROI stream. AURC is the area-under-risk–coverage summary implemented as the arithmetic mean of cumulative error proportions over all 36 ranks. Ranking uses absolute distance from each locked threshold, with structural abstentions appended at lowest confidence as errors. Risk is ordinary misclassification risk, not 1 minus balanced accuracy. Lower AURC is preferable. These descriptive selective-risk results do not validate a new rejection policy or clinical benefit."
   },
   {
     "section": "supplement",
